@@ -168,6 +168,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{15BB402D
 		HexalithApp\src\HexalithApp.Build\Project.Common.props = HexalithApp\src\HexalithApp.Build\Project.Common.props
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_global", "_global", "{1895AACE-034C-4F76-9322-1B0DB5C6DF4C}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\hexalith_build.yml = .github\workflows\hexalith_build.yml
+		LICENSE = LICENSE
+		README.md = README.md
+		.github\workflows\semgrep.yml = .github\workflows\semgrep.yml
+		.github\workflows\sonarqube.yml = .github\workflows\sonarqube.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_global", "_global", "{57AF038F-723F-47A6-98D1-2E92783D1E7D}"
+	ProjectSection(SolutionItems) = preProject
+		Hexalith\LICENSE = Hexalith\LICENSE
+		Hexalith\README.md = Hexalith\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -409,6 +424,7 @@ Global
 		{1E632F29-A727-400A-8983-892C25280056} = {42E73C73-473F-4769-A460-D57ECAC1F8F7}
 		{80D29F19-93CA-4F1D-B3E3-24DE1E57246F} = {D2DA3040-462E-4E0E-9CFE-3EA95FA3D014}
 		{15BB402D-E044-48AC-BFD2-6AD5435C6929} = {01ECF18B-80EF-4B78-875B-AC460AC0D5CC}
+		{57AF038F-723F-47A6-98D1-2E92783D1E7D} = {D2DA3040-462E-4E0E-9CFE-3EA95FA3D014}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09CBB595-8996-4C7F-9C48-4C58AD9293AC}
