@@ -1,0 +1,15 @@
+<Project>
+	<PropertyGroup>
+		<HexalithParentProps>$([MSBuild]::GetPathOfFileAbove('Hexalith.props', '$(MSBuildThisFileDirectory)..'))</HexalithParentProps>
+		<HexalithAppName Condition="'$(HexalithAppName)' == ''">EasyAuthentication</HexalithAppName>
+	</PropertyGroup>
+	<Import Project="$(HexalithParentProps)" Condition=" '$(HexalithParentProps)' != '' " />
+	<PropertyGroup>
+		<HexalithPath Condition="'$(HexalithPath)' == ''">$(MSBuildThisFileDirectory)Hexalith\</HexalithPath>
+		<HexalithVersion Condition="'$(HexalithVersion)' == ''">*</HexalithVersion>
+		<HexalithAppPath Condition="'$(HexalithAppPath)' == ''">$(HexalithPath)..\HexalithApp\</HexalithAppPath>
+		<HexalithAppVersion Condition="'$(HexalithAppVersion)' == ''">*</HexalithAppVersion>
+		<HexalithEasyAuthenticationPath Condition="'$(HexalithEasyAuthenticationPath)' == ''">$(MSBuildThisFileDirectory)</HexalithEasyAuthenticationPath>
+		<HexalithEasyAuthenticationVersion Condition="'$(HexalithEasyAuthenticationVersion)' == ''">*</HexalithEasyAuthenticationVersion>
+	</PropertyGroup>
+</Project>

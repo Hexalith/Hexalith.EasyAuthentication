@@ -1,0 +1,19 @@
+<Project>
+	<PropertyGroup>
+		<HexalithModulesServerProps>$([MSBuild]::GetPathOfFileAbove('Hexalith.Modules.Server.props', '$(MSBuildThisFileDirectory)..'))</HexalithModulesServerProps>
+	</PropertyGroup>
+	<Import Project="$(HexalithModulesServerProps)" Condition=" '$(HexalithModulesServerProps)' != '' " />
+	<ItemGroup Condition="'$(UseProjectReference)' == 'true'">
+		<ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.Shared\Hexalith.EasyAuthentication.Shared.csproj" />
+		<ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.Client\Hexalith.EasyAuthentication.Client.csproj" />
+		<ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.Server\Hexalith.EasyAuthentication.Server.csproj" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(UseProjectReference)' != 'true'">
+		<PackageReference Include="Hexalith.EasyAuthentication.Shared" Version="$(HexalithEasyAuthenticationVersion)" />
+		<PackageReference Include="Hexalith.EasyAuthentication.Client" Version="$(HexalithEasyAuthenticationVersion)" />
+		<PackageReference Include="Hexalith.EasyAuthentication.Server" Version="$(HexalithEasyAuthenticationVersion)" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="$(MSBuildThisFileDirectory)src/ServerApplication.cs" />
+	</ItemGroup>
+</Project>
