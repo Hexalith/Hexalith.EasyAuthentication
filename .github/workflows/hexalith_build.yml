@@ -52,9 +52,9 @@ jobs:
     - name: Unit Tests
       run: |
         dotnet test -c Release --no-restore --no-build ./test/Hexalith.EasyAuthentication.UnitTests/Hexalith.EasyAuthentication.UnitTests.csproj
-    - name: Publish packages to GitHub
-      run: |
-        dotnet nuget push './src/**/*.nupkg' -k ${{secrets.GITHUB_TOKEN}} -n -s https://nuget.pkg.github.com/Hexalith/index.json --skip-duplicate
+    # - name: Publish packages to GitHub
+    #   run: |
+    #     dotnet nuget push './src/**/*.nupkg' -k ${{secrets.GITHUB_TOKEN}} -n -s https://nuget.pkg.github.com/Hexalith/index.json --skip-duplicate
     - name: Publish release packages to Nuget
       if: startswith(github.ref, 'refs/tags/v') 
       run: |
