@@ -12,5 +12,6 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="$(MicrosoftExtensionsPackagesVersion)" />
 		<PackageReference Include="Microsoft.Identity.Web" Version="$(MicrosoftIdentityWebVersion)" />
 		<PackageReference Include="NEasyAuthMiddleware" Version="$(NEasyAuthMiddlewareVersion)" />
-	</ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="$(MicrosoftExtensionsPackagesVersion)" />
+  </ItemGroup>
 </Project>
