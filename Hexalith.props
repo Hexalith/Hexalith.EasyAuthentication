@@ -6,7 +6,7 @@
 	<Import Project="$(HexalithParentProps)" Condition=" '$(HexalithParentProps)' != '' " />
 	<PropertyGroup>
 		<HexalithPath Condition="'$(HexalithPath)' == ''">$(MSBuildThisFileDirectory)Hexalith\</HexalithPath>
-		<HexalithVersion Condition="'$(HexalithVersion)' == ''">*</HexalithVersion>
+		<HexalithVersion Condition="'$(HexalithVersion)' == ''">1.*</HexalithVersion>
 		<HexalithAppPath Condition="'$(HexalithAppPath)' == ''">$(HexalithPath)..\HexalithApp\</HexalithAppPath>
 		<HexalithAppVersion Condition="'$(HexalithAppVersion)' == ''">*</HexalithAppVersion>
 		<HexalithEasyAuthenticationPath Condition="'$(HexalithEasyAuthenticationPath)' == ''">$(MSBuildThisFileDirectory)</HexalithEasyAuthenticationPath>
