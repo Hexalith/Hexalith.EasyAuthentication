@@ -52,7 +52,7 @@
 		<FluentAssertionsVersion>6.12.0</FluentAssertionsVersion>
 		<GitHubActionsTestLoggerVersion>2.4.1</GitHubActionsTestLoggerVersion>
 		<GoogleApiVersion>5.4.3</GoogleApiVersion>
-		<MicrosoftIdentityWebVersion>3.1.0</MicrosoftIdentityWebVersion>
+		<MicrosoftIdentityWebVersion>3.2.1</MicrosoftIdentityWebVersion>
 		<MicrosoftNETTestSdkVersion>17.11.0</MicrosoftNETTestSdkVersion>
 		<MicrosoftVisualStudioThreadingAnalyzersVersion>17.11.20</MicrosoftVisualStudioThreadingAnalyzersVersion>
 		<MinverVersion>5.0.0</MinverVersion>
@@ -61,7 +61,7 @@
 		<NEasyAuthMiddlewareVersion>3.2.0</NEasyAuthMiddlewareVersion>
 		<StyleCopAnalyzersVersion>1.2.0-beta.556</StyleCopAnalyzersVersion>
 		<XUnitRunnerVisualStudioVersion>2.8.2</XUnitRunnerVisualStudioVersion>
-		<XUnitVersion>2.9.0</XUnitVersion>
+		<XUnitVersion>2.9.2</XUnitVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
