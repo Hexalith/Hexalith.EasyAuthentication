@@ -12,5 +12,6 @@
 		<PackageReference Include="Microsoft.Extensions.Http" Version="$(MicrosoftExtensionsPackagesVersion)" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="$(AspNetCorePackagesVersion)" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="$(AspNetCorePackagesVersion)" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MicrosoftExtensionsPackagesVersion)" />
 	</ItemGroup>
 </Project>
