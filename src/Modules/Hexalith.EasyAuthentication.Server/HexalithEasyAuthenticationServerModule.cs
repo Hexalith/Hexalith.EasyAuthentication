@@ -11,15 +11,15 @@ using Hexalith.Extensions.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Web;
 
 using NEasyAuthMiddleware;
-using NEasyAuthMiddleware.Core;
-using NEasyAuthMiddleware.Providers;
 
 /// <summary>
 /// Microsoft Easy Authentication server module.
@@ -85,19 +85,6 @@ public sealed class HexalithEasyAuthenticationServerModule : IServerApplicationM
         }
 
         _ = services.AddAuthorization();
-
-        // Retrieve the environment name from the environment variable
-        string? environmentName = configuration.GetValue<string>("ASPNETCORE_ENVIRONMENT");
-        if (environmentName?.Equals("Development", StringComparison.OrdinalIgnoreCase) == true) // Use the mock json file when not running in an app service
-        {
-            string mockFile = $"{AppDomain.CurrentDomain.BaseDirectory}\\mock_user.json";
-            _ = services.AddSingleton((IServiceProvider provider) => new JsonFileHeaderDictionaryProviderOptions
-            {
-                JsonFilePath = mockFile,
-            });
-            _ = services.AddSingleton<IHeaderDictionaryProvider, JsonFileHeaderDictionaryProvider>();
-        }
-
         _ = services.AddScoped<AuthenticationStateProvider, ServerPersistingAuthenticationStateProvider>();
     }
 
@@ -113,6 +100,12 @@ public sealed class HexalithEasyAuthenticationServerModule : IServerApplicationM
         IOptions<EasyAuthenticationSettings> settings = b.ApplicationServices.GetRequiredService<IOptions<EasyAuthenticationSettings>>();
         if (settings.Value.UseMsal)
         {
+            IWebHostEnvironment env = b.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
+            if (env.IsDevelopment())
+            {
+                _ = b.UseMiddleware<DevelopmentAuthenticationMiddleware>();
+            }
+
             _ = b.UseMiddleware<ContainerAppsAuthenticationMiddleware>();
         }
     }
