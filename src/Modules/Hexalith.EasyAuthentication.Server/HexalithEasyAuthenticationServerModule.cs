@@ -4,13 +4,18 @@ using System.Collections.Generic;
 using System.Reflection;
 
 using Hexalith.Application.Modules.Modules;
+using Hexalith.EasyAuthentication.Server.Middlewares;
 using Hexalith.EasyAuthentication.Shared.Configurations;
 using Hexalith.Extensions.Helpers;
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Microsoft.Identity.Web;
 
 using NEasyAuthMiddleware;
 using NEasyAuthMiddleware.Core;
@@ -37,13 +42,13 @@ public sealed class HexalithEasyAuthenticationServerModule : IServerApplicationM
     public int OrderWeight => 0;
 
     /// <inheritdoc/>
+    string IApplicationModule.Path => HexalithEasyAuthenticationServerModule.Path;
+
+    /// <inheritdoc/>
     public IEnumerable<Assembly> PresentationAssemblies => [GetType().Assembly];
 
     /// <inheritdoc/>
     public string Version => "1.0";
-
-    /// <inheritdoc/>
-    string IApplicationModule.Path => HexalithEasyAuthenticationServerModule.Path;
 
     private static string CookieScheme => "Cookies";
 
@@ -65,9 +70,20 @@ public sealed class HexalithEasyAuthenticationServerModule : IServerApplicationM
             return;
         }
 
-        _ = services
-            .AddEasyAuth()
-            .AddIdentityCookies();
+        if (settings.UseMsal)
+        {
+            _ = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"))
+                .EnableTokenAcquisitionToCallDownstreamApi()
+                .AddInMemoryTokenCaches();
+        }
+        else
+        {
+            _ = services
+                .AddEasyAuth()
+                .AddIdentityCookies();
+        }
+
         _ = services.AddAuthorization();
 
         // Retrieve the environment name from the environment variable
@@ -88,5 +104,16 @@ public sealed class HexalithEasyAuthenticationServerModule : IServerApplicationM
     /// <inheritdoc/>
     public void UseModule(object builder)
     {
+        ArgumentNullException.ThrowIfNull(builder);
+        if (builder is not ApplicationBuilder b)
+        {
+            throw new InvalidOperationException($"Invalid builder type '{builder.GetType().FullName}'. The expected type is ${nameof(ApplicationBuilder)}.");
+        }
+
+        IOptions<EasyAuthenticationSettings> settings = b.ApplicationServices.GetRequiredService<IOptions<EasyAuthenticationSettings>>();
+        if (settings.Value.UseMsal)
+        {
+            _ = b.UseMiddleware<ContainerAppsAuthenticationMiddleware>();
+        }
     }
 }

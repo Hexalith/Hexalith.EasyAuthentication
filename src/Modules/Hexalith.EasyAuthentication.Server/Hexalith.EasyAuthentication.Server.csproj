@@ -10,8 +10,9 @@
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(AspNetCorePackagesVersion)" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="$(AspNetCorePackagesVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="$(MicrosoftExtensionsPackagesVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="$(MicrosoftExtensionsPackagesVersion)" />
 		<PackageReference Include="Microsoft.Identity.Web" Version="$(MicrosoftIdentityWebVersion)" />
 		<PackageReference Include="NEasyAuthMiddleware" Version="$(NEasyAuthMiddlewareVersion)" />
-    <PackageReference Include="System.Text.Json" Version="$(MicrosoftExtensionsPackagesVersion)" />
-  </ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="$(MicrosoftExtensionsPackagesVersion)" />
+	</ItemGroup>
 </Project>

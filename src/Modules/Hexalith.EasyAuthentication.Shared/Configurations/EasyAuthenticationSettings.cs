@@ -21,6 +21,11 @@ public record EasyAuthenticationSettings(
     }
 
     /// <summary>
+    /// Gets or sets a value indicating whether to use Microsoft Authentication Library (MSAL).
+    /// </summary>
+    public bool UseMsal { get; set; }
+
+    /// <summary>
     /// The name of the configuration.
     /// </summary>
     /// <returns>Settings section name.</returns>
