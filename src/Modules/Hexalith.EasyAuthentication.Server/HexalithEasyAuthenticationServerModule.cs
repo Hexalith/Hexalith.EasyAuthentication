@@ -6,6 +6,7 @@ using System.Reflection;
 using Hexalith.Application.Modules.Modules;
 using Hexalith.EasyAuthentication.Server.Middlewares;
 using Hexalith.EasyAuthentication.Shared.Configurations;
+using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -85,28 +86,32 @@ public sealed class HexalithEasyAuthenticationServerModule : IServerApplicationM
         }
 
         _ = services.AddAuthorization();
-        _ = services.AddScoped<AuthenticationStateProvider, ServerPersistingAuthenticationStateProvider>();
+        _ = services.AddScoped<AuthenticationStateProvider, ServerPersistingAuthenticationStateProvider>()
+            .ConfigureSettings<EasyAuthenticationSettings>(configuration);
     }
 
     /// <inheritdoc/>
     public void UseModule(object builder)
     {
         ArgumentNullException.ThrowIfNull(builder);
-        if (builder is not ApplicationBuilder b)
+        if (builder is not WebApplication app)
         {
-            throw new InvalidOperationException($"Invalid builder type '{builder.GetType().FullName}'. The expected type is ${nameof(ApplicationBuilder)}.");
+            throw new InvalidOperationException($"Invalid builder type '{builder.GetType().FullName}'. The expected type is {typeof(WebApplication).FullName}.");
         }
 
-        IOptions<EasyAuthenticationSettings> settings = b.ApplicationServices.GetRequiredService<IOptions<EasyAuthenticationSettings>>();
+        // initialize modules
+        using IServiceScope scope = app.Services.CreateScope();
+
+        IOptions<EasyAuthenticationSettings> settings = scope.ServiceProvider.GetRequiredService<IOptions<EasyAuthenticationSettings>>();
         if (settings.Value.UseMsal)
         {
-            IWebHostEnvironment env = b.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
+            IWebHostEnvironment env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
             if (env.IsDevelopment())
             {
-                _ = b.UseMiddleware<DevelopmentAuthenticationMiddleware>();
+                _ = app.UseMiddleware<DevelopmentAuthenticationMiddleware>();
             }
 
-            _ = b.UseMiddleware<ContainerAppsAuthenticationMiddleware>();
+            _ = app.UseMiddleware<ContainerAppsAuthenticationMiddleware>();
         }
     }
 }

@@ -29,21 +29,24 @@ public class DevelopmentAuthenticationMiddleware
     public async Task InvokeAsync(HttpContext context)
     {
         ArgumentNullException.ThrowIfNull(context);
-
-        // Simulate the Azure Container App authentication headers
-        if (string.IsNullOrWhiteSpace(context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdHeader]))
+        if (!context.Request.Path.StartsWithSegments("/healthz", StringComparison.OrdinalIgnoreCase) &&
+            !context.Request.Path.StartsWithSegments(new PathString("/dapr"), StringComparison.OrdinalIgnoreCase))
         {
-            context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdHeader] = "jdoe@hexalith.com";
-        }
+            // Simulate the Azure Container App authentication headers
+            if (string.IsNullOrWhiteSpace(context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdHeader]))
+            {
+                context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdHeader] = "jdoe@hexalith.com";
+            }
 
-        if (string.IsNullOrWhiteSpace(context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalNameHeader]))
-        {
-            context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalNameHeader] = "John Doe";
-        }
+            if (string.IsNullOrWhiteSpace(context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalNameHeader]))
+            {
+                context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalNameHeader] = "John Doe";
+            }
 
-        if (string.IsNullOrWhiteSpace(context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdentityProviderHeader]))
-        {
-            context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdentityProviderHeader] = "dev";
+            if (string.IsNullOrWhiteSpace(context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdentityProviderHeader]))
+            {
+                context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdentityProviderHeader] = "dev";
+            }
         }
 
         await _next(context).ConfigureAwait(false);
