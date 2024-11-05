@@ -61,6 +61,11 @@ public partial class ContainerAppsAuthenticationMiddleware
         ArgumentNullException.ThrowIfNull(context);
 
         if (context.Request.Path.StartsWithSegments("/healthz", StringComparison.OrdinalIgnoreCase) ||
+            context.Request.Path.StartsWithSegments("/actors", StringComparison.OrdinalIgnoreCase) ||
+            context.Request.Path.StartsWithSegments("/ HTTP", StringComparison.OrdinalIgnoreCase) ||
+            context.Request.Path.StartsWithSegments("/v1.0", StringComparison.OrdinalIgnoreCase) ||
+            context.Request.Path.StartsWithSegments("/v1.0-beta1", StringComparison.OrdinalIgnoreCase) ||
+            context.Request.Path.StartsWithSegments("/v1.0-alpha1", StringComparison.OrdinalIgnoreCase) ||
             context.Request.Path.StartsWithSegments(new PathString("/dapr"), StringComparison.OrdinalIgnoreCase))
         {
             await _next(context).ConfigureAwait(false);
