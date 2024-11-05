@@ -1,5 +1,11 @@
 ﻿namespace Hexalith.EasyAuthentication.Server.Middlewares;
 
+using System.Security.Claims;
+using System.Text;
+using System.Text.Json;
+
+using Hexalith.Application.Sessions.Helpers;
+using Hexalith.EasyAuthentication.Server.Models;
 using Hexalith.EasyAuthentication.Shared;
 
 using Microsoft.AspNetCore.Http;
@@ -29,13 +35,16 @@ public class DevelopmentAuthenticationMiddleware
     public async Task InvokeAsync(HttpContext context)
     {
         ArgumentNullException.ThrowIfNull(context);
-        if (!context.Request.Path.StartsWithSegments("/healthz", StringComparison.OrdinalIgnoreCase) &&
+        if (
+            !context.Request.Path.StartsWithSegments("/healthz", StringComparison.OrdinalIgnoreCase) &&
+            !context.Request.Path.StartsWithSegments("/v1.0", StringComparison.OrdinalIgnoreCase) &&
+            !context.Request.Path.StartsWithSegments("/actors", StringComparison.OrdinalIgnoreCase) &&
             !context.Request.Path.StartsWithSegments(new PathString("/dapr"), StringComparison.OrdinalIgnoreCase))
         {
             // Simulate the Azure Container App authentication headers
             if (string.IsNullOrWhiteSpace(context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdHeader]))
             {
-                context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdHeader] = "jdoe@hexalith.com";
+                context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdHeader] = "jdoe";
             }
 
             if (string.IsNullOrWhiteSpace(context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalNameHeader]))
@@ -46,6 +55,23 @@ public class DevelopmentAuthenticationMiddleware
             if (string.IsNullOrWhiteSpace(context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdentityProviderHeader]))
             {
                 context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdentityProviderHeader] = "dev";
+            }
+
+            if (string.IsNullOrWhiteSpace(context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalHeader]))
+            {
+                ClientPrincipal clientPrincipal = new(
+                    context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdentityProviderHeader].ToString(),
+                    [
+                        new ClientPrincipalClaim(ClaimTypes.NameIdentifier, context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdHeader].ToString()),
+                        new ClientPrincipalClaim(ClaimTypes.Name, context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalNameHeader].ToString()),
+                        new ClientPrincipalClaim(ClaimTypes.Email, "jdoe@hexalith.com"),
+                        new ClientPrincipalClaim(SessionHelper.IdentityProviderClaimName, context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdentityProviderHeader].ToString()),
+                    ],
+                    ClaimTypes.Name,
+                    ClaimTypes.Role);
+
+                context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalHeader] = Convert
+                    .ToBase64String(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(clientPrincipal)));
             }
         }
 

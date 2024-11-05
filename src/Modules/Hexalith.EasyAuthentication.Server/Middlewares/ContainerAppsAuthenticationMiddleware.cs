@@ -5,11 +5,13 @@ using System.Text;
 using System.Text.Json;
 
 using Hexalith.Application.Modules.Applications;
+using Hexalith.Application.Partitions.Services;
 using Hexalith.Application.Sessions;
 using Hexalith.Application.Sessions.Helpers;
 using Hexalith.Application.Sessions.Models;
 using Hexalith.Application.Sessions.Services;
 using Hexalith.EasyAuthentication.Shared;
+using Hexalith.Extensions.Helpers;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +28,7 @@ public partial class ContainerAppsAuthenticationMiddleware
 {
     private readonly IApplication _application;
     private readonly RequestDelegate _next;
+    private readonly IPartitionService _partitionService;
     private readonly IServiceProvider _serviceProvider;
 
     /// <summary>
@@ -34,15 +37,17 @@ public partial class ContainerAppsAuthenticationMiddleware
     /// <param name="next">The next middleware in the pipeline.</param>
     /// <param name="serviceProvider">The session service.</param>
     /// <param name="application">The application.</param>
-    public ContainerAppsAuthenticationMiddleware(RequestDelegate next, IServiceProvider serviceProvider, IApplication application)
+    public ContainerAppsAuthenticationMiddleware(RequestDelegate next, IServiceProvider serviceProvider, IApplication application, IPartitionService partitionService)
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(serviceProvider);
         ArgumentNullException.ThrowIfNull(application);
+        ArgumentNullException.ThrowIfNull(partitionService);
 
         _next = next;
         _serviceProvider = serviceProvider;
         _application = application;
+        _partitionService = partitionService;
     }
 
     [LoggerMessage(
@@ -62,7 +67,6 @@ public partial class ContainerAppsAuthenticationMiddleware
 
         if (context.Request.Path.StartsWithSegments("/healthz", StringComparison.OrdinalIgnoreCase) ||
             context.Request.Path.StartsWithSegments("/actors", StringComparison.OrdinalIgnoreCase) ||
-            context.Request.Path.StartsWithSegments("/ HTTP", StringComparison.OrdinalIgnoreCase) ||
             context.Request.Path.StartsWithSegments("/v1.0", StringComparison.OrdinalIgnoreCase) ||
             context.Request.Path.StartsWithSegments("/v1.0-beta1", StringComparison.OrdinalIgnoreCase) ||
             context.Request.Path.StartsWithSegments("/v1.0-alpha1", StringComparison.OrdinalIgnoreCase) ||
@@ -84,6 +88,75 @@ public partial class ContainerAppsAuthenticationMiddleware
             return;
         }
 
+        using IServiceScope scope = _serviceProvider.CreateScope();
+        ILogger logger = scope.ServiceProvider.GetRequiredService<ILogger<ContainerAppsAuthenticationMiddleware>>();
+
+        context.User = GetUser(context.User, context, logger);
+
+        string partitionId = await GetPartitionAsync(context).ConfigureAwait(false);
+
+        ISessionService sessionService = scope.ServiceProvider.GetRequiredService<ISessionService>();
+
+        SessionInformation? session = await sessionService.OpenAsync(partitionId, CancellationToken.None).ConfigureAwait(false);
+        if (session is not null)
+        {
+            context.Session.SetString($"{nameof(Session)}{nameof(Session.Id)}", session.Id);
+            context.Session.SetInt32($"{nameof(Session)}{nameof(Session.Expiration)}", session.CreatedOn.ExpirationInEpochMinutes(session.Expiration));
+            context.User = AddHexalithIdentity(context.User, session);
+        }
+
+        await _next(context).ConfigureAwait(false);
+    }
+
+    private static ClaimsPrincipal AddHexalithIdentity(ClaimsPrincipal user, SessionInformation sessionInformation)
+    {
+        if (user.Identity?.IsAuthenticated != true)
+        {
+            return user;
+        }
+
+        ClaimsIdentity? hexalith = user.Identities.FirstOrDefault(i => i.AuthenticationType == SessionHelper.HexalithAuthenticationType);
+        if (hexalith?.Claims.Any(
+            p => p.Type == SessionHelper.SessionIdClaimName &&
+            p.Value == sessionInformation.Id) == true)
+        {
+            return user;
+        }
+
+        ClaimsPrincipal newUser = new(user.Identity);
+        foreach (ClaimsIdentity identity in user.Identities.Where(
+            p => p.AuthenticationType != SessionHelper.HexalithAuthenticationType && p != user.Identity))
+        {
+            newUser.AddIdentity(identity);
+        }
+
+        newUser.AddIdentity(new ClaimsIdentity(
+            sessionInformation
+                .User
+                .Roles
+                .Select(p => new Claim(ClaimTypes.Role, p, null, SessionHelper.HexalithIssuerName))
+            .Union(
+                [
+
+                new Claim(SessionHelper.SessionIdClaimName, sessionInformation.Id, null, SessionHelper.HexalithIssuerName),
+                new Claim(SessionHelper.PartitionIdClaimName, sessionInformation.PartitionId, null, SessionHelper.HexalithIssuerName),
+                new Claim(ClaimTypes.NameIdentifier, sessionInformation.User.Id, null, SessionHelper.HexalithIssuerName),
+                new Claim(ClaimTypes.Name, sessionInformation.Contact.Name, null, SessionHelper.HexalithIssuerName),
+                new Claim(ClaimTypes.Actor, sessionInformation.Contact.Id, null, SessionHelper.HexalithIssuerName),
+                new Claim(ClaimTypes.Email, sessionInformation.Contact.Email),
+                new Claim(ClaimTypes.Expiration, sessionInformation.CreatedOn.ExpirationInEpochMinutes(sessionInformation.Expiration).ToInvariantString())
+            ]),
+            SessionHelper.HexalithAuthenticationType));
+        return user;
+    }
+
+    private static ClaimsPrincipal GetUser(ClaimsPrincipal? user, HttpContext context, ILogger logger)
+    {
+        if (user?.Identity?.IsAuthenticated == true)
+        {
+            return user;
+        }
+
         // Extract principal identifier from Container Apps authentication headers
         string principalId = context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalIdHeader].ToString();
         string principalName = context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalNameHeader].ToString();
@@ -91,65 +164,41 @@ public partial class ContainerAppsAuthenticationMiddleware
         string? principal = context.Request.Headers[EasyAuthenticationConstants.ClientPrincipalHeader].ToString();
         principal = string.IsNullOrWhiteSpace(principal) ? null : Encoding.UTF8.GetString(Convert.FromBase64String(principal));
 
-        using IServiceScope scope = _serviceProvider.CreateScope();
-        ISessionService sessionService = scope.ServiceProvider.GetRequiredService<ISessionService>();
-        ILogger logger = scope.ServiceProvider.GetRequiredService<ILogger<ContainerAppsAuthenticationMiddleware>>();
-
         LogClientPrincipalInformation(logger, principalId, principalName, principalIdp, principal);
 
-        if (string.IsNullOrWhiteSpace(principalId))
+        Models.ClientPrincipal? clientPrincipal;
+        ClaimsIdentity identity;
+        if (!string.IsNullOrWhiteSpace(principal) && (clientPrincipal = JsonSerializer.Deserialize<Models.ClientPrincipal>(principal)) != null)
         {
-            await _next(context).ConfigureAwait(false);
-            return;
+            identity = new(clientPrincipal.IdentityProvider, clientPrincipal.NameClaimType, clientPrincipal.RoleClaimType);
+            identity.AddClaims(clientPrincipal.Claims.Select(c => new Claim(c.Type, c.Value)));
+        }
+        else
+        {
+            identity = new(principalIdp);
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, principalId));
+            identity.AddClaim(new Claim(ClaimTypes.Name, principalName));
+            identity.AddClaim(new Claim(SessionHelper.IdentityProviderClaimName, principalIdp));
         }
 
-        if (context.User.Identity?.IsAuthenticated != true)
-        {
-            Models.ClientPrincipal? headerPrincipal = string.IsNullOrWhiteSpace(principal)
-                ? null
-                : JsonSerializer.Deserialize<Models.ClientPrincipal>(principal);
-
-            List<Claim> claims = [new(ClaimTypes.NameIdentifier, principalId)];
-            if (headerPrincipal is not null)
-            {
-                claims.AddRange(headerPrincipal.Claims.Select(c => new Claim(c.Type, c.Value)));
-            }
-
-            if (!string.IsNullOrWhiteSpace(principalName))
-            {
-                claims.Add(new(ClaimTypes.Name, principalName));
-            }
-
-            if (!string.IsNullOrWhiteSpace(principalIdp))
-            {
-                claims.Add(new("idp", principalIdp));
-            }
-
-            ClaimsIdentity identity = new(claims, principalIdp);
-            context.User = new ClaimsPrincipal(identity);
-        }
-
-        SessionInformation? session = string.IsNullOrWhiteSpace(sessionId)
-                ? await sessionService
-                    .OpenAsync(GetPartition(context), CancellationToken.None)
-                    .ConfigureAwait(false)
-                : await sessionService
-                .GetAsync(sessionId, CancellationToken.None)
-                .ConfigureAwait(false)
-                ?? await sessionService
-                    .OpenAsync(GetPartition(context), CancellationToken.None)
-                    .ConfigureAwait(false);
-        if (session is not null)
-        {
-            context.Session.SetString($"{nameof(Session)}{nameof(Session.Id)}", session.Id);
-            context.Session.SetInt32($"{nameof(Session)}{nameof(Session.Expiration)}", session.CreatedOn.ExpirationInEpochMinutes(session.Expiration));
-        }
-
-        await _next(context).ConfigureAwait(false);
+        return new(identity);
     }
 
-    private static string? GetPartition(HttpContext context)
-        => context.Request.Headers[EasyAuthenticationConstants.PartitionHeader].ToString()
-            ?? context.Request.Query[$"{nameof(Session.PartitionId)}"].ToString()
-            ?? context.Session.GetString($"{nameof(Session.PartitionId)}");
+    private async Task<string> GetPartitionAsync(HttpContext context)
+    {
+        string? partitionId = context.Request.Headers[EasyAuthenticationConstants.PartitionHeader].ToString();
+        if (!string.IsNullOrWhiteSpace(partitionId))
+        {
+            return partitionId;
+        }
+
+        partitionId = context.Request.Query[$"{nameof(Session.PartitionId)}"].ToString();
+        if (!string.IsNullOrWhiteSpace(partitionId))
+        {
+            return partitionId;
+        }
+
+        partitionId = context.Session.GetString($"{nameof(Session.PartitionId)}");
+        return !string.IsNullOrWhiteSpace(partitionId) ? partitionId : await _partitionService.DefaultAsync(CancellationToken.None).ConfigureAwait(false);
+    }
 }
