@@ -1,4 +1,4 @@
-﻿namespace Hexalith.EasyAuthentication.Shared;
+﻿namespace Hexalith.EasyAuthentication.Shared.Modules;
 
 using System.Collections.Generic;
 using System.Reflection;
@@ -20,7 +20,7 @@ public class HexalithEasyAuthenticationSharedModule : ISharedApplicationModule
     public IEnumerable<string> Dependencies => [];
 
     /// <inheritdoc/>
-    public string Description => "Hexalith Open ID connect shared module";
+    public string Description => "Hexalith Security shared module";
 
     /// <inheritdoc/>
     public string Id => "Hexalith.EasyAuthentication.Shared";
@@ -57,6 +57,7 @@ public class HexalithEasyAuthenticationSharedModule : ISharedApplicationModule
         _ = services
             .AddAuthorizationCore()
             .AddCascadingAuthenticationState()
+            .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<EasyAuthenticationSettings>(configuration);
     }
 
