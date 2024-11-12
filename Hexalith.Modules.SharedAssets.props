@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <HexalithModulesSharedProps>$([MSBuild]::GetPathOfFileAbove('Hexalith.Modules.SharedAssets.props', '$(MSBuildThisFileDirectory)..'))</HexalithModulesSharedProps>
+  </PropertyGroup>
+  <Import Project="$(HexalithModulesSharedProps)" Condition=" '$(HexalithModulesSharedProps)' != '' " />
+  <ItemGroup Condition="'$(UseProjectReference)' == 'true'">
+    <ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.SharedAssets\Hexalith.EasyAuthentication.SharedAssets.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
+    <PackageReference Include="Hexalith.EasyAuthentication.SharedAssets" Version="$(HexalithEasyAuthenticationVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)src/SharedAssetsApplication.cs" />
+  </ItemGroup>
+</Project>

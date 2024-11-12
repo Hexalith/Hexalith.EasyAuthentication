@@ -9,9 +9,9 @@ namespace Hexalith.EasyAuthentication.UnitTests.Modules;
 using FluentAssertions;
 
 using Hexalith.Application.Modules.Applications;
-using Hexalith.EasyAuthentication.Client;
-using Hexalith.EasyAuthentication.Server;
-using Hexalith.EasyAuthentication.Shared;
+using Hexalith.EasyAuthentication.SharedAssets.Modules;
+using Hexalith.EasyAuthentication.WebApp;
+using Hexalith.EasyAuthentication.WebServer;
 using Hexalith.UI.Components.Modules;
 
 using Microsoft.AspNetCore.Components.Authorization;
@@ -67,13 +67,13 @@ public class HexalithApplicationTest
     [Fact]
     public void HexalithApplicationShouldReturnServerModuleTypes()
     {
-        _ = HexalithApplication.Server.ServerModules
+        _ = HexalithApplication.Server.WebServerModules
             .Should()
             .HaveCount(1);
         _ = HexalithApplication.Server.Modules
             .Should()
             .HaveCount(3);
-        _ = HexalithApplication.Server.ServerModules
+        _ = HexalithApplication.Server.WebServerModules
             .Should()
             .Contain(typeof(HexalithEasyAuthenticationServerModule));
         _ = HexalithApplication.Server.Modules

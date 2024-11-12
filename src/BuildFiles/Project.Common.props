@@ -1,7 +1,7 @@
 <Project>
   <!-- Default values to use when building and packaging -->
   <PropertyGroup>
-    <DNVersion>8</DNVersion>
+    <DNVersion>9</DNVersion>
     <!-- Framework version used when coding in Visual Studio and when creating templates -->
     <DefaultTargetFramework>net$(DNVersion).0</DefaultTargetFramework>
 
@@ -21,8 +21,8 @@
 
   <!-- These versions are used for the NuGet packages that are dependent on the current .NET version -->
   <PropertyGroup>
-    <AspNetCorePackagesVersion>$(DNVersion).*</AspNetCorePackagesVersion>
-    <MicrosoftExtensionsPackagesVersion>$(DNVersion).*</MicrosoftExtensionsPackagesVersion>
+    <AspNetCorePackagesVersion>$(DNVersion).*-*</AspNetCorePackagesVersion>
+    <MicrosoftExtensionsPackagesVersion>$(DNVersion).*-*</MicrosoftExtensionsPackagesVersion>
   </PropertyGroup>
 
   <PropertyGroup>

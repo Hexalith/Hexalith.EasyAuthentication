@@ -17,7 +17,12 @@
 		<PackageReference Include="Hexalith.TestMocks" Version="$(HexalithVersion)" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="$(HexalithAppPath)\src\HexalithApp.Shared\HexalithApp.Shared.csproj" />
 		<Folder Include="Configurations\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.SharedAssets\HexalithApp.SharedAssets.csproj" />
+	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.WebApp\HexalithApp.WebApp.csproj" />
+	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.WebServer\HexalithApp.WebServer.csproj" />
+	  <ProjectReference Include="..\..\Hexalith\src\Core\Application\Hexalith.Application.Modules\Hexalith.Application.Modules.csproj" />
 	</ItemGroup>
 </Project>

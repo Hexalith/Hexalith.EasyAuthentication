@@ -4,7 +4,7 @@ using System.Text.Json;
 
 using FluentAssertions;
 
-using Hexalith.EasyAuthentication.Shared.Configurations;
+using Hexalith.EasyAuthentication.SharedAssets.Configurations;
 using Hexalith.Extensions.Helpers;
 using Hexalith.TestMocks;
 

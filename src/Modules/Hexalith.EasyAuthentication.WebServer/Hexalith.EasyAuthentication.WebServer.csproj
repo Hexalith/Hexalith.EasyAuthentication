@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>$(DefaultTargetFramework)</TargetFramework>
+    <UserSecretsId>ec81df23-6b1e-4de8-b8ad-539fbc979451</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(AspNetCorePackagesVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="$(AspNetCorePackagesVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="$(AspNetCorePackagesVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="$(MicrosoftExtensionsPackagesVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="$(MicrosoftExtensionsPackagesVersion)" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="$(MicrosoftIdentityWebVersion)" />
+    <PackageReference Include="NEasyAuthMiddleware" Version="$(NEasyAuthMiddlewareVersion)" />
+    <PackageReference Include="System.Text.Json" Version="$(MicrosoftExtensionsPackagesVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hexalith.EasyAuthentication.WebApp\Hexalith.EasyAuthentication.WebApp.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseProjectReference)' == 'true'">
+    <ProjectReference Include="$(HexalithPath)src\Core\Application\Hexalith.Application.Sessions.Abstractions\Hexalith.Application.Sessions.Abstractions.csproj" />
+    <ProjectReference Include="$(HexalithPath)src\Core\Application\Hexalith.Application.Partitions.Abstractions\Hexalith.Application.Partitions.Abstractions.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
+    <PackageReference Include="Hexalith.Application.Partitions.Abstractions" Version="$(HexalithVersion)" />
+    <PackageReference Include="Hexalith.Application.Sessions.Abstractions" Version="$(HexalithVersion)" />
+  </ItemGroup>
+
+</Project>
