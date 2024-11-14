@@ -1,10 +1,10 @@
-namespace Hexalith.EasyAuthentication.Client;
+namespace Hexalith.Security.Client;
 
 using System;
 using System.Collections.Generic;
 
 using Hexalith.Application.Modules.Applications;
-using Hexalith.EasyAuthentication.WebApp;
+using Hexalith.Security.WebApp;
 
 /// <summary>
 /// Represents a client application.
@@ -13,7 +13,7 @@ public class WebAppApplication : HexalithWebAppApplication
 {
     /// <inheritdoc/>
     public override IEnumerable<Type> ClientModules
-        => [typeof(HexalithEasyAuthenticationClientModule)];
+        => [typeof(HexalithSecurityClientModule)];
 
     /// <inheritdoc/>
     public override Type SharedAssetsApplicationType => typeof(SharedAssetsApplication);

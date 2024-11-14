@@ -4,12 +4,12 @@
   </PropertyGroup>
   <Import Project="$(HexalithModulesServerProps)" Condition=" '$(HexalithModulesServerProps)' != '' " />
   <ItemGroup Condition="'$(UseProjectReference)' == 'true'">
-    <ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.SharedAssets\Hexalith.EasyAuthentication.SharedAssets.csproj" />
-    <ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.ApiServer\Hexalith.EasyAuthentication.ApiServer.csproj" />
+    <ProjectReference Include="$(HexalithSecurityPath)\src\Modules\Hexalith.Security.SharedAssets\Hexalith.Security.SharedAssets.csproj" />
+    <ProjectReference Include="$(HexalithSecurityPath)\src\Modules\Hexalith.Security.ApiServer\Hexalith.Security.ApiServer.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
-    <PackageReference Include="Hexalith.EasyAuthentication.SharedAssets" Version="$(HexalithEasyAuthenticationVersion)" />
-    <PackageReference Include="Hexalith.EasyAuthentication.ApiServer" Version="$(HexalithEasyAuthenticationVersion)" />
+    <PackageReference Include="Hexalith.Security.SharedAssets" Version="$(HexalithSecurityVersion)" />
+    <PackageReference Include="Hexalith.Security.ApiServer" Version="$(HexalithSecurityVersion)" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)src/ApiServerApplication.cs" />

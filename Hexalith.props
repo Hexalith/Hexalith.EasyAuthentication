@@ -1,15 +1,15 @@
 <Project>
-	<PropertyGroup>
-		<HexalithParentProps>$([MSBuild]::GetPathOfFileAbove('Hexalith.props', '$(MSBuildThisFileDirectory)..'))</HexalithParentProps>
-		<HexalithAppName Condition="'$(HexalithAppName)' == ''">EasyAuthentication</HexalithAppName>
-	</PropertyGroup>
-	<Import Project="$(HexalithParentProps)" Condition=" '$(HexalithParentProps)' != '' " />
-	<PropertyGroup>
-		<HexalithPath Condition="'$(HexalithPath)' == ''">$(MSBuildThisFileDirectory)Hexalith\</HexalithPath>
-		<HexalithVersion Condition="'$(HexalithVersion)' == ''">1.*</HexalithVersion>
-		<HexalithAppPath Condition="'$(HexalithAppPath)' == ''">$(HexalithPath)..\HexalithApp\</HexalithAppPath>
-		<HexalithAppVersion Condition="'$(HexalithAppVersion)' == ''">*</HexalithAppVersion>
-		<HexalithEasyAuthenticationPath Condition="'$(HexalithEasyAuthenticationPath)' == ''">$(MSBuildThisFileDirectory)</HexalithEasyAuthenticationPath>
-		<HexalithEasyAuthenticationVersion Condition="'$(HexalithEasyAuthenticationVersion)' == ''">*</HexalithEasyAuthenticationVersion>
-	</PropertyGroup>
+  <PropertyGroup>
+    <HexalithParentProps>$([MSBuild]::GetPathOfFileAbove('Hexalith.props', '$(MSBuildThisFileDirectory)..'))</HexalithParentProps>
+    <HexalithAppName Condition="'$(HexalithAppName)' == ''">Security</HexalithAppName>
+  </PropertyGroup>
+  <Import Project="$(HexalithParentProps)" Condition=" '$(HexalithParentProps)' != '' " />
+  <PropertyGroup>
+    <HexalithPath Condition="'$(HexalithPath)' == ''">$(MSBuildThisFileDirectory)Hexalith\</HexalithPath>
+    <HexalithVersion Condition="'$(HexalithVersion)' == ''">1.*</HexalithVersion>
+    <HexalithAppPath Condition="'$(HexalithAppPath)' == ''">$(HexalithPath)..\HexalithApp\</HexalithAppPath>
+    <HexalithAppVersion Condition="'$(HexalithAppVersion)' == ''">*</HexalithAppVersion>
+    <HexalithSecurityPath Condition="'$(HexalithSecurityPath)' == ''">$(MSBuildThisFileDirectory)</HexalithSecurityPath>
+    <HexalithSecurityVersion Condition="'$(HexalithSecurityVersion)' == ''">*</HexalithSecurityVersion>
+  </PropertyGroup>
 </Project>

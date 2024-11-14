@@ -1,10 +1,10 @@
-namespace Hexalith.EasyAuthentication.Client;
+namespace Hexalith.Security.Client;
 
 using System;
 using System.Collections.Generic;
 
 using Hexalith.Application.Modules.Applications;
-using Hexalith.EasyAuthentication.ApiServer;
+using Hexalith.Security.ApiServer;
 
 /// <summary>
 /// Represents a server application.
@@ -12,7 +12,7 @@ using Hexalith.EasyAuthentication.ApiServer;
 internal class ApiServerApplication : HexalithApiServerApplication
 {
     /// <inheritdoc/>
-    public override IEnumerable<Type> ApiServerModules => [typeof(HexalithEasyAuthenticationApiServerModule)];
+    public override IEnumerable<Type> ApiServerModules => [typeof(HexalithSecurityApiServerModule)];
 
     /// <inheritdoc/>
     public override Type SharedAssetsApplicationType => typeof(SharedAssetsApplication);

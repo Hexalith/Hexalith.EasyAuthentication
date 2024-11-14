@@ -1,7 +1,7 @@
-namespace Hexalith.EasyAuthentication.Client;
+namespace Hexalith.Security.Client;
 
 using Hexalith.Application.Modules.Applications;
-using Hexalith.EasyAuthentication.SharedAssets.Modules;
+using Hexalith.Security.SharedAssets.Modules;
 using Hexalith.UI.Components.Modules;
 
 /// <summary>
@@ -10,10 +10,10 @@ using Hexalith.UI.Components.Modules;
 public class SharedAssetsApplication : HexalithSharedAssetsApplication
 {
     /// <inheritdoc/>
-    public override string HomePath => "EasyAuthentication";
+    public override string HomePath => "Security";
 
     /// <inheritdoc/>
-    public override string Id => "HexalithEasyAuthentication";
+    public override string Id => "HexalithSecurity";
 
     /// <inheritdoc/>
     public override string LoginPath => ".auth/login";
@@ -27,7 +27,7 @@ public class SharedAssetsApplication : HexalithSharedAssetsApplication
     /// <inheritdoc/>
     public override IEnumerable<Type> SharedModules =>
     [
-        typeof(HexalithEasyAuthenticationSharedModule), typeof(HexalithUIComponentsSharedModule)
+        typeof(HexalithSecuritySharedModule), typeof(HexalithUIComponentsSharedModule)
     ];
 
     /// <summary>

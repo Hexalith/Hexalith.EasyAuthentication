@@ -44,8 +44,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"Hexalith_Hexalith.EasyAuthentication" /o:"hexalith" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build './src/Modules/Hexalith.EasyAuthentication.Shared/Hexalith.EasyAuthentication.Shared.csproj' --configuration Release -p:Version=${{ env.VERSION }}
-          dotnet build './src/Modules/Hexalith.EasyAuthentication.Client/Hexalith.EasyAuthentication.Client.csproj' --configuration Release -p:Version=${{ env.VERSION }}
-          dotnet build './src/Modules/Hexalith.EasyAuthentication.Server/Hexalith.EasyAuthentication.Server.csproj' --configuration Release -p:Version=${{ env.VERSION }}
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"Hexalith_Hexalith.Security" /o:"hexalith" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build './src/Modules/Hexalith.Security.Shared/Hexalith.Security.Shared.csproj' --configuration Release -p:Version=${{ env.VERSION }}
+          dotnet build './src/Modules/Hexalith.Security.Client/Hexalith.Security.Client.csproj' --configuration Release -p:Version=${{ env.VERSION }}
+          dotnet build './src/Modules/Hexalith.Security.Server/Hexalith.Security.Server.csproj' --configuration Release -p:Version=${{ env.VERSION }}
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

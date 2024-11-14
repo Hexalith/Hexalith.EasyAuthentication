@@ -1,10 +1,10 @@
-namespace Hexalith.EasyAuthentication.Client;
+namespace Hexalith.Security.Client;
 
 using System;
 using System.Collections.Generic;
 
 using Hexalith.Application.Modules.Applications;
-using Hexalith.EasyAuthentication.WebServer;
+using Hexalith.Security.WebServer;
 
 /// <summary>
 /// Represents a server application.
@@ -18,5 +18,5 @@ internal class WebServerApplication : HexalithWebServerApplication
     public override Type WebAppApplicationType => typeof(WebAppApplication);
 
     /// <inheritdoc/>
-    public override IEnumerable<Type> WebServerModules => [typeof(HexalithEasyAuthenticationServerModule)];
+    public override IEnumerable<Type> WebServerModules => [typeof(HexalithSecurityServerModule)];
 }
