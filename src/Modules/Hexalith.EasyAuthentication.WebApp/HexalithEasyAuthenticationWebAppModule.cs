@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 /// <summary>
 /// Microsoft Easy Authentication client module.
 /// </summary>
-public class HexalithEasyAuthenticationClientModule : IWebAppApplicationModule
+public class HexalithEasyAuthenticationWebAppModule : IWebAppApplicationModule
 {
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];

@@ -21,8 +21,8 @@
 
   <!-- These versions are used for the NuGet packages that are dependent on the current .NET version -->
   <PropertyGroup>
-    <AspNetCorePackagesVersion>$(DNVersion).*-*</AspNetCorePackagesVersion>
-    <MicrosoftExtensionsPackagesVersion>$(DNVersion).*-*</MicrosoftExtensionsPackagesVersion>
+    <AspNetCorePackagesVersion>$(DNVersion).*</AspNetCorePackagesVersion>
+    <MicrosoftExtensionsPackagesVersion>$(DNVersion).*</MicrosoftExtensionsPackagesVersion>
   </PropertyGroup>
 
   <PropertyGroup>
