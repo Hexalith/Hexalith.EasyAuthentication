@@ -3,15 +3,10 @@
     <HexalithModulesServerProps>$([MSBuild]::GetPathOfFileAbove('Hexalith.Modules.WebServer.props', '$(MSBuildThisFileDirectory)..'))</HexalithModulesServerProps>
   </PropertyGroup>
   <Import Project="$(HexalithModulesServerProps)" Condition=" '$(HexalithModulesServerProps)' != '' " />
-  <ItemGroup Condition="'$(UseProjectReference)' == 'true'">
-    <ProjectReference Include="$(HexalithSecurityPath)\src\Modules\Hexalith.Security.SharedAssets\Hexalith.Security.SharedAssets.csproj" />
-    <ProjectReference Include="$(HexalithSecurityPath)\src\Modules\Hexalith.Security.WebApp\Hexalith.Security.WebApp.csproj" />
-    <ProjectReference Include="$(HexalithSecurityPath)\src\Modules\Hexalith.Security.WebServer\Hexalith.Security.WebServer.csproj" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
-    <PackageReference Include="Hexalith.Security.SharedAssets" Version="$(HexalithSecurityVersion)" />
-    <PackageReference Include="Hexalith.Security.WebApp" Version="$(HexalithSecurityVersion)" />
-    <PackageReference Include="Hexalith.Security.WebServer" Version="$(HexalithSecurityVersion)" />
+  <ItemGroup>
+    <ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.SharedAssets\Hexalith.EasyAuthentication.SharedAssets.csproj" />
+    <ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.WebApp\Hexalith.EasyAuthentication.WebApp.csproj" />
+    <ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.WebServer\Hexalith.EasyAuthentication.WebServer.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)src/WebServerApplication.cs" />

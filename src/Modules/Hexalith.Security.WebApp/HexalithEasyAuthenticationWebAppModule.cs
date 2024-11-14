@@ -15,7 +15,11 @@ using Microsoft.Extensions.DependencyInjection;
 /// <summary>
 /// Microsoft Easy Authentication client module.
 /// </summary>
+<<<<<<<< HEAD:src/Modules/Hexalith.Security.WebApp/HexalithEasyAuthenticationClientModule.cs
 public class HexalithSecurityClientModule : IWebAppApplicationModule
+========
+public class HexalithEasyAuthenticationWebAppModule : IWebAppApplicationModule
+>>>>>>>> 8e93b25a9298737142169f8ab68450fe81afe84a:src/Modules/Hexalith.Security.WebApp/HexalithEasyAuthenticationWebAppModule.cs
 {
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];

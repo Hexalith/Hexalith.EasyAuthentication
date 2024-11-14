@@ -3,17 +3,11 @@
     <HexalithModulesClientProps>$([MSBuild]::GetPathOfFileAbove('Hexalith.Modules.WebApp.props', '$(MSBuildThisFileDirectory)..'))</HexalithModulesClientProps>
   </PropertyGroup>
   <Import Project="$(HexalithModulesClientProps)" Condition=" '$(HexalithModulesClientProps)' != '' " />
-  <ItemGroup Condition="'$(UseProjectReference)' == 'true'">
-    <ProjectReference Include="$(HexalithSecurityPath)src\Modules\Hexalith.Security.SharedAssets\Hexalith.Security.SharedAssets.csproj" />
-    <ProjectReference Include="$(HexalithSecurityPath)src\Modules\Hexalith.Security.WebApp\Hexalith.Security.WebApp.csproj" />
-    <ProjectReference Include="$(HexalithSecurityPath)src\Presentation\Hexalith.Security.UI.Components\Hexalith.Security.UI.Components.csproj" />
-    <ProjectReference Include="$(HexalithSecurityPath)src\Presentation\Hexalith.Security.UI.Pages\Hexalith.Security.UI.Pages.csproj" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
-    <PackageReference Include="Hexalith.Security.SharedAssets" Version="$(HexalithSecurityVersion)" />
-    <PackageReference Include="Hexalith.Security.WebApp" Version="$(HexalithSecurityVersion)" />
-    <PackageReference Include="Security.UI.Components" Version="$(HexalithSecurityVersion)" />
-    <PackageReference Include="Hexalith.Security.UI.Pages" Version="$(HexalithSecurityVersion)" />
+  <ItemGroup>
+    <ProjectReference Include="$(HexalithEasyAuthenticationPath)src\Modules\Hexalith.EasyAuthentication.SharedAssets\Hexalith.EasyAuthentication.SharedAssets.csproj" />
+    <ProjectReference Include="$(HexalithEasyAuthenticationPath)src\Modules\Hexalith.EasyAuthentication.WebApp\Hexalith.EasyAuthentication.WebApp.csproj" />
+    <ProjectReference Include="$(HexalithEasyAuthenticationPath)src\Presentation\Hexalith.EasyAuthentication.UI.Components\Hexalith.EasyAuthentication.UI.Components.csproj" />
+    <ProjectReference Include="$(HexalithEasyAuthenticationPath)src\Presentation\Hexalith.EasyAuthentication.UI.Pages\Hexalith.EasyAuthentication.UI.Pages.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)src/WebAppApplication.cs" />
