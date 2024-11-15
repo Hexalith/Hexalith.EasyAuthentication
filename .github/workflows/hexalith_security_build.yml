@@ -20,6 +20,8 @@ permissions:
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
+  HEXALITH_MODULE_NAME: 'Hexalith.Security'
+  HEXALITH_MODULE_SHORT_NAME: 'security'
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -48,7 +50,7 @@ jobs:
         echo "VERSION=$version"
     - name: Unit Tests
       run: |
-        dotnet test -c Release --no-restore --no-build ./test/Hexalith.Security.UnitTests/Hexalith.Security.UnitTests.csproj
+        dotnet test -c Release --no-restore --no-build ./test/${{ env.HEXALITH_MODULE_NAME }}.UnitTests/${{ env.HEXALITH_MODULE_NAME }}.UnitTests.csproj
     - name: Publish release packages to Nuget
       if: startswith(github.ref, 'refs/tags/v') 
       run: |
@@ -66,8 +68,8 @@ jobs:
         password: ${{ secrets.AZURE_APPLICATIONSECRET }}
     - name: Publish and push the Document Web server container images to the container registry
       run: |
-          dotnet publish './HexalithApp/src/HexalithApp.WebServer/HexalithApp.WebServer.csproj' /t:PublishContainer --configuration Release --os linux --arch x64 -p:ContainerImageTags='"${{ env.VERSION }};latest"' -p:ContainerRegistry=${{ vars.AZURE_REGISTRY }} -p:ContainerRepository='security-web'
-          dotnet publish './HexalithApp/src/HexalithApp.ApiServer/HexalithApp.ApiServer.csproj' /t:PublishContainer --configuration Release --os linux --arch x64 -p:ContainerImageTags='"${{ env.VERSION }};latest"' -p:ContainerRegistry=${{ vars.AZURE_REGISTRY }} -p:ContainerRepository='security-api'
+          dotnet publish './HexalithApp/src/HexalithApp.WebServer/HexalithApp.WebServer.csproj' /t:PublishContainer --configuration Release --os linux --arch x64 -p:ContainerImageTags='"${{ env.VERSION }};latest"' -p:ContainerRegistry=${{ vars.AZURE_REGISTRY }} -p:ContainerRepository='"${{ env.HEXALITH_MODULE_SHORT_NAME }}-web"'
+          dotnet publish './HexalithApp/src/HexalithApp.ApiServer/HexalithApp.ApiServer.csproj' /t:PublishContainer --configuration Release --os linux --arch x64 -p:ContainerImageTags='"${{ env.VERSION }};latest"' -p:ContainerRegistry=${{ vars.AZURE_REGISTRY }} -p:ContainerRepository='"${{ env.HEXALITH_MODULE_SHORT_NAME }}-api"'
     - name: Log in to Azure
       uses: azure/login@v2
       with:
@@ -82,12 +84,12 @@ jobs:
         az containerapp update \
           --name int-security-web \
           --resource-group hex-integration \
-          --image ${{ vars.AZURE_REGISTRY }}/security-web:${{ env.VERSION }}
+          --image ${{ vars.AZURE_REGISTRY }}/${{ env.HEXALITH_MODULE_SHORT_NAME }}-web:${{ env.VERSION }}
  
     - name: Deploy to Azure Container Apps
       run: |
         az containerapp update \
           --name int-security-api \
           --resource-group hex-integration \
-          --image ${{ vars.AZURE_REGISTRY }}/security-api:${{ env.VERSION }}
+          --image ${{ vars.AZURE_REGISTRY }}/${{ env.HEXALITH_MODULE_SHORT_NAME }}-api:${{ env.VERSION }}
  
