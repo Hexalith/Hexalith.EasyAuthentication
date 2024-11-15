@@ -92,9 +92,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{3A505F
 		Hexalith.Modules.WebServer.props = Hexalith.Modules.WebServer.props
 		Hexalith.props = Hexalith.props
 		.github\workflows\hexalith_security_build.yml = .github\workflows\hexalith_security_build.yml
+		.github\workflows\hexalith_security_sonar_qube.yml = .github\workflows\hexalith_security_sonar_qube.yml
 		src\BuildFiles\Project.Common.props = src\BuildFiles\Project.Common.props
-		.github\workflows\semgrep.yml = .github\workflows\semgrep.yml
-		.github\workflows\sonarqube.yml = .github\workflows\sonarqube.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8B5B1376-6E74-4BE2-8688-5F4B604B0370}"
