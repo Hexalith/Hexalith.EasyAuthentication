@@ -50,9 +50,13 @@ jobs:
         echo "MINVERVERSIONOVERRIDE=$version" >> $GITHUB_ENV
         echo "VERSION=$version" >> $GITHUB_ENV
         echo "VERSION=$version"
-    - name: Build
+    - name: Build all projects
+      shell: pwsh
       run: |
-        dotnet build --configuration Release -p:Version=${{ env.VERSION }}
+        Get-ChildItem -Path src -Filter *.csproj -Recurse | ForEach-Object {
+          Write-Host "Building $($_.FullName)"
+          dotnet build $_.FullName --configuration Release -p:Version=${{ env.VERSION }}
+        }
     - name: Unit Tests
       run: |
         dotnet test -c Release --no-restore --no-build ./test/${{ env.HEXALITH_MODULE_NAME }}.UnitTests/${{ env.HEXALITH_MODULE_NAME }}.UnitTests.csproj

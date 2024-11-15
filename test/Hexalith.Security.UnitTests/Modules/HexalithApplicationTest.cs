@@ -32,13 +32,13 @@ public class HexalithApplicationTest
             .HaveCount(3);
         _ = HexalithApplication.WebAppApplication.WebAppModules
             .Should()
-            .Contain(typeof(HexalithSecurityClientModule));
+            .Contain(typeof(HexalithSecurityWebAppModule));
         _ = HexalithApplication.WebAppApplication.Modules
             .Should()
             .Contain(typeof(HexalithSecuritySharedModule));
         _ = HexalithApplication.WebAppApplication.Modules
             .Should()
-            .Contain(typeof(HexalithSecurityClientModule));
+            .Contain(typeof(HexalithSecurityWebAppModule));
         _ = HexalithApplication.WebAppApplication.Modules
             .Should()
             .Contain(typeof(HexalithUIComponentsSharedModule));
