@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 /// <summary>
 /// Microsoft Security client module.
 /// </summary>
-public class HexalithSecurityClientModule : IWebAppApplicationModule
+public class HexalithSecurityWebAppModule : IWebAppApplicationModule
 {
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];
