@@ -1,4 +1,4 @@
-name: Hexalith EasyAuthentication Build
+name: Hexalith Security Build
 on:
   push:
     paths-ignore:
@@ -48,7 +48,7 @@ jobs:
         echo "VERSION=$version"
     - name: Unit Tests
       run: |
-        dotnet test -c Release --no-restore --no-build ./test/Hexalith.EasyAuthentication.UnitTests/Hexalith.EasyAuthentication.UnitTests.csproj
+        dotnet test -c Release --no-restore --no-build ./test/Hexalith.Security.UnitTests/Hexalith.Security.UnitTests.csproj
     - name: Publish release packages to Nuget
       if: startswith(github.ref, 'refs/tags/v') 
       run: |

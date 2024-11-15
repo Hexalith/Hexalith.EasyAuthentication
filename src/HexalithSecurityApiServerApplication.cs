@@ -9,11 +9,11 @@ using Hexalith.Security.ApiServer;
 /// <summary>
 /// Represents a server application.
 /// </summary>
-internal class ApiServerApplication : HexalithApiServerApplication
+public class HexalithSecurityApiServerApplication : HexalithApiServerApplication
 {
     /// <inheritdoc/>
     public override IEnumerable<Type> ApiServerModules => [typeof(HexalithSecurityApiServerModule)];
 
     /// <inheritdoc/>
-    public override Type SharedAssetsApplicationType => typeof(SharedAssetsApplication);
+    public override Type SharedAssetsApplicationType => typeof(HexalithSecuritySharedAssetsApplication);
 }

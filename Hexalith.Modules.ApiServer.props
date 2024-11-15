@@ -4,10 +4,10 @@
   </PropertyGroup>
   <Import Project="$(HexalithModulesServerProps)" Condition=" '$(HexalithModulesServerProps)' != '' " />
   <ItemGroup>
-    <ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.SharedAssets\Hexalith.EasyAuthentication.SharedAssets.csproj" />
-    <ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.ApiServer\Hexalith.EasyAuthentication.ApiServer.csproj" />
+    <ProjectReference Include="$(HexalithSecurityPath)\src\Modules\Hexalith.Security.SharedAssets\Hexalith.Security.SharedAssets.csproj" />
+    <ProjectReference Include="$(HexalithSecurityPath)\src\Modules\Hexalith.Security.ApiServer\Hexalith.Security.ApiServer.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)src/ApiServerApplication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)src/HexalithSecurityApiServerApplication.cs" />
   </ItemGroup>
 </Project>

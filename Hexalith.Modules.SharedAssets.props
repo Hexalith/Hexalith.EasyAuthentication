@@ -4,9 +4,9 @@
   </PropertyGroup>
   <Import Project="$(HexalithModulesSharedProps)" Condition=" '$(HexalithModulesSharedProps)' != '' " />
   <ItemGroup>
-    <ProjectReference Include="$(HexalithEasyAuthenticationPath)\src\Modules\Hexalith.EasyAuthentication.SharedAssets\Hexalith.EasyAuthentication.SharedAssets.csproj" />
+    <ProjectReference Include="$(HexalithSecurityPath)\src\Modules\Hexalith.Security.SharedAssets\Hexalith.Security.SharedAssets.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)src/SharedAssetsApplication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)src/HexalithSecuritySharedAssetsApplication.cs" />
   </ItemGroup>
 </Project>

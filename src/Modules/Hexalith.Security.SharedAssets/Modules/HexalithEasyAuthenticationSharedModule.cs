@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// Microsoft Easy Authentication shared module.
+/// Microsoft Security shared module.
 /// </summary>
 public class HexalithSecuritySharedModule : ISharedAssetsApplicationModule
 {

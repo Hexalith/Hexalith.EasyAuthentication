@@ -4,34 +4,29 @@ using System.Collections.Generic;
 using System.Reflection;
 
 using Hexalith.Application.Modules.Modules;
-using Hexalith.Security.SharedAssets.Configurations;
 using Hexalith.Extensions.Helpers;
+using Hexalith.Security.SharedAssets.Configurations;
 
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Configuration;
-
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// Microsoft Easy Authentication client module.
+/// Microsoft Security client module.
 /// </summary>
-<<<<<<<< HEAD:src/Modules/Hexalith.Security.WebApp/HexalithEasyAuthenticationClientModule.cs
 public class HexalithSecurityClientModule : IWebAppApplicationModule
-========
-public class HexalithEasyAuthenticationWebAppModule : IWebAppApplicationModule
->>>>>>>> 8e93b25a9298737142169f8ab68450fe81afe84a:src/Modules/Hexalith.Security.WebApp/HexalithEasyAuthenticationWebAppModule.cs
 {
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];
 
     /// <inheritdoc/>
-    public string Description => "Microsoft Easy Authentication client module";
+    public string Description => "Microsoft Security client module";
 
     /// <inheritdoc/>
     public string Id => "Hexalith.Security.Client";
 
     /// <inheritdoc/>
-    public string Name => "Microsoft Easy Authentication client";
+    public string Name => "Microsoft Security client";
 
     /// <inheritdoc/>
     public int OrderWeight => 0;

@@ -9,13 +9,13 @@ using Hexalith.Security.WebServer;
 /// <summary>
 /// Represents a server application.
 /// </summary>
-internal class WebServerApplication : HexalithWebServerApplication
+public class HexalithSecurityWebServerApplication : HexalithWebServerApplication
 {
     /// <inheritdoc/>
-    public override Type SharedAssetsApplicationType => typeof(SharedAssetsApplication);
+    public override Type SharedAssetsApplicationType => typeof(HexalithSecuritySharedAssetsApplication);
 
     /// <inheritdoc/>
-    public override Type WebAppApplicationType => typeof(WebAppApplication);
+    public override Type WebAppApplicationType => typeof(HexalithSecurityWebAppApplication);
 
     /// <inheritdoc/>
     public override IEnumerable<Type> WebServerModules => [typeof(HexalithSecurityServerModule)];

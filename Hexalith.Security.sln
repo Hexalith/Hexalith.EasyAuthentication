@@ -91,7 +91,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{3A505F
 		Hexalith.Modules.WebApp.props = Hexalith.Modules.WebApp.props
 		Hexalith.Modules.WebServer.props = Hexalith.Modules.WebServer.props
 		Hexalith.props = Hexalith.props
-		.github\workflows\hexalith_build.yml = .github\workflows\hexalith_build.yml
+		.github\workflows\hexalith_security_build.yml = .github\workflows\hexalith_security_build.yml
 		src\BuildFiles\Project.Common.props = src\BuildFiles\Project.Common.props
 		.github\workflows\semgrep.yml = .github\workflows\semgrep.yml
 		.github\workflows\sonarqube.yml = .github\workflows\sonarqube.yml
@@ -195,6 +195,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Security.UI.Components", "src\Presentation\Hexalith.Security.UI.Components\Hexalith.Security.UI.Components.csproj", "{0F18EEBE-51C5-4F81-8BB9-974464C0E9F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Security.UI.Pages", "src\Presentation\Hexalith.Security.UI.Pages\Hexalith.Security.UI.Pages.csproj", "{DA18485D-9DBC-4F40-A635-412FC3E6F6B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexalithApp.ApiServer", "HexalithApp\src\HexalithApp.ApiServer\HexalithApp.ApiServer.csproj", "{7E806F0B-2EA0-EC52-9F07-5A874BB548DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -410,6 +412,10 @@ Global
 		{DA18485D-9DBC-4F40-A635-412FC3E6F6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA18485D-9DBC-4F40-A635-412FC3E6F6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA18485D-9DBC-4F40-A635-412FC3E6F6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E806F0B-2EA0-EC52-9F07-5A874BB548DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E806F0B-2EA0-EC52-9F07-5A874BB548DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E806F0B-2EA0-EC52-9F07-5A874BB548DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E806F0B-2EA0-EC52-9F07-5A874BB548DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -479,6 +485,7 @@ Global
 		{05D3C88D-E3B4-4139-A0E9-A2D5B89871CA} = {6DCC825D-02D0-4F25-9A3D-A530736AB837}
 		{0F18EEBE-51C5-4F81-8BB9-974464C0E9F1} = {05D3C88D-E3B4-4139-A0E9-A2D5B89871CA}
 		{DA18485D-9DBC-4F40-A635-412FC3E6F6B0} = {05D3C88D-E3B4-4139-A0E9-A2D5B89871CA}
+		{7E806F0B-2EA0-EC52-9F07-5A874BB548DB} = {01ECF18B-80EF-4B78-875B-AC460AC0D5CC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09CBB595-8996-4C7F-9C48-4C58AD9293AC}

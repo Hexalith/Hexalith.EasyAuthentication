@@ -24,7 +24,7 @@ using Microsoft.Identity.Web;
 using NEasyAuthMiddleware;
 
 /// <summary>
-/// Microsoft Easy Authentication server module.
+/// Microsoft Security server module.
 /// </summary>
 public sealed class HexalithSecurityServerModule : IWebServerApplicationModule
 {
@@ -32,13 +32,13 @@ public sealed class HexalithSecurityServerModule : IWebServerApplicationModule
     public IEnumerable<string> Dependencies => [];
 
     /// <inheritdoc/>
-    public string Description => "Microsoft Easy Authentication server module";
+    public string Description => "Microsoft Security server module";
 
     /// <inheritdoc/>
     public string Id => "Hexalith.Security.Server";
 
     /// <inheritdoc/>
-    public string Name => "Microsoft Easy Authentication server";
+    public string Name => "Microsoft Security server";
 
     /// <inheritdoc/>
     public int OrderWeight => 0;

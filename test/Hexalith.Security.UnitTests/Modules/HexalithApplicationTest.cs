@@ -33,7 +33,7 @@ public class HexalithApplicationTest
             .Setup(c => c.GetSection(It.IsAny<string>()))
             .Returns(new Mock<IConfigurationSection>().Object);
 
-        HexalithApplication.AddClientServices(services, configurationMock.Object);
+        HexalithApplication.AddWebAppServices(services, configurationMock.Object);
 
         // Check that the client module services have been added by checking if AuthenticationStateProvider has been added
         _ = services
@@ -44,22 +44,22 @@ public class HexalithApplicationTest
     [Fact]
     public void HexalithApplicationShouldReturnClientModuleTypes()
     {
-        _ = HexalithApplication.Client.ClientModules
+        _ = HexalithApplication.WebAppApplication.WebAppModules
             .Should()
             .HaveCount(1);
-        _ = HexalithApplication.Client.Modules
+        _ = HexalithApplication.WebAppApplication.Modules
             .Should()
             .HaveCount(3);
-        _ = HexalithApplication.Client.ClientModules
+        _ = HexalithApplication.WebAppApplication.WebAppModules
             .Should()
             .Contain(typeof(HexalithSecurityClientModule));
-        _ = HexalithApplication.Client.Modules
+        _ = HexalithApplication.WebAppApplication.Modules
             .Should()
             .Contain(typeof(HexalithSecuritySharedModule));
-        _ = HexalithApplication.Client.Modules
+        _ = HexalithApplication.WebAppApplication.Modules
             .Should()
             .Contain(typeof(HexalithSecurityClientModule));
-        _ = HexalithApplication.Client.Modules
+        _ = HexalithApplication.WebAppApplication.Modules
             .Should()
             .Contain(typeof(HexalithUIComponentsSharedModule));
     }
@@ -67,19 +67,19 @@ public class HexalithApplicationTest
     [Fact]
     public void HexalithApplicationShouldReturnServerModuleTypes()
     {
-        _ = HexalithApplication.Server.WebServerModules
+        _ = HexalithApplication.WebServerApplication.WebServerModules
             .Should()
             .HaveCount(1);
-        _ = HexalithApplication.Server.Modules
+        _ = HexalithApplication.WebServerApplication.Modules
             .Should()
             .HaveCount(3);
-        _ = HexalithApplication.Server.WebServerModules
+        _ = HexalithApplication.WebServerApplication.WebServerModules
             .Should()
             .Contain(typeof(HexalithSecurityServerModule));
-        _ = HexalithApplication.Server.Modules
+        _ = HexalithApplication.WebServerApplication.Modules
             .Should()
             .Contain(typeof(HexalithSecuritySharedModule));
-        _ = HexalithApplication.Server.Modules
+        _ = HexalithApplication.WebServerApplication.Modules
             .Should()
             .Contain(typeof(HexalithUIComponentsSharedModule));
     }

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// Microsoft Easy Authentication server module.
+/// Microsoft Security server module.
 /// </summary>
 public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModule
 {
@@ -17,13 +17,13 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
     public IEnumerable<string> Dependencies => [];
 
     /// <inheritdoc/>
-    public string Description => "Microsoft Easy Authentication API Server module";
+    public string Description => "Microsoft Security API Server module";
 
     /// <inheritdoc/>
     public string Id => "Hexalith.Security.ApiServer";
 
     /// <inheritdoc/>
-    public string Name => "Microsoft Easy Authentication API Server";
+    public string Name => "Microsoft Security API Server";
 
     /// <inheritdoc/>
     public int OrderWeight => 0;

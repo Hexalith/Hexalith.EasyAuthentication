@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using Hexalith.Extensions.Configuration;
 
 /// <summary>
-/// Easy Authentication settings.
+/// Security settings.
 /// </summary>
 [DataContract]
 public record SecuritySettings(

@@ -1,7 +1,7 @@
-namespace Hexalith.Security.SharedAssets;
+﻿namespace Hexalith.Security.SharedAssets;
 
 /// <summary>
-/// Contains constants used in Easy Authentication.
+/// Contains constants used in Security.
 /// </summary>
 public static class SecurityConstants
 {

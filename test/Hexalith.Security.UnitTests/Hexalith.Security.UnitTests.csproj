@@ -1,7 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>$(DefaultTargetFramework)</TargetFramework>
+    <NoWarn>$(NoWarn);CA1515</NoWarn>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="D:\Hexalith.EasyAuthentication\src/HexalithSecurityApiServerApplication.cs" />
+	  <Compile Remove="D:\Hexalith.EasyAuthentication\src/HexalithSecuritySharedAssetsApplication.cs" />
+	  <Compile Remove="D:\Hexalith.EasyAuthentication\src/HexalithSecurityWebAppApplication.cs" />
+	  <Compile Remove="D:\Hexalith.EasyAuthentication\src/HexalithSecurityWebServerApplication.cs" />
+	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\.editorconfig" Link=".editorconfig" />
 	</ItemGroup>
@@ -20,6 +27,7 @@
 		<Folder Include="Configurations\" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.ApiServer\HexalithApp.ApiServer.csproj" />
 	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.SharedAssets\HexalithApp.SharedAssets.csproj" />
 	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.WebApp\HexalithApp.WebApp.csproj" />
 	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.WebServer\HexalithApp.WebServer.csproj" />

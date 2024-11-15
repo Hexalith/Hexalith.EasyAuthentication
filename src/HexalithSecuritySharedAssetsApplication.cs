@@ -7,13 +7,13 @@ using Hexalith.UI.Components.Modules;
 /// <summary>
 /// Represents a shared application.
 /// </summary>
-public class SharedAssetsApplication : HexalithSharedAssetsApplication
+public class HexalithSecuritySharedAssetsApplication : HexalithSharedAssetsApplication
 {
     /// <inheritdoc/>
     public override string HomePath => "Security";
 
     /// <inheritdoc/>
-    public override string Id => "HexalithSecurity";
+    public override string Id => "Hexalith.Security.SharedAssets";
 
     /// <inheritdoc/>
     public override string LoginPath => ".auth/login";
@@ -22,10 +22,10 @@ public class SharedAssetsApplication : HexalithSharedAssetsApplication
     public override string LogoutPath => ".auth/logout";
 
     /// <inheritdoc/>
-    public override string Name => "Hexalith Easy Authentication Shared Assets";
+    public override string Name => "Hexalith Security Shared Assets";
 
     /// <inheritdoc/>
-    public override IEnumerable<Type> SharedModules =>
+    public override IEnumerable<Type> SharedAssetsModules =>
     [
         typeof(HexalithSecuritySharedModule), typeof(HexalithUIComponentsSharedModule)
     ];
