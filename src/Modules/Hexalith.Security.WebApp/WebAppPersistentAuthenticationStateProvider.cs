@@ -3,7 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 
-using Hexalith.Security.SharedAssets;
+using Hexalith.Security.SharedUIElements;
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 /// that authenticate to the server when making subsequent requests. That works separately using a
 /// cookie that will be included on HttpClient requests to the server.
 /// </summary>
-public sealed class ClientPersistentAuthenticationStateProvider : AuthenticationStateProvider
+public sealed class WebAppPersistentAuthenticationStateProvider : AuthenticationStateProvider
 {
     private static readonly Task<AuthenticationState> _defaultUnauthenticatedTask =
         Task.FromResult(new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity())));
@@ -26,10 +26,10 @@ public sealed class ClientPersistentAuthenticationStateProvider : Authentication
     private readonly Task<AuthenticationState> _authenticationStateTask = _defaultUnauthenticatedTask;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ClientPersistentAuthenticationStateProvider"/> class.
+    /// Initializes a new instance of the <see cref="WebAppPersistentAuthenticationStateProvider"/> class.
     /// </summary>
     /// <param name="state">The authentication state.</param>
-    public ClientPersistentAuthenticationStateProvider(PersistentComponentState state)
+    public WebAppPersistentAuthenticationStateProvider(PersistentComponentState state)
     {
         ArgumentNullException.ThrowIfNull(state);
         if (!state.TryTakeFromJson(nameof(UserInfo), out UserInfo? userInfo) || userInfo is null)

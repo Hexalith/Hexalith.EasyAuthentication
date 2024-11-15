@@ -12,7 +12,7 @@ using Hexalith.Security.WebApp;
 public class HexalithSecurityWebAppApplication : HexalithWebAppApplication
 {
     /// <inheritdoc/>
-    public override Type SharedAssetsApplicationType => typeof(HexalithSecuritySharedAssetsApplication);
+    public override Type SharedUIElementsApplicationType => typeof(HexalithSecuritySharedUIElementsApplication);
 
     /// <inheritdoc/>
     public override IEnumerable<Type> WebAppModules

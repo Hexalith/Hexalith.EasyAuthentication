@@ -1,14 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
     <TargetFramework>$(DefaultTargetFramework)</TargetFramework>
   </PropertyGroup>
   <ItemGroup Condition="'$(UseProjectReference)' == 'true'">
     <ProjectReference Include="$(HexalithPath)\src\Core\Application\Hexalith.Application.Modules.Abstractions\Hexalith.Application.Modules.Abstractions.csproj" />
-    <ProjectReference Include="$(HexalithPath)\src\Core\UI\Hexalith.UI.Components.Abstractions\Hexalith.UI.Components.Abstractions.csproj" />
+    <ProjectReference Include="$(HexalithPath)\src\Core\UI\Hexalith.UI.Components\Hexalith.UI.Components.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
     <PackageReference Include="Hexalith.Application.Modules.Abstractions" Version="$(HexalithVersion)" />
-    <PackageReference Include="Hexalith.UI.Components.Abstractions" Version="$(HexalithVersion)" />
+    <PackageReference Include="Hexalith.UI.Components" Version="$(HexalithVersion)" />
   </ItemGroup>
   <ItemGroup>
     <SupportedPlatform Include="browser" />

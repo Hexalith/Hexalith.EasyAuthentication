@@ -86,7 +86,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{3A505F
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 		Hexalith.Modules.ApiServer.props = Hexalith.Modules.ApiServer.props
-		Hexalith.Modules.SharedAssets.props = Hexalith.Modules.SharedAssets.props
+		Hexalith.Modules.SharedUIElements.props = Hexalith.Modules.SharedUIElements.props
 		Hexalith.Modules.StoreApp.props = Hexalith.Modules.StoreApp.props
 		Hexalith.Modules.WebApp.props = Hexalith.Modules.WebApp.props
 		Hexalith.Modules.WebServer.props = Hexalith.Modules.WebServer.props
@@ -152,7 +152,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{15BB402D
 		HexalithApp\src\HexalithApp.Build\Dependencies.props = HexalithApp\src\HexalithApp.Build\Dependencies.props
 		HexalithApp\Directory.Build.props = HexalithApp\Directory.Build.props
 		HexalithApp\Hexalith.Modules.ApiServer.props = HexalithApp\Hexalith.Modules.ApiServer.props
-		HexalithApp\Hexalith.Modules.SharedAssets.props = HexalithApp\Hexalith.Modules.SharedAssets.props
+		HexalithApp\Hexalith.Modules.SharedUIElements.props = HexalithApp\Hexalith.Modules.SharedUIElements.props
 		HexalithApp\Hexalith.Modules.StoreApp.props = HexalithApp\Hexalith.Modules.StoreApp.props
 		HexalithApp\Hexalith.Modules.WebApp.props = HexalithApp\Hexalith.Modules.WebApp.props
 		HexalithApp\Hexalith.Modules.WebServer.props = HexalithApp\Hexalith.Modules.WebServer.props
@@ -167,7 +167,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_global", "_global", "{57AF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.PolymorphicSerialization", "Hexalith\src\Core\Common\Hexalith.PolymorphicSerialization\Hexalith.PolymorphicSerialization.csproj", "{AD30A9C7-3E9D-44E4-9CB1-741DC2954094}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexalithApp.SharedAssets", "HexalithApp\src\HexalithApp.SharedAssets\HexalithApp.SharedAssets.csproj", "{C3371C3D-6DB7-49AE-A12C-B3BA85C87C11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexalithApp.SharedUIElements", "HexalithApp\src\HexalithApp.SharedUIElements\HexalithApp.SharedUIElements.csproj", "{C3371C3D-6DB7-49AE-A12C-B3BA85C87C11}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexalithApp.WebApp", "HexalithApp\src\HexalithApp.WebApp\HexalithApp.WebApp.csproj", "{2A543783-BF66-49DF-A974-0F0A7453127F}"
 EndProject
@@ -183,7 +183,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Application.Sessio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Security.ApiServer", "src\Modules\Hexalith.Security.ApiServer\Hexalith.Security.ApiServer.csproj", "{92908F41-0766-44D2-AA53-1322027760EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Security.SharedAssets", "src\Modules\Hexalith.Security.SharedAssets\Hexalith.Security.SharedAssets.csproj", "{C5E6183F-4DE4-48DB-BB95-631BDC21A8D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Security.SharedUIElements", "src\Modules\Hexalith.Security.SharedUIElements\Hexalith.Security.SharedUIElements.csproj", "{C5E6183F-4DE4-48DB-BB95-631BDC21A8D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Security.WebApp", "src\Modules\Hexalith.Security.WebApp\Hexalith.Security.WebApp.csproj", "{7A5BD9FB-7BDE-465A-BD31-27866D068D38}"
 EndProject
@@ -196,6 +196,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Security.UI.Pages", "src\Presentation\Hexalith.Security.UI.Pages\Hexalith.Security.UI.Pages.csproj", "{DA18485D-9DBC-4F40-A635-412FC3E6F6B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexalithApp.ApiServer", "HexalithApp\src\HexalithApp.ApiServer\HexalithApp.ApiServer.csproj", "{7E806F0B-2EA0-EC52-9F07-5A874BB548DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.CodeGenerators.SerializationMappers", "Hexalith\src\Core\CodeGenerators\Hexalith.CodeGenerators.SerializationMappers\Hexalith.CodeGenerators.SerializationMappers.csproj", "{87C74D47-C5A1-B541-1947-553112896034}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeGenerators", "CodeGenerators", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -415,6 +419,10 @@ Global
 		{7E806F0B-2EA0-EC52-9F07-5A874BB548DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E806F0B-2EA0-EC52-9F07-5A874BB548DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E806F0B-2EA0-EC52-9F07-5A874BB548DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87C74D47-C5A1-B541-1947-553112896034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87C74D47-C5A1-B541-1947-553112896034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87C74D47-C5A1-B541-1947-553112896034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87C74D47-C5A1-B541-1947-553112896034}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -485,6 +493,8 @@ Global
 		{0F18EEBE-51C5-4F81-8BB9-974464C0E9F1} = {05D3C88D-E3B4-4139-A0E9-A2D5B89871CA}
 		{DA18485D-9DBC-4F40-A635-412FC3E6F6B0} = {05D3C88D-E3B4-4139-A0E9-A2D5B89871CA}
 		{7E806F0B-2EA0-EC52-9F07-5A874BB548DB} = {01ECF18B-80EF-4B78-875B-AC460AC0D5CC}
+		{87C74D47-C5A1-B541-1947-553112896034} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {D2DA3040-462E-4E0E-9CFE-3EA95FA3D014}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09CBB595-8996-4C7F-9C48-4C58AD9293AC}

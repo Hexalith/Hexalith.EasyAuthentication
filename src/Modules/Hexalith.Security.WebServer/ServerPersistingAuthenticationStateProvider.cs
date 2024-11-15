@@ -1,6 +1,6 @@
 ﻿namespace Hexalith.Security.WebServer;
 
-using Hexalith.Security.SharedAssets;
+using Hexalith.Security.SharedUIElements;
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;

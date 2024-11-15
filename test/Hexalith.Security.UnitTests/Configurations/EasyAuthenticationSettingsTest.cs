@@ -4,7 +4,7 @@ using System.Text.Json;
 
 using FluentAssertions;
 
-using Hexalith.Security.SharedAssets.Configurations;
+using Hexalith.Security.SharedUIElements.Configurations;
 using Hexalith.Extensions.Helpers;
 using Hexalith.TestMocks;
 

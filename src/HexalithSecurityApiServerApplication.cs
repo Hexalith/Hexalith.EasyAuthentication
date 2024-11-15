@@ -15,5 +15,5 @@ public class HexalithSecurityApiServerApplication : HexalithApiServerApplication
     public override IEnumerable<Type> ApiServerModules => [typeof(HexalithSecurityApiServerModule)];
 
     /// <inheritdoc/>
-    public override Type SharedAssetsApplicationType => typeof(HexalithSecuritySharedAssetsApplication);
+    public override Type SharedUIElementsApplicationType => typeof(HexalithSecuritySharedUIElementsApplication);
 }

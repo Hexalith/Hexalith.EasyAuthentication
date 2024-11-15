@@ -1,11 +1,11 @@
-﻿namespace Hexalith.Security.SharedAssets.Modules;
+﻿namespace Hexalith.Security.SharedUIElements.Modules;
 
 using System.Collections.Generic;
 using System.Reflection;
 
 using Hexalith.Application.Modules.Modules;
 using Hexalith.Security.Shared.Resources.Modules;
-using Hexalith.Security.SharedAssets.Configurations;
+using Hexalith.Security.SharedUIElements.Configurations;
 using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
 
@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 /// <summary>
 /// Microsoft Security shared module.
 /// </summary>
-public class HexalithSecuritySharedModule : ISharedAssetsApplicationModule
+public class HexalithSecuritySharedModule : ISharedUIElementsApplicationModule
 {
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];

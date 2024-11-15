@@ -5,7 +5,7 @@ using System.Reflection;
 
 using Hexalith.Application.Modules.Modules;
 using Hexalith.Extensions.Helpers;
-using Hexalith.Security.SharedAssets.Configurations;
+using Hexalith.Security.SharedUIElements.Configurations;
 
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -54,7 +54,7 @@ public class HexalithSecurityClientModule : IWebAppApplicationModule
             return;
         }
 
-        _ = services.AddScoped<AuthenticationStateProvider, ClientPersistentAuthenticationStateProvider>();
+        _ = services.AddScoped<AuthenticationStateProvider, WebAppPersistentAuthenticationStateProvider>();
     }
 
     /// <inheritdoc/>

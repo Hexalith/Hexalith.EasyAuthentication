@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <HexalithModulesSharedProps>$([MSBuild]::GetPathOfFileAbove('Hexalith.Modules.SharedUIElements.props', '$(MSBuildThisFileDirectory)..'))</HexalithModulesSharedProps>
+  </PropertyGroup>
+  <Import Project="$(HexalithModulesSharedProps)" Condition=" '$(HexalithModulesSharedProps)' != '' " />
+  <ItemGroup>
+    <ProjectReference Include="$(HexalithSecurityPath)\src\Modules\Hexalith.Security.SharedUIElements\Hexalith.Security.SharedUIElements.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)src/HexalithSecuritySharedUIElementsApplication.cs" />
+  </ItemGroup>
+</Project>

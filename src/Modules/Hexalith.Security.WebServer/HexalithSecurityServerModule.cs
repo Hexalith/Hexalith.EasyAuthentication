@@ -5,7 +5,7 @@ using System.Reflection;
 
 using Hexalith.Application.Modules.Modules;
 using Hexalith.Security.Server.Middlewares;
-using Hexalith.Security.SharedAssets.Configurations;
+using Hexalith.Security.SharedUIElements.Configurations;
 using Hexalith.Security.WebServer.Middlewares;
 using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
