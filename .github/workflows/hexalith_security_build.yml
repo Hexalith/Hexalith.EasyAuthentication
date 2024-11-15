@@ -20,9 +20,6 @@ permissions:
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
-  HEXALITH_MODULE_NAME: 'Hexalith.Security'
-  HEXALITH_MODULE_SHORT_NAME: 'security'
-  HEXALITH_RESOURCE_GROUP: 'stg-hexalith'
   MINVERBUILDMETADATA: build.${{ github.run_id }}.${{ github.run_attempt}}
 jobs:
   publish:
