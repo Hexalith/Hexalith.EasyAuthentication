@@ -22,6 +22,8 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   HEXALITH_MODULE_NAME: 'Hexalith.Security'
   HEXALITH_MODULE_SHORT_NAME: 'security'
+  HEXALITH_RESOURCE_GROUP: 'stg-hexalith'
+  MINVERBUILDMETADATA: build.${{ github.run_id }}.${{ github.run_attempt}}
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -48,6 +50,9 @@ jobs:
         echo "MINVERVERSIONOVERRIDE=$version" >> $GITHUB_ENV
         echo "VERSION=$version" >> $GITHUB_ENV
         echo "VERSION=$version"
+    - name: Build
+      run: |
+        dotnet build --configuration Release -p:Version=${{ env.VERSION }}
     - name: Unit Tests
       run: |
         dotnet test -c Release --no-restore --no-build ./test/${{ env.HEXALITH_MODULE_NAME }}.UnitTests/${{ env.HEXALITH_MODULE_NAME }}.UnitTests.csproj
@@ -82,14 +87,14 @@ jobs:
     - name: Deploy to Azure Container Apps
       run: |
         az containerapp update \
-          --name int-security-web \
-          --resource-group hex-integration \
+          --name int-${{ env.HEXALITH_MODULE_SHORT_NAME }}web \
+          --resource-group ${{ env.HEXALITH_RESOURCE_GROUP }} \
           --image ${{ vars.AZURE_REGISTRY }}/${{ env.HEXALITH_MODULE_SHORT_NAME }}-web:${{ env.VERSION }}
  
     - name: Deploy to Azure Container Apps
       run: |
         az containerapp update \
-          --name int-security-api \
-          --resource-group hex-integration \
+          --name int-${{ env.HEXALITH_MODULE_SHORT_NAME }}api \
+          --resource-group ${{ env.HEXALITH_RESOURCE_GROUP }} \
           --image ${{ vars.AZURE_REGISTRY }}/${{ env.HEXALITH_MODULE_SHORT_NAME }}-api:${{ env.VERSION }}
  
