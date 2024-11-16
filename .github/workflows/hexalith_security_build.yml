@@ -87,6 +87,7 @@ jobs:
         client-id: ${{ secrets.AZURE_APPLICATIONID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID  }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        enable-AzPSSession: true
         allow-no-subscriptions: true
     - name: Deploy to Azure Container Apps
       run: az account show
