@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 using Hexalith.Application.Modules.Applications;
 using Hexalith.Security.ApiServer;
+using Hexalith.Security.Application;
 
 /// <summary>
 /// Represents a server application.
@@ -15,5 +16,11 @@ public class HexalithSecurityApiServerApplication : HexalithApiServerApplication
     public override IEnumerable<Type> ApiServerModules => [typeof(HexalithSecurityApiServerModule)];
 
     /// <inheritdoc/>
-    public override Type SharedUIElementsApplicationType => typeof(HexalithSecuritySharedUIElementsApplication);
+    public override string Id => $"{HexalithSecurityApplicationInformation.Id}.{ApplicationType}";
+
+    /// <inheritdoc/>
+    public override string Name => $"{HexalithSecurityApplicationInformation.Name} {ApplicationType}";
+
+    /// <inheritdoc/>
+    public override string ShortName => HexalithSecurityApplicationInformation.ShortName;
 }

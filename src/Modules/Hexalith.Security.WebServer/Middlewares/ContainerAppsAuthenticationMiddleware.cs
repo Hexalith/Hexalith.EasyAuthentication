@@ -10,9 +10,9 @@ using Hexalith.Application.Sessions;
 using Hexalith.Application.Sessions.Helpers;
 using Hexalith.Application.Sessions.Models;
 using Hexalith.Application.Sessions.Services;
-using Hexalith.Security.SharedUIElements;
-using Hexalith.Security.WebServer.Models;
 using Hexalith.Extensions.Helpers;
+using Hexalith.Security.Application;
+using Hexalith.Security.WebServer.Models;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;

@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Reflection;
 
 using Hexalith.Application.Modules.Modules;
+using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
-using Hexalith.Security.SharedUIElements.Configurations;
+using Hexalith.Security.Application.Configurations;
+using Hexalith.Security.UI.Components.Menu;
 
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -55,6 +57,9 @@ public class HexalithSecurityWebAppModule : IWebAppApplicationModule
         }
 
         _ = services.AddScoped<AuthenticationStateProvider, WebAppPersistentAuthenticationStateProvider>();
+        _ = services
+            .AddSingleton(p => SecurityMenu.Menu)
+            .ConfigureSettings<SecuritySettings>(configuration);
     }
 
     /// <inheritdoc/>

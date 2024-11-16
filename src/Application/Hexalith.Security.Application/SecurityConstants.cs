@@ -1,4 +1,4 @@
-﻿namespace Hexalith.Security.SharedUIElements;
+﻿namespace Hexalith.Security.Application;
 
 /// <summary>
 /// Contains constants used in Security.

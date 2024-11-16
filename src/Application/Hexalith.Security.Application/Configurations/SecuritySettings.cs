@@ -1,4 +1,4 @@
-﻿namespace Hexalith.Security.SharedUIElements.Configurations;
+﻿namespace Hexalith.Security.Application.Configurations;
 
 using System.Runtime.Serialization;
 

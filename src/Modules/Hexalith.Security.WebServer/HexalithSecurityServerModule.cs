@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Reflection;
 
 using Hexalith.Application.Modules.Modules;
-using Hexalith.Security.Server.Middlewares;
-using Hexalith.Security.SharedUIElements.Configurations;
-using Hexalith.Security.WebServer.Middlewares;
 using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
+using Hexalith.Security.Application.Configurations;
+using Hexalith.Security.Server.Middlewares;
+using Hexalith.Security.UI.Components.Menu;
+using Hexalith.Security.WebServer.Middlewares;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -84,6 +85,7 @@ public sealed class HexalithSecurityServerModule : IWebServerApplicationModule
 
         _ = services.AddAuthorization();
         _ = services.AddScoped<AuthenticationStateProvider, ServerPersistingAuthenticationStateProvider>()
+            .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<SecuritySettings>(configuration);
     }
 

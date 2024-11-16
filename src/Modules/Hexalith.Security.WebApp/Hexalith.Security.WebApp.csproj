@@ -5,9 +5,9 @@
 		<StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
 	</PropertyGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Application\Hexalith.Security.Application\Hexalith.Security.Application.csproj" />
 	  <ProjectReference Include="..\..\Presentation\Hexalith.Security.UI.Components\Hexalith.Security.UI.Components.csproj" />
 	  <ProjectReference Include="..\..\Presentation\Hexalith.Security.UI.Pages\Hexalith.Security.UI.Pages.csproj" />
-	  <ProjectReference Include="..\Hexalith.Security.SharedUIElements\Hexalith.Security.SharedUIElements.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(AspNetCorePackagesVersion)" />

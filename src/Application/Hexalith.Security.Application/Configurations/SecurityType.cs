@@ -1,4 +1,4 @@
-﻿namespace Hexalith.Security.SharedUIElements.Configurations;
+﻿namespace Hexalith.Security.Application.Configurations;
 
 /// <summary>
 /// Represents the Security types.

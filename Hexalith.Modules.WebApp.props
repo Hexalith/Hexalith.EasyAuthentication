@@ -4,7 +4,7 @@
   </PropertyGroup>
   <Import Project="$(HexalithModulesClientProps)" Condition=" '$(HexalithModulesClientProps)' != '' " />
   <ItemGroup>
-    <ProjectReference Include="$(HexalithSecurityPath)src\Modules\Hexalith.Security.SharedUIElements\Hexalith.Security.SharedUIElements.csproj" />
+    <ProjectReference Include="$(HexalithSecurityPath)\src\Application\Hexalith.Security.Application\Hexalith.Security.Application.csproj" />
     <ProjectReference Include="$(HexalithSecurityPath)src\Modules\Hexalith.Security.WebApp\Hexalith.Security.WebApp.csproj" />
     <ProjectReference Include="$(HexalithSecurityPath)src\Presentation\Hexalith.Security.UI.Components\Hexalith.Security.UI.Components.csproj" />
     <ProjectReference Include="$(HexalithSecurityPath)src\Presentation\Hexalith.Security.UI.Pages\Hexalith.Security.UI.Pages.csproj" />

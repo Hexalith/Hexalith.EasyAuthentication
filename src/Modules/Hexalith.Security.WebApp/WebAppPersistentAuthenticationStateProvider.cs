@@ -3,7 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 
-using Hexalith.Security.SharedUIElements;
+using Hexalith.Security.Application.Users;
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;

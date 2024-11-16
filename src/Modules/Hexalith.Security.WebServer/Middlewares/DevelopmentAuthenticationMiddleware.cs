@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json;
 
 using Hexalith.Application.Sessions.Helpers;
-using Hexalith.Security.SharedUIElements;
+using Hexalith.Security.Application;
 using Hexalith.Security.WebServer.Models;
 
 using Microsoft.AspNetCore.Http;

@@ -1,7 +1,6 @@
 <Project>
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Hexalith.props', '$(MSBuildThisFileDirectory)'))" />
-  <Import Project="$([MSBuild]::GetPathOfFileAbove('Hexalith.Modules.SharedUIElements.props', '$(MSBuildThisFileDirectory)'))" />
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Hexalith.Modules.WebApp.props', '$(MSBuildThisFileDirectory)'))" />
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Hexalith.Modules.ApiServer.props', '$(MSBuildThisFileDirectory)'))" />
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Hexalith.Modules.WebServer.props', '$(MSBuildThisFileDirectory)'))" />

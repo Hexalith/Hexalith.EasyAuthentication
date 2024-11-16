@@ -1,4 +1,4 @@
-﻿namespace Hexalith.Security.SharedUIElements;
+﻿namespace Hexalith.Security.Application.Users;
 
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;

@@ -9,15 +9,13 @@ namespace Hexalith.Security.UnitTests.Modules;
 using FluentAssertions;
 
 using Hexalith.Application.Modules.Applications;
-using Hexalith.Security.SharedUIElements.Modules;
+using Hexalith.Security.Application.Configurations;
 using Hexalith.Security.WebApp;
 using Hexalith.Security.WebServer;
-using Hexalith.UI.Components.Modules;
 
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using Moq;
 
 public class HexalithApplicationTest
 {
@@ -29,19 +27,13 @@ public class HexalithApplicationTest
             .HaveCount(1);
         _ = HexalithApplication.WebAppApplication.Modules
             .Should()
-            .HaveCount(3);
+            .HaveCount(1);
         _ = HexalithApplication.WebAppApplication.WebAppModules
             .Should()
             .Contain(typeof(HexalithSecurityWebAppModule));
         _ = HexalithApplication.WebAppApplication.Modules
             .Should()
-            .Contain(typeof(HexalithSecuritySharedModule));
-        _ = HexalithApplication.WebAppApplication.Modules
-            .Should()
             .Contain(typeof(HexalithSecurityWebAppModule));
-        _ = HexalithApplication.WebAppApplication.Modules
-            .Should()
-            .Contain(typeof(HexalithUIComponentsSharedModule));
     }
 
     [Fact]
@@ -52,34 +44,36 @@ public class HexalithApplicationTest
             .HaveCount(1);
         _ = HexalithApplication.WebServerApplication.Modules
             .Should()
-            .HaveCount(3);
+            .HaveCount(2);
         _ = HexalithApplication.WebServerApplication.WebServerModules
             .Should()
             .Contain(typeof(HexalithSecurityServerModule));
         _ = HexalithApplication.WebServerApplication.Modules
             .Should()
-            .Contain(typeof(HexalithSecuritySharedModule));
+            .Contain(typeof(HexalithSecurityWebAppModule));
         _ = HexalithApplication.WebServerApplication.Modules
             .Should()
-            .Contain(typeof(HexalithUIComponentsSharedModule));
+            .Contain(typeof(HexalithSecurityServerModule));
     }
 
     [Fact]
     public void WebAppServicesFromModulesShouldBeAdded()
     {
         ServiceCollection services = [];
-        Mock<IConfiguration> configurationMock = new(MockBehavior.Strict);
+        Dictionary<string, string> inMemorySettings = new()
+        {
+            { $"{SecuritySettings.ConfigurationName()}:Enabled", "true" },
+        };
 
-        // Mock the configuration GetSection method
-        _ = configurationMock
-            .Setup(c => c.GetSection(It.IsAny<string>()))
-            .Returns(new Mock<IConfigurationSection>().Object);
+        IConfiguration configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(inMemorySettings)
+            .Build();
 
-        HexalithApplication.AddWebAppServices(services, configurationMock.Object);
+        HexalithApplication.AddWebAppServices(services, configuration);
 
         // Check that the client module services have been added by checking if AuthenticationStateProvider has been added
         _ = services
             .Should()
-            .ContainSingle(s => s.ServiceType == typeof(WebAppPersistentAuthenticationStateProvider));
+            .ContainSingle(s => s.ServiceType == typeof(AuthenticationStateProvider));
     }
 }

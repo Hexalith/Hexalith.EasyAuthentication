@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 
 using Hexalith.Application.Modules.Applications;
+using Hexalith.Security.Application;
 using Hexalith.Security.WebApp;
 
 /// <summary>
@@ -12,7 +13,13 @@ using Hexalith.Security.WebApp;
 public class HexalithSecurityWebAppApplication : HexalithWebAppApplication
 {
     /// <inheritdoc/>
-    public override Type SharedUIElementsApplicationType => typeof(HexalithSecuritySharedUIElementsApplication);
+    public override string Id => $"{HexalithSecurityApplicationInformation.Id}.{ApplicationType}";
+
+    /// <inheritdoc/>
+    public override string Name => $"{HexalithSecurityApplicationInformation.Name} {ApplicationType}";
+
+    /// <inheritdoc/>
+    public override string ShortName => HexalithSecurityApplicationInformation.ShortName;
 
     /// <inheritdoc/>
     public override IEnumerable<Type> WebAppModules

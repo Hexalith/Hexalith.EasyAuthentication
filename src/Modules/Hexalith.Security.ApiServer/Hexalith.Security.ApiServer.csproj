@@ -14,7 +14,4 @@
   <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
     <PackageReference Include="Hexalith.Application.Modules.Abstractions" Version="$(HexalithVersion)" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Hexalith.Security.SharedUIElements\Hexalith.Security.SharedUIElements.csproj" />
-  </ItemGroup>
 </Project>

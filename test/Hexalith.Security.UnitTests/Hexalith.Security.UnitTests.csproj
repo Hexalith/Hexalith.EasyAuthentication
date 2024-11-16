@@ -28,7 +28,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.ApiServer\HexalithApp.ApiServer.csproj" />
-	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.SharedUIElements\HexalithApp.SharedUIElements.csproj" />
 	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.WebApp\HexalithApp.WebApp.csproj" />
 	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.WebServer\HexalithApp.WebServer.csproj" />
 	  <ProjectReference Include="..\..\Hexalith\src\Core\Application\Hexalith.Application.Modules\Hexalith.Application.Modules.csproj" />
