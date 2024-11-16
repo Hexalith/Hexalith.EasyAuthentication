@@ -190,6 +190,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Security.WebServer", "src\Modules\Hexalith.Security.WebServer\Hexalith.Security.WebServer.csproj", "{F3D6A6B4-A5F0-4F68-97AA-0E5990D822A7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{05D3C88D-E3B4-4139-A0E9-A2D5B89871CA}"
+	ProjectSection(SolutionItems) = preProject
+		src\Presentation\Directory.Build.props = src\Presentation\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Security.UI.Components", "src\Presentation\Hexalith.Security.UI.Components\Hexalith.Security.UI.Components.csproj", "{0F18EEBE-51C5-4F81-8BB9-974464C0E9F1}"
 EndProject
