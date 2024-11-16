@@ -1,22 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../../Hexalith.props" />
-  <Import Project="../../Hexalith.Modules.WebServer.props" />
-  <Import Project="../../Hexalith.Modules.ApiServer.props" />
-  <Import Project="../../Hexalith.Modules.WebApp.props" />
   <PropertyGroup>
     <TargetFramework>$(DefaultTargetFramework)</TargetFramework>
     <NoWarn>$(NoWarn);CA1515</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\..\.editorconfig" Link=".editorconfig" />
-    <ProjectReference Include="..\..\src\Modules\Hexalith.Security.ApiServer\Hexalith.Security.ApiServer.csproj" />
-    <ProjectReference Include="..\..\src\Modules\Hexalith.Security.WebApp\Hexalith.Security.WebApp.csproj" />
-    <ProjectReference Include="..\..\src\Modules\Hexalith.Security.WebServer\Hexalith.Security.WebServer.csproj" />
+    <ProjectReference Include="$(HexalithSecurityPath)src\Modules\Hexalith.Security.ApiServer\Hexalith.Security.ApiServer.csproj" />
+    <ProjectReference Include="$(HexalithSecurityPath)src\Modules\Hexalith.Security.WebApp\Hexalith.Security.WebApp.csproj" />
+    <ProjectReference Include="$(HexalithSecurityPath)src\Modules\Hexalith.Security.WebServer\Hexalith.Security.WebServer.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(HexalithSecurityPath)src/HexalithSecurityApiServerApplication.cs" />
+    <Compile Include="$(HexalithSecurityPath)src/HexalithSecurityWebServerApplication.cs" />
+    <Compile Include="$(HexalithSecurityPath)src/HexalithSecurityWebAppApplication.cs" />
   </ItemGroup>
   <ItemGroup Condition="'$(UseProjectReference)' == 'true'">
     <ProjectReference Include="$(HexalithPath)\src\Core\Common\Hexalith.TestMocks\Hexalith.TestMocks.csproj" />
