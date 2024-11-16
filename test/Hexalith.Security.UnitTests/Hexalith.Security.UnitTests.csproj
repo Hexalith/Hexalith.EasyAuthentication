@@ -1,35 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFramework>$(DefaultTargetFramework)</TargetFramework>
+  <PropertyGroup>
+    <TargetFramework>$(DefaultTargetFramework)</TargetFramework>
     <NoWarn>$(NoWarn);CA1515</NoWarn>
-	</PropertyGroup>
-	<ItemGroup>
-	  <Compile Remove="D:\Hexalith.EasyAuthentication\src/HexalithSecurityApiServerApplication.cs" />
-	  <Compile Remove="D:\Hexalith.EasyAuthentication\src/HexalithSecuritySharedUIElementsApplication.cs" />
-	  <Compile Remove="D:\Hexalith.EasyAuthentication\src/HexalithSecurityWebAppApplication.cs" />
-	  <Compile Remove="D:\Hexalith.EasyAuthentication\src/HexalithSecurityWebServerApplication.cs" />
-	</ItemGroup>
-	<ItemGroup>
-		<None Include="..\..\.editorconfig" Link=".editorconfig" />
-	</ItemGroup>
-	<ItemGroup>
-		<None Update="appsettings.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-	<ItemGroup Condition="'$(UseProjectReference)' == 'true'">
-		<ProjectReference Include="$(HexalithPath)\src\Core\Common\Hexalith.TestMocks\Hexalith.TestMocks.csproj" />
-	</ItemGroup>
-	<ItemGroup Condition="'$(UseProjectReference)' != 'true'">
-		<PackageReference Include="Hexalith.TestMocks" Version="$(HexalithVersion)" />
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="Configurations\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.ApiServer\HexalithApp.ApiServer.csproj" />
-	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.WebApp\HexalithApp.WebApp.csproj" />
-	  <ProjectReference Include="..\..\HexalithApp\src\HexalithApp.WebServer\HexalithApp.WebServer.csproj" />
-	  <ProjectReference Include="..\..\Hexalith\src\Core\Application\Hexalith.Application.Modules\Hexalith.Application.Modules.csproj" />
-	</ItemGroup>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Modules\Hexalith.Security.ApiServer\Hexalith.Security.ApiServer.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Hexalith.Security.WebApp\Hexalith.Security.WebApp.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Hexalith.Security.WebServer\Hexalith.Security.WebServer.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseProjectReference)' == 'true'">
+    <ProjectReference Include="$(HexalithPath)\src\Core\Common\Hexalith.TestMocks\Hexalith.TestMocks.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
+    <PackageReference Include="Hexalith.TestMocks" Version="$(HexalithVersion)" />
+  </ItemGroup>
 </Project>

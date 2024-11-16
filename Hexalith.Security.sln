@@ -151,7 +151,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{15BB402D
 		HexalithApp\src\HexalithApp.Build\Dependencies.props = HexalithApp\src\HexalithApp.Build\Dependencies.props
 		HexalithApp\Directory.Build.props = HexalithApp\Directory.Build.props
 		HexalithApp\Hexalith.Modules.ApiServer.props = HexalithApp\Hexalith.Modules.ApiServer.props
-		HexalithApp\Hexalith.Modules.SharedUIElements.props = HexalithApp\Hexalith.Modules.SharedUIElements.props
 		HexalithApp\Hexalith.Modules.StoreApp.props = HexalithApp\Hexalith.Modules.StoreApp.props
 		HexalithApp\Hexalith.Modules.WebApp.props = HexalithApp\Hexalith.Modules.WebApp.props
 		HexalithApp\Hexalith.Modules.WebServer.props = HexalithApp\Hexalith.Modules.WebServer.props
