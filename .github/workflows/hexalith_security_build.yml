@@ -93,14 +93,14 @@ jobs:
     - name: Deploy to Azure Container Apps
       run: |
         az containerapp update \
-          --name int-${{ vars.HEXALITH_MODULE_SHORT_NAME }}web \
+          --name ${{ vars.HEXALITH_MODULE_SHORT_NAME }}web \
           --resource-group ${{ vars.HEXALITH_RESOURCE_GROUP }} \
           --image ${{ vars.AZURE_REGISTRY }}/${{ vars.HEXALITH_MODULE_SHORT_NAME }}-web:${{ env.VERSION }}
  
     - name: Deploy to Azure Container Apps
       run: |
         az containerapp update \
-          --name int-${{ env.HEXALITH_MODULE_SHORT_NAME }}api \
+          --name ${{ env.HEXALITH_MODULE_SHORT_NAME }}api \
           --resource-group ${{ vars.HEXALITH_RESOURCE_GROUP }} \
           --image ${{ vars.AZURE_REGISTRY }}/${{ vars.HEXALITH_MODULE_SHORT_NAME }}-api:${{ env.VERSION }}
  
