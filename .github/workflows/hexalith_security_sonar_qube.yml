@@ -10,6 +10,13 @@ jobs:
     name: Build and analyze
     runs-on: windows-latest
     steps:
+      - name: Setup .NET 9.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - name: Add Aspire Workloads
+        run: |
+          dotnet workload install aspire
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
