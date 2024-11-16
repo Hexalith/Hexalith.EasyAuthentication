@@ -44,13 +44,10 @@ public class HexalithApplicationTest
             .HaveCount(1);
         _ = HexalithApplication.WebServerApplication.Modules
             .Should()
-            .HaveCount(2);
+            .HaveCount(1);
         _ = HexalithApplication.WebServerApplication.WebServerModules
             .Should()
             .Contain(typeof(HexalithSecurityServerModule));
-        _ = HexalithApplication.WebServerApplication.Modules
-            .Should()
-            .Contain(typeof(HexalithSecurityWebAppModule));
         _ = HexalithApplication.WebServerApplication.Modules
             .Should()
             .Contain(typeof(HexalithSecurityServerModule));

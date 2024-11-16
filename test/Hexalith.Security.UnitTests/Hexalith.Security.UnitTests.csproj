@@ -1,12 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../Hexalith.props" />
+  <Import Project="../../Hexalith.Modules.WebServer.props" />
+  <Import Project="../../Hexalith.Modules.ApiServer.props" />
+  <Import Project="../../Hexalith.Modules.WebApp.props" />
   <PropertyGroup>
     <TargetFramework>$(DefaultTargetFramework)</TargetFramework>
     <NoWarn>$(NoWarn);CA1515</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Modules\Hexalith.Security.ApiServer\Hexalith.Security.ApiServer.csproj" />
     <ProjectReference Include="..\..\src\Modules\Hexalith.Security.WebApp\Hexalith.Security.WebApp.csproj" />
     <ProjectReference Include="..\..\src\Modules\Hexalith.Security.WebServer\Hexalith.Security.WebServer.csproj" />
