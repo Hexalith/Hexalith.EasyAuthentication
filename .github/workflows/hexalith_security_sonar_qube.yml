@@ -14,10 +14,10 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: 'zulu' # Alternative distribution options are available.
+          distribution: 'zulu'
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
       - name: Cache SonarQube Cloud packages
         uses: actions/cache@v4
         with:
@@ -39,15 +39,13 @@ jobs:
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
       - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Hexalith_Hexalith.Security" /o:"hexalith" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          Get-ChildItem -Path src -Filter *.csproj -Recurse | ForEach-Object 
-          {
-          Write-Host "Building $($_.FullName)"
-          dotnet build $_.FullName --configuration Release -p:Version=${{ env.VERSION }}
+          Get-ChildItem -Path src -Filter *.csproj -Recurse | ForEach-Object {
+            Write-Host "Building $($_.FullName)"
+            dotnet build $_.FullName --configuration Release
           }
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-
