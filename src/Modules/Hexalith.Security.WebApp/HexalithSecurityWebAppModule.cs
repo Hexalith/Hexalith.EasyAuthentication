@@ -62,6 +62,7 @@ public class HexalithSecurityWebAppModule : IWebAppApplicationModule
         _ = services
             .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<SecuritySettings>(configuration);
+        _ = services.AddAuthorizationCore();
     }
 
     /// <inheritdoc/>

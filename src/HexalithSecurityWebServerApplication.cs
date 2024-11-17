@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Hexalith.Application.Modules.Applications;
 using Hexalith.Security.Application;
 using Hexalith.Security.WebServer;
+using Hexalith.UI.Components.Modules;
 
 /// <summary>
 /// Represents a server application.
@@ -25,5 +26,7 @@ public class HexalithSecurityWebServerApplication : HexalithWebServerApplication
     public override Type WebAppApplicationType => typeof(HexalithSecurityWebAppApplication);
 
     /// <inheritdoc/>
-    public override IEnumerable<Type> WebServerModules => [typeof(HexalithSecurityServerModule)];
+    public override IEnumerable<Type> WebServerModules => [
+        typeof(HexalithUIComponentsWebAppModule),
+        typeof(HexalithSecurityWebServerModule)];
 }

@@ -29,7 +29,7 @@ using NEasyAuthMiddleware;
 /// <summary>
 /// Microsoft Security server module.
 /// </summary>
-public sealed class HexalithSecurityServerModule : IWebServerApplicationModule
+public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModule
 {
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];
@@ -89,6 +89,7 @@ public sealed class HexalithSecurityServerModule : IWebServerApplicationModule
         _ = services.AddScoped<AuthenticationStateProvider, ServerPersistingAuthenticationStateProvider>()
             .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<SecuritySettings>(configuration);
+        _ = services.AddAuthorizationCore();
     }
 
     /// <inheritdoc/>
