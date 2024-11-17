@@ -48,6 +48,7 @@
   </ItemGroup>
 
   <PropertyGroup>
+    <AspireVersion>9.0.0</AspireVersion>
     <CoverletCollectorVersion>6.0.2</CoverletCollectorVersion>
     <FluentAssertionsVersion>6.12.2</FluentAssertionsVersion>
     <GitHubActionsTestLoggerVersion>2.4.1</GitHubActionsTestLoggerVersion>

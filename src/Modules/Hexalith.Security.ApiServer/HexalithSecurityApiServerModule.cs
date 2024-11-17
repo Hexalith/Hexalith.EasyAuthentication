@@ -1,9 +1,13 @@
 ﻿namespace Hexalith.Security.ApiServer;
 
 using System.Collections.Generic;
-using System.Reflection;
+
+using Dapr.Actors.Runtime;
 
 using Hexalith.Application.Modules.Modules;
+using Hexalith.Infrastructure.DaprRuntime.Partitions.Helpers;
+using Hexalith.Infrastructure.DaprRuntime.Sessions.Helpers;
+using Hexalith.Security.Application;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,10 +24,10 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
     public string Description => "Microsoft Security API Server module";
 
     /// <inheritdoc/>
-    public string Id => "Hexalith.Security.ApiServer";
+    public string Id => $"{HexalithSecurityApplicationInformation.Id}.ApiServer";
 
     /// <inheritdoc/>
-    public string Name => "Microsoft Security API Server";
+    public string Name => $"{HexalithSecurityApplicationInformation.Name} Api Server";
 
     /// <inheritdoc/>
     public int OrderWeight => 0;
@@ -32,12 +36,9 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
     string IApplicationModule.Path => HexalithSecurityApiServerModule.Path;
 
     /// <inheritdoc/>
-    public IEnumerable<Assembly> PresentationAssemblies => [GetType().Assembly];
-
-    /// <inheritdoc/>
     public string Version => "1.0";
 
-    private static string Path => "Hexalith/Security";
+    private static string Path => HexalithSecurityApplicationInformation.ShortName;
 
     /// <summary>
     /// Adds services to the service collection.
@@ -46,6 +47,22 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
     /// <param name="configuration">The configuration.</param>
     public static void AddServices(IServiceCollection services, IConfiguration configuration)
     {
+    }
+
+    /// <summary>
+    /// Registers the actors associated with the module.
+    /// </summary>
+    /// <param name="actorCollection">The actor collection.</param>
+    public static void RegisterActors(object actorCollection)
+    {
+        ArgumentNullException.ThrowIfNull(actorCollection);
+        if (actorCollection is not ActorRegistrationCollection actorRegistrations)
+        {
+            throw new ArgumentException($"{nameof(RegisterActors)} parameter must be an {nameof(ActorRegistrationCollection)}. Actual type : {actorCollection.GetType().Name}.", nameof(actorCollection));
+        }
+
+        actorRegistrations.RegisterSessionActors();
+        actorRegistrations.RegisterPartitionActors();
     }
 
     /// <inheritdoc/>
