@@ -6,6 +6,7 @@ using System.Reflection;
 using Hexalith.Application.Modules.Modules;
 using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
+using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
 using Hexalith.Security.Server.Middlewares;
 using Hexalith.Security.UI.Components.Claims;
@@ -31,17 +32,19 @@ using NEasyAuthMiddleware;
 /// </summary>
 public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModule
 {
+    public static string Path => HexalithSecurityApplicationInformation.ShortName;
+
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];
 
     /// <inheritdoc/>
-    public string Description => "Microsoft Security server module";
+    public string Description => Name + " Module";
 
     /// <inheritdoc/>
-    public string Id => "Hexalith.Security.Server";
+    public string Id => $"{HexalithSecurityApplicationInformation.Id}.WebServer";
 
     /// <inheritdoc/>
-    public string Name => "Microsoft Security server";
+    public string Name => $"{HexalithSecurityApplicationInformation.Name} Web Server";
 
     /// <inheritdoc/>
     public int OrderWeight => 0;
@@ -54,8 +57,6 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
 
     /// <inheritdoc/>
     public string Version => "1.0";
-
-    private static string Path => "Hexalith/Security";
 
     /// <summary>
     /// Adds services to the service collection.
@@ -73,7 +74,8 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
 
         if (settings.UseMsal)
         {
-            _ = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            _ = services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"))
                 .EnableTokenAcquisitionToCallDownstreamApi()
                 .AddInMemoryTokenCaches();
@@ -86,10 +88,11 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
         }
 
         _ = services.AddAuthorization();
-        _ = services.AddScoped<AuthenticationStateProvider, ServerPersistingAuthenticationStateProvider>()
+        _ = services
+            .AddCascadingAuthenticationState()
+            .AddScoped<AuthenticationStateProvider, ServerPersistingAuthenticationStateProvider>()
             .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<SecuritySettings>(configuration);
-        _ = services.AddAuthorizationCore();
     }
 
     /// <inheritdoc/>
@@ -98,7 +101,7 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
         ArgumentNullException.ThrowIfNull(builder);
         if (builder is not WebApplication app)
         {
-            throw new InvalidOperationException($"Invalid builder type '{builder.GetType().FullName}'. The expected type is {typeof(WebApplication).FullName}.");
+            throw new InvalidOperationException($"Invalid builder type '{builder.GetType().FullName}' for UseModule. The expected type is {typeof(WebApplication).FullName}.");
         }
 
         // initialize modules
@@ -115,5 +118,19 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
 
             _ = app.UseMiddleware<ContainerAppsAuthenticationMiddleware>();
         }
+    }
+
+    /// <inheritdoc/>
+    public void UseSecurity(object application)
+    {
+        ArgumentNullException.ThrowIfNull(application);
+        if (application is not WebApplication app)
+        {
+            throw new InvalidOperationException($"Invalid builder type '{application.GetType().FullName}' for UseSecurity. The expected type is {typeof(WebApplication).FullName}.");
+        }
+
+        _ = app
+            .UseAuthentication()
+            .UseAuthorization();
     }
 }

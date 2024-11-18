@@ -12,35 +12,50 @@ on:
       - 'v*'
   pull_request:
     branches: 
-      - master
+      - main
       - release-*
 permissions:
   contents: read
   packages: write
   id-token: write
+  security-events: write
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
-  # MINVERBUILDMETADATA: build.${{ github.run_id }}.${{ github.run_attempt}}
+  DOTNET_NOLOGO: true  # To reduce noise
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages  # Cache NuGet packages
 jobs:
-  publish:
+  build-test-publish:
     runs-on: ubuntu-latest
     name: Build, Test, Publish
+    timeout-minutes: 30  # Added timeout for safety
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Repository
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
     - name: Initialize HexalithApp submodule
       run: |
           git submodule init HexalithApp
           git submodule update HexalithApp
+          cd HexalithApp
+          git checkout main
     - name: Setup .NET 9.0
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
+        cache: true  
+    - name: Cache NuGet Packages
+      uses: actions/cache@v3
+      with:
+        path: ${{ github.workspace }}/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
     - name: Add Aspire Workloads
       run: |
         dotnet workload install aspire
+        dotnet workload restore
     - name: Build Version
       run: |
         dotnet tool install --global minver-cli --version 5.0.0
@@ -48,6 +63,11 @@ jobs:
         echo "MINVERVERSIONOVERRIDE=$version" >> $GITHUB_ENV
         echo "VERSION=$version" >> $GITHUB_ENV
         echo "VERSION=$version"
+    - name: Run Security Scanner
+      run: |
+        dotnet new tool-manifest
+        dotnet tool install security.scan
+        dotnet security-scan
     - name: Build all projects
       shell: pwsh
       run: |
@@ -57,7 +77,7 @@ jobs:
         }
     - name: Unit Tests
       run: |
-        dotnet test -c Release --no-restore --no-build ./test/${{ vars.HEXALITH_MODULE_NAME }}.UnitTests/${{ vars.HEXALITH_MODULE_NAME }}.UnitTests.csproj
+        dotnet test --configuration Release -p:Version=${{ env.VERSION }} ./test/${{ vars.HEXALITH_MODULE_NAME }}.UnitTests/${{ vars.HEXALITH_MODULE_NAME }}.UnitTests.csproj
     - name: Publish final release packages to Nuget
       if: startswith(github.ref, 'refs/tags/v') 
       run: |
@@ -79,8 +99,23 @@ jobs:
         password: ${{ secrets.AZURE_APPLICATIONSECRET }}
     - name: Publish and push the server images to the container registry
       run: |
-          dotnet publish './HexalithApp/src/HexalithApp.WebServer/HexalithApp.WebServer.csproj' /t:PublishContainer --configuration Release --os linux --arch x64 -p:ContainerImageTags='"${{ env.VERSION }};latest"' -p:ContainerRegistry=${{ vars.AZURE_REGISTRY }} -p:ContainerRepository='"${{ vars.HEXALITH_MODULE_SHORT_NAME }}-web"'
-          dotnet publish './HexalithApp/src/HexalithApp.ApiServer/HexalithApp.ApiServer.csproj' /t:PublishContainer --configuration Release --os linux --arch x64 -p:ContainerImageTags='"${{ env.VERSION }};latest"' -p:ContainerRegistry=${{ vars.AZURE_REGISTRY }} -p:ContainerRepository='"${{ vars.HEXALITH_MODULE_SHORT_NAME }}-api"'
+        # Function to publish container
+        publish_container() {
+          local project=$1
+          local repository=$2
+          
+          dotnet publish "./HexalithApp/src/$project/$project.csproj" \
+            /t:PublishContainer \
+            --configuration Release \
+            --os linux \
+            --arch x64 \
+            -p:ContainerImageTags='"${{ env.VERSION }};latest"' \
+            -p:ContainerRegistry=${{ vars.AZURE_REGISTRY }} \
+            -p:ContainerRepository='"${{ vars.HEXALITH_MODULE_SHORT_NAME }}-$repository"'
+        }
+
+        publish_container "HexalithApp.WebServer" "web"
+        publish_container "HexalithApp.ApiServer" "api"    
     - name: Log in to Azure
       uses: azure/login@v2
       with:
@@ -93,15 +128,16 @@ jobs:
       run: az account show
     - name: Deploy to Azure Container Apps
       run: |
-        az containerapp update \
-          --name ${{ vars.HEXALITH_MODULE_SHORT_NAME }}web \
-          --resource-group ${{ vars.HEXALITH_RESOURCE_GROUP }} \
-          --image ${{ vars.AZURE_REGISTRY }}/${{ vars.HEXALITH_MODULE_SHORT_NAME }}-web:${{ env.VERSION }}
- 
-    - name: Deploy to Azure Container Apps
-      run: |
-        az containerapp update \
-          --name ${{ vars.HEXALITH_MODULE_SHORT_NAME }}api \
-          --resource-group ${{ vars.HEXALITH_RESOURCE_GROUP }} \
-          --image ${{ vars.AZURE_REGISTRY }}/${{ vars.HEXALITH_MODULE_SHORT_NAME }}-api:${{ env.VERSION }}
- 
+        # Function to update container app
+        update_container_app() {
+          local app_name=$1
+          local app_type=$2
+          
+          az containerapp update \
+            --name ${{ vars.HEXALITH_MODULE_SHORT_NAME }}$app_type \
+            --resource-group ${{ vars.HEXALITH_RESOURCE_GROUP }} \
+            --image ${{ vars.AZURE_REGISTRY }}/${{ vars.HEXALITH_MODULE_SHORT_NAME }}-$app_type:${{ env.VERSION }}
+        }
+
+        update_container_app "web" "web"
+        update_container_app "api" "api" 

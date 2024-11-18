@@ -33,7 +33,7 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
     public int OrderWeight => 0;
 
     /// <inheritdoc/>
-    string IApplicationModule.Path => HexalithSecurityApiServerModule.Path;
+    string IApplicationModule.Path => Path;
 
     /// <inheritdoc/>
     public string Version => "1.0";

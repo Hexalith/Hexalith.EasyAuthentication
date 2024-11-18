@@ -6,6 +6,7 @@ using System.Reflection;
 using Hexalith.Application.Modules.Modules;
 using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
+using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
 using Hexalith.Security.UI.Components.Claims;
 using Hexalith.Security.UI.Components.Menu;
@@ -20,23 +21,25 @@ using Microsoft.Extensions.DependencyInjection;
 /// </summary>
 public class HexalithSecurityWebAppModule : IWebAppApplicationModule
 {
+    public static string Path => HexalithSecurityApplicationInformation.ShortName;
+
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];
 
     /// <inheritdoc/>
-    public string Description => "Microsoft Security client module";
+    public string Description => Name + " Module";
 
     /// <inheritdoc/>
-    public string Id => "Hexalith.Security.Client";
+    public string Id => $"{HexalithSecurityApplicationInformation.Id}.WebApp";
 
     /// <inheritdoc/>
-    public string Name => "Microsoft Security client";
+    public string Name => $"{HexalithSecurityApplicationInformation.Name} Web App";
 
     /// <inheritdoc/>
     public int OrderWeight => 0;
 
     /// <inheritdoc/>
-    public string Path => "Hexalith/Security";
+    string IApplicationModule.Path => Path;
 
     /// <inheritdoc/>
     public IEnumerable<Assembly> PresentationAssemblies => [GetType().Assembly, typeof(SecurityIndex).Assembly, typeof(ClaimsView).Assembly];
@@ -58,11 +61,12 @@ public class HexalithSecurityWebAppModule : IWebAppApplicationModule
             return;
         }
 
+        _ = services.AddAuthorizationCore();
         _ = services.AddScoped<AuthenticationStateProvider, WebAppPersistentAuthenticationStateProvider>();
         _ = services
+            .AddCascadingAuthenticationState()
             .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<SecuritySettings>(configuration);
-        _ = services.AddAuthorizationCore();
     }
 
     /// <inheritdoc/>
