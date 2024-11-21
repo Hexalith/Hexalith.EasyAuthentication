@@ -3,6 +3,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 
+using BlazorApp.Components.Account;
+
 using Hexalith.Application.Modules.Modules;
 using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
@@ -12,9 +14,9 @@ using Hexalith.Security.Server.Middlewares;
 using Hexalith.Security.UI.Components.Claims;
 using Hexalith.Security.UI.Components.Menu;
 using Hexalith.Security.UI.Pages.Security;
+using Hexalith.Security.WebServer.Helpers;
 using Hexalith.Security.WebServer.Middlewares;
 
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -24,8 +26,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Web;
-
-using NEasyAuthMiddleware;
 
 /// <summary>
 /// Microsoft Security server module.
@@ -72,25 +72,29 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
             return;
         }
 
-        if (settings.UseMsal)
-        {
-            _ = services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"))
-                .EnableTokenAcquisitionToCallDownstreamApi()
-                .AddInMemoryTokenCaches();
-        }
-        else
-        {
-            _ = services
-                .AddEasyAuth()
-                .AddIdentityCookies();
-        }
-
+        _ = services.AddRazorComponents()
+            .AddAuthenticationStateSerialization();
+        _ = services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            })
+            .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"))
+            .EnableTokenAcquisitionToCallDownstreamApi()
+            .AddInMemoryTokenCaches();
+        _ = services.AddAuthentication()
+            .AddIdentityCookies();
         _ = services.AddAuthorization();
+        _ = services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+             .AddDaprStores()
+             .AddSignInManager()
+             .AddDefaultTokenProviders();
+
         _ = services
             .AddCascadingAuthenticationState()
-            .AddScoped<AuthenticationStateProvider, ServerPersistingAuthenticationStateProvider>()
+            .AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>()
+            .AddScoped<IdentityUserAccessor>()
+            .AddScoped<IdentityRedirectManager>()
             .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<SecuritySettings>(configuration);
     }

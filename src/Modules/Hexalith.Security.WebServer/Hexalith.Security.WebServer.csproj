@@ -17,12 +17,10 @@
     <ProjectReference Include="..\Hexalith.Security.WebApp\Hexalith.Security.WebApp.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(UseProjectReference)' == 'true'">
-    <ProjectReference Include="$(HexalithPath)src\Core\Application\Hexalith.Application.Sessions.Abstractions\Hexalith.Application.Sessions.Abstractions.csproj" />
-    <ProjectReference Include="$(HexalithPath)src\Core\Application\Hexalith.Application.Partitions.Abstractions\Hexalith.Application.Partitions.Abstractions.csproj" />
+    <ProjectReference Include="$(HexalithPath)src\Core\Infrastructure\Hexalith.Infrastructure.DaprRuntime.Sessions\Hexalith.Infrastructure.DaprRuntime.Sessions.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
-    <PackageReference Include="Hexalith.Application.Partitions.Abstractions" Version="$(HexalithVersion)" />
-    <PackageReference Include="Hexalith.Application.Sessions.Abstractions" Version="$(HexalithVersion)" />
+    <PackageReference Include="Hexalith.Infrastructure.DaprRuntime.Sessions" Version="$(HexalithVersion)" />
   </ItemGroup>
 
 </Project>
