@@ -4,3 +4,6 @@
 [submodule "HexalithApp"]
 	path = HexalithApp
 	url = https://github.com/Hexalith/HexalithApp.git
+[submodule "Hexalith.DaprIdentityStore"]
+	path = Hexalith.DaprIdentityStore
+	url = https://github.com/Hexalith/Hexalith.DaprIdentityStore.git
