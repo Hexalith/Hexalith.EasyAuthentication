@@ -71,20 +71,17 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
 
         _ = services.AddControllers().AddDapr();
 
-        _ = services.AddRazorComponents()
-            .AddAuthenticationStateSerialization();
-
         // _ = services.AddAuthentication()
         //    .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"))
         //    .EnableTokenAcquisitionToCallDownstreamApi()
         //    .AddInMemoryTokenCaches();
         // _ = services.AddAuthentication()
         //    .AddIdentityCookies();
-        _ = services.AddAuthorization();
         _ = services
             .AddDaprIdentityStoreUI()
             .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<SecuritySettings>(configuration);
+        _ = services.AddAuthorization();
     }
 
     /// <inheritdoc/>
