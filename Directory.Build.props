@@ -14,5 +14,7 @@
     <HexalithAppVersion Condition="'$(HexalithAppVersion)' == ''">*</HexalithAppVersion>
     <HexalithPartiesPath Condition="'$(HexalithPartiesPath)' == ''">$(MSBuildThisFileDirectory)</HexalithPartiesPath>
     <HexalithPartiesVersion Condition="'$(HexalithPartiesVersion)' == ''">*</HexalithPartiesVersion>
+    <HexalithDaprIdentityStorePath Condition="'$(HexalithDaprIdentityStorePath)' == ''">$(HexalithPath)..\Hexalith.DaprIdentityStore\</HexalithDaprIdentityStorePath>
+    <HexalithDaprIdentityStoreVersion Condition="'$(HexalithDaprIdentityStoreVersion)' == ''">*</HexalithDaprIdentityStoreVersion>
   </PropertyGroup>
 </Project>

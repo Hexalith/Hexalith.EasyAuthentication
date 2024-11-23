@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Dapr.Actors.Runtime;
 
 using Hexalith.Application.Modules.Modules;
+using Hexalith.DaprIdentityStore.Helpers;
 using Hexalith.Infrastructure.DaprRuntime.Partitions.Helpers;
 using Hexalith.Infrastructure.DaprRuntime.Sessions.Helpers;
 using Hexalith.Security.Application;
@@ -63,10 +64,11 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
 
         actorRegistrations.RegisterSessionActors();
         actorRegistrations.RegisterPartitionActors();
+        actorRegistrations.RegisterIdentityActors();
     }
 
     /// <inheritdoc/>
-    public void UseModule(object builder)
+    public void UseModule(object application)
     {
     }
 }

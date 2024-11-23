@@ -204,6 +204,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Security.Applicati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityInfrastructure", "SecurityInfrastructure\SecurityInfrastructure.csproj", "{0F2AD951-9EA3-9D89-06C9-E7905A0A9639}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.DaprIdentityStore.Abstractions", "Hexalith.DaprIdentityStore\src\Hexalith.DaprIdentityStore.Abstractions\Hexalith.DaprIdentityStore.Abstractions.csproj", "{46CA507D-56BF-1F3A-00A8-00F2350CAE26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.DaprIdentityStore", "Hexalith.DaprIdentityStore\src\Hexalith.DaprIdentityStore\Hexalith.DaprIdentityStore.csproj", "{11E354BA-A045-78FA-C608-DF5354C9CA80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.DaprIdentityStore.UI", "Hexalith.DaprIdentityStore\src\Hexalith.DaprIdentityStore.UI\Hexalith.DaprIdentityStore.UI.csproj", "{C34E8C2A-4E0E-BBED-8BFD-C5727E05447E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -426,6 +432,18 @@ Global
 		{0F2AD951-9EA3-9D89-06C9-E7905A0A9639}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F2AD951-9EA3-9D89-06C9-E7905A0A9639}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F2AD951-9EA3-9D89-06C9-E7905A0A9639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46CA507D-56BF-1F3A-00A8-00F2350CAE26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46CA507D-56BF-1F3A-00A8-00F2350CAE26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46CA507D-56BF-1F3A-00A8-00F2350CAE26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46CA507D-56BF-1F3A-00A8-00F2350CAE26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11E354BA-A045-78FA-C608-DF5354C9CA80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11E354BA-A045-78FA-C608-DF5354C9CA80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11E354BA-A045-78FA-C608-DF5354C9CA80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11E354BA-A045-78FA-C608-DF5354C9CA80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C34E8C2A-4E0E-BBED-8BFD-C5727E05447E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C34E8C2A-4E0E-BBED-8BFD-C5727E05447E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C34E8C2A-4E0E-BBED-8BFD-C5727E05447E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C34E8C2A-4E0E-BBED-8BFD-C5727E05447E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

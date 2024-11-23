@@ -3,29 +3,20 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-using BlazorApp.Components.Account;
-
 using Hexalith.Application.Modules.Modules;
+using Hexalith.DaprIdentityStore.UI.Helpers;
 using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
 using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
-using Hexalith.Security.Server.Middlewares;
 using Hexalith.Security.UI.Components.Claims;
 using Hexalith.Security.UI.Components.Menu;
 using Hexalith.Security.UI.Pages.Security;
-using Hexalith.Security.WebServer.Helpers;
-using Hexalith.Security.WebServer.Middlewares;
 
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Microsoft.Identity.Web;
 
 /// <summary>
 /// Microsoft Security server module.
@@ -72,56 +63,34 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
             return;
         }
 
+        _ = services.AddControllers().AddDapr();
+
         _ = services.AddRazorComponents()
             .AddAuthenticationStateSerialization();
-        _ = services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = IdentityConstants.ApplicationScheme;
-                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-            })
-            .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"))
-            .EnableTokenAcquisitionToCallDownstreamApi()
-            .AddInMemoryTokenCaches();
-        _ = services.AddAuthentication()
-            .AddIdentityCookies();
-        _ = services.AddAuthorization();
-        _ = services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-             .AddDaprStores()
-             .AddSignInManager()
-             .AddDefaultTokenProviders();
 
+        // _ = services.AddAuthentication()
+        //    .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"))
+        //    .EnableTokenAcquisitionToCallDownstreamApi()
+        //    .AddInMemoryTokenCaches();
+        // _ = services.AddAuthentication()
+        //    .AddIdentityCookies();
+        _ = services.AddAuthorization();
         _ = services
-            .AddCascadingAuthenticationState()
-            .AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>()
-            .AddScoped<IdentityUserAccessor>()
-            .AddScoped<IdentityRedirectManager>()
+            .AddDaprIdentityStoreUI()
             .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<SecuritySettings>(configuration);
     }
 
     /// <inheritdoc/>
-    public void UseModule(object builder)
+    public void UseModule(object application)
     {
-        ArgumentNullException.ThrowIfNull(builder);
-        if (builder is not WebApplication app)
+        ArgumentNullException.ThrowIfNull(application);
+        if (application is not WebApplication app)
         {
-            throw new InvalidOperationException($"Invalid builder type '{builder.GetType().FullName}' for UseModule. The expected type is {typeof(WebApplication).FullName}.");
+            throw new InvalidOperationException($"Invalid builder type '{application.GetType().FullName}' for UseModule. The expected type is {typeof(WebApplication).FullName}.");
         }
 
-        // initialize modules
-        using IServiceScope scope = app.Services.CreateScope();
-
-        IOptions<SecuritySettings> settings = scope.ServiceProvider.GetRequiredService<IOptions<SecuritySettings>>();
-        if (settings.Value.UseMsal)
-        {
-            IWebHostEnvironment env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
-            if (env.IsDevelopment())
-            {
-                _ = app.UseMiddleware<DevelopmentAuthenticationMiddleware>();
-            }
-
-            _ = app.UseMiddleware<ContainerAppsAuthenticationMiddleware>();
-        }
+        _ = app.MapAdditionalIdentityEndpoints();
     }
 
     /// <inheritdoc/>
@@ -133,6 +102,20 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
             throw new InvalidOperationException($"Invalid builder type '{application.GetType().FullName}' for UseSecurity. The expected type is {typeof(WebApplication).FullName}.");
         }
 
+        // initialize modules
+        using IServiceScope scope = app.Services.CreateScope();
+        IOptions<SecuritySettings> settings = scope.ServiceProvider.GetRequiredService<IOptions<SecuritySettings>>();
+
+        // if (settings.Value.UseMsal)
+        // {
+        //    IWebHostEnvironment env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
+        //    if (env.IsDevelopment())
+        //    {
+        //        _ = app.UseMiddleware<DevelopmentAuthenticationMiddleware>();
+        //    }
+
+        // _ = app.UseMiddleware<ContainerAppsAuthenticationMiddleware>();
+        // }
         _ = app
             .UseAuthentication()
             .UseAuthorization();

@@ -9,6 +9,8 @@
     <HexalithVersion Condition="'$(HexalithVersion)' == ''">1.*</HexalithVersion>
     <HexalithAppPath Condition="'$(HexalithAppPath)' == ''">$(HexalithPath)..\HexalithApp\</HexalithAppPath>
     <HexalithAppVersion Condition="'$(HexalithAppVersion)' == ''">*</HexalithAppVersion>
+    <HexalithDaprIdentityStorePath Condition="'$(HexalithDaprIdentityStorePath)' == ''">$(HexalithPath)..\Hexalith.DaprIdentityStore\</HexalithDaprIdentityStorePath>
+    <HexalithDaprIdentityStoreVersion Condition="'$(HexalithDaprIdentityStoreVersion)' == ''">*</HexalithDaprIdentityStoreVersion>
     <HexalithSecurityPath Condition="'$(HexalithSecurityPath)' == ''">$(MSBuildThisFileDirectory)</HexalithSecurityPath>
     <HexalithSecurityVersion Condition="'$(HexalithSecurityVersion)' == ''">*</HexalithSecurityVersion>
   </PropertyGroup>
