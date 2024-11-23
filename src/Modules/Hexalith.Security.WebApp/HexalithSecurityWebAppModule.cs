@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Reflection;
 
 using Hexalith.Application.Modules.Modules;
-using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
 using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
@@ -12,17 +11,14 @@ using Hexalith.Security.UI.Components.Claims;
 using Hexalith.Security.UI.Components.Menu;
 using Hexalith.Security.UI.Pages.Security;
 
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 /// Microsoft Security client module.
 /// </summary>
-public class HexalithSecurityWebAppModule : IWebAppApplicationModule
+public sealed class HexalithSecurityWebAppModule : IWebAppApplicationModule
 {
-    public static string Path => HexalithSecurityApplicationInformation.ShortName;
-
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];
 
@@ -42,10 +38,15 @@ public class HexalithSecurityWebAppModule : IWebAppApplicationModule
     string IApplicationModule.Path => Path;
 
     /// <inheritdoc/>
-    public IEnumerable<Assembly> PresentationAssemblies => [GetType().Assembly, typeof(SecurityIndex).Assembly, typeof(ClaimsView).Assembly];
+    public IEnumerable<Assembly> PresentationAssemblies => [
+        GetType().Assembly,
+        typeof(SecurityIndex).Assembly,
+        typeof(ClaimsView).Assembly];
 
     /// <inheritdoc/>
     public string Version => field ??= this.ProductVersion() ?? "1.0";
+
+    private static string Path => HexalithSecurityApplicationInformation.ShortName;
 
     /// <summary>
     /// Adds services to the service collection.
@@ -61,12 +62,10 @@ public class HexalithSecurityWebAppModule : IWebAppApplicationModule
             return;
         }
 
-        _ = services.AddAuthorizationCore();
-        _ = services.AddScoped<AuthenticationStateProvider, WebAppPersistentAuthenticationStateProvider>();
-        _ = services
+        _ = services.AddAuthorizationCore()
             .AddCascadingAuthenticationState()
-            .AddSingleton(p => SecurityMenu.Menu)
-            .ConfigureSettings<SecuritySettings>(configuration);
+            .AddAuthenticationStateDeserialization()
+            .AddSingleton(p => SecurityMenu.Menu);
     }
 
     /// <inheritdoc/>

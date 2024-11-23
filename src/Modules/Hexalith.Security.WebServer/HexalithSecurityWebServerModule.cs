@@ -23,8 +23,6 @@ using Microsoft.Extensions.Options;
 /// </summary>
 public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModule
 {
-    public static string Path => HexalithSecurityApplicationInformation.ShortName;
-
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];
 
@@ -54,6 +52,8 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
 
     /// <inheritdoc/>
     public string Version => field ??= this.ProductVersion() ?? "1.0";
+
+    private static string Path => HexalithSecurityApplicationInformation.ShortName;
 
     /// <summary>
     /// Adds services to the service collection.

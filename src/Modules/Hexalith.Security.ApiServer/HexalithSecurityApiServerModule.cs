@@ -49,6 +49,8 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
     /// <param name="configuration">The configuration.</param>
     public static void AddServices(IServiceCollection services, IConfiguration configuration)
     {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configuration);
     }
 
     /// <summary>
