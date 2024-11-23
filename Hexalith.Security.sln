@@ -134,7 +134,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HexalithApp", "HexalithApp", "{01ECF18B-80EF-4B78-875B-AC460AC0D5CC}"
 	ProjectSection(SolutionItems) = preProject
 		HexalithApp\src\Directory.Build.props = HexalithApp\src\Directory.Build.props
-		HexalithApp\src\HexalithApp.ApiServer\HexalithApp.ApiServer.csproj = HexalithApp\src\HexalithApp.ApiServer\HexalithApp.ApiServer.csproj
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{42E73C73-473F-4769-A460-D57ECAC1F8F7}"

@@ -45,7 +45,7 @@ public class HexalithSecurityWebAppModule : IWebAppApplicationModule
     public IEnumerable<Assembly> PresentationAssemblies => [GetType().Assembly, typeof(SecurityIndex).Assembly, typeof(ClaimsView).Assembly];
 
     /// <inheritdoc/>
-    public string Version => "1.0";
+    public string Version => field ??= this.ProductVersion() ?? "1.0";
 
     /// <summary>
     /// Adds services to the service collection.
@@ -70,7 +70,7 @@ public class HexalithSecurityWebAppModule : IWebAppApplicationModule
     }
 
     /// <inheritdoc/>
-    public void UseModule(object builder)
+    public void UseModule(object application)
     {
     }
 }

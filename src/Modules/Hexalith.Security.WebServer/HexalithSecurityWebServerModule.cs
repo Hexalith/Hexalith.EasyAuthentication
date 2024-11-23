@@ -44,10 +44,16 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
     string IApplicationModule.Path => Path;
 
     /// <inheritdoc/>
-    public IEnumerable<Assembly> PresentationAssemblies => [GetType().Assembly, typeof(SecurityIndex).Assembly, typeof(ClaimsView).Assembly];
+    public IEnumerable<Assembly> PresentationAssemblies =>
+    [
+        GetType().Assembly,
+        typeof(Hexalith.DaprIdentityStore.UI._Imports).Assembly,
+        typeof(SecurityIndex).Assembly,
+        typeof(ClaimsView).Assembly
+    ];
 
     /// <inheritdoc/>
-    public string Version => "1.0";
+    public string Version => field ??= this.ProductVersion() ?? "1.0";
 
     /// <summary>
     /// Adds services to the service collection.

@@ -6,6 +6,7 @@ using Dapr.Actors.Runtime;
 
 using Hexalith.Application.Modules.Modules;
 using Hexalith.DaprIdentityStore.Helpers;
+using Hexalith.Extensions.Helpers;
 using Hexalith.Infrastructure.DaprRuntime.Partitions.Helpers;
 using Hexalith.Infrastructure.DaprRuntime.Sessions.Helpers;
 using Hexalith.Security.Application;
@@ -37,7 +38,7 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
     string IApplicationModule.Path => Path;
 
     /// <inheritdoc/>
-    public string Version => "1.0";
+    public string Version => field ??= this.ProductVersion() ?? "1.0";
 
     private static string Path => HexalithSecurityApplicationInformation.ShortName;
 
