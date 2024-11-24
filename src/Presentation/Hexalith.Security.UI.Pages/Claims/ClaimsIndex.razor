@@ -1,9 +1,12 @@
 ﻿@page "/Security/claim"
-
-<FluentStack Orientation="Orientation.Vertical">
-	<ClaimsView/>
-</FluentStack>
-
+<AuthorizeView>
+	<Authorized>
+		<ClaimsView/>
+	</Authorized>
+	<NotAuthorized>
+		<RedirectToLogin />
+	</NotAuthorized>
+</AuthorizeView>
 
 @code {
 }

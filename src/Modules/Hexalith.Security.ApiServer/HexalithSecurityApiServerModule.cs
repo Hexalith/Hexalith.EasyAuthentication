@@ -51,6 +51,7 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
+        _ = services.AddDaprIdentityStore();
     }
 
     /// <summary>

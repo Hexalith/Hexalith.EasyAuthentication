@@ -78,10 +78,13 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
         // _ = services.AddAuthentication()
         //    .AddIdentityCookies();
         _ = services
+            .AddCascadingAuthenticationState()
             .AddDaprIdentityStoreUI()
             .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<SecuritySettings>(configuration);
-        _ = services.AddAuthorization();
+        _ = services
+            .AddAuthorization()
+            .AddApiAuthorization();
     }
 
     /// <inheritdoc/>

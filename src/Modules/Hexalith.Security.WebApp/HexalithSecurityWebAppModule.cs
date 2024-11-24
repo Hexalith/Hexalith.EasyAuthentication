@@ -62,10 +62,7 @@ public sealed class HexalithSecurityWebAppModule : IWebAppApplicationModule
             return;
         }
 
-        _ = services.AddAuthorizationCore()
-            .AddCascadingAuthenticationState()
-            .AddAuthenticationStateDeserialization()
-            .AddSingleton(p => SecurityMenu.Menu);
+        _ = services.AddSingleton(p => SecurityMenu.Menu);
     }
 
     /// <inheritdoc/>
