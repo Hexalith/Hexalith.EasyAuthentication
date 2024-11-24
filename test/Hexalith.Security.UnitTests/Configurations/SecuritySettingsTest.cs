@@ -3,11 +3,12 @@
 using System.Text.Json;
 
 using FluentAssertions;
+
 using Hexalith.Extensions.Helpers;
+using Hexalith.Security.Application.Configurations;
 using Hexalith.TestMocks;
 
 using Microsoft.Extensions.Configuration;
-using Hexalith.Security.Application.Configurations;
 
 public class SecuritySettingsTest : SerializationTestBase
 {
