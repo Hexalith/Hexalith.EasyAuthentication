@@ -208,6 +208,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.DaprIdentityStore"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.DaprIdentityStore.UI", "Hexalith.DaprIdentityStore\src\Hexalith.DaprIdentityStore.UI\Hexalith.DaprIdentityStore.UI.csproj", "{C34E8C2A-4E0E-BBED-8BFD-C5727E05447E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hexalith.DaprIdentityStore", "Hexalith.DaprIdentityStore", "{D0662561-58FC-4245-B168-DEDC9D519E53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{4B884768-108B-4F83-8343-A8E17F5C2DD1}"
+	ProjectSection(SolutionItems) = preProject
+		Hexalith.DaprIdentityStore\.editorconfig = Hexalith.DaprIdentityStore\.editorconfig
+		Hexalith.DaprIdentityStore\.gitignore = Hexalith.DaprIdentityStore\.gitignore
+		Hexalith.DaprIdentityStore\.stylecop.json = Hexalith.DaprIdentityStore\.stylecop.json
+		Hexalith.DaprIdentityStore\.stylecop.ruleset = Hexalith.DaprIdentityStore\.stylecop.ruleset
+		Hexalith.DaprIdentityStore\buildFiles\Dependencies.props = Hexalith.DaprIdentityStore\buildFiles\Dependencies.props
+		Hexalith.DaprIdentityStore\Directory.Build.props = Hexalith.DaprIdentityStore\Directory.Build.props
+		Hexalith.DaprIdentityStore\LICENSE = Hexalith.DaprIdentityStore\LICENSE
+		Hexalith.DaprIdentityStore\buildFiles\Project.Common.props = Hexalith.DaprIdentityStore\buildFiles\Project.Common.props
+		Hexalith.DaprIdentityStore\README.md = Hexalith.DaprIdentityStore\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -509,6 +524,10 @@ Global
 		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {D2DA3040-462E-4E0E-9CFE-3EA95FA3D014}
 		{1D9B0B67-B7E1-476F-B0D0-333E0D1266A3} = {6DCC825D-02D0-4F25-9A3D-A530736AB837}
 		{77B777F4-0E62-48BA-A86B-9830772DD7D3} = {1D9B0B67-B7E1-476F-B0D0-333E0D1266A3}
+		{46CA507D-56BF-1F3A-00A8-00F2350CAE26} = {D0662561-58FC-4245-B168-DEDC9D519E53}
+		{11E354BA-A045-78FA-C608-DF5354C9CA80} = {D0662561-58FC-4245-B168-DEDC9D519E53}
+		{C34E8C2A-4E0E-BBED-8BFD-C5727E05447E} = {D0662561-58FC-4245-B168-DEDC9D519E53}
+		{4B884768-108B-4F83-8343-A8E17F5C2DD1} = {D0662561-58FC-4245-B168-DEDC9D519E53}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09CBB595-8996-4C7F-9C48-4C58AD9293AC}
