@@ -8,7 +8,6 @@
 {
 	if (_user.Identity is not null)
 	{
-		<p>Mode : @(_inWebAssembly?"Client":"Serveur")</p>
 		<p>Authentifié : @_user.Identity.IsAuthenticated</p>
 		<p>Nom : @_user.Identity.Name</p>
 		<p>Authentication type : @_user.Identity.AuthenticationType</p>
@@ -32,13 +31,14 @@
 	private string? surname;
 	private IEnumerable<Claim> claims = Enumerable.Empty<Claim>();
 	private ClaimsPrincipal? _user;
-	private bool _inWebAssembly;
 
 	protected override async Task OnInitializedAsync()
 	{
-		var authState = await authenticationState;
-		_user = authState.User;
-		_inWebAssembly = (JSRuntime is IJSInProcessRuntime);
-		await base.OnInitializedAsync();
+		if (authenticationState != null)
+		{
+			var authState = await authenticationState;
+			_user = authState.User;
+			await base.OnInitializedAsync();
+		}
 	}
 }
