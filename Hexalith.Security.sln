@@ -88,8 +88,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{3A505F
 		Hexalith.Modules.WebApp.props = Hexalith.Modules.WebApp.props
 		Hexalith.Modules.WebServer.props = Hexalith.Modules.WebServer.props
 		Hexalith.props = Hexalith.props
-		.github\workflows\hexalith_security_build.yml = .github\workflows\hexalith_security_build.yml
 		.github\workflows\hexalith_security_sonar_qube.yml = .github\workflows\hexalith_security_sonar_qube.yml
+		.github\workflows\hexalith.yml = .github\workflows\hexalith.yml
 		src\BuildFiles\Project.Common.props = src\BuildFiles\Project.Common.props
 	EndProjectSection
 EndProject
@@ -218,6 +218,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{4B884768
 		Hexalith.DaprIdentityStore\.stylecop.ruleset = Hexalith.DaprIdentityStore\.stylecop.ruleset
 		Hexalith.DaprIdentityStore\buildFiles\Dependencies.props = Hexalith.DaprIdentityStore\buildFiles\Dependencies.props
 		Hexalith.DaprIdentityStore\Directory.Build.props = Hexalith.DaprIdentityStore\Directory.Build.props
+		Hexalith.DaprIdentityStore\.github\workflows\hexalith.yml = Hexalith.DaprIdentityStore\.github\workflows\hexalith.yml
+		Hexalith.DaprIdentityStore\.github\workflows\hexalith_sonar_qube.yml = Hexalith.DaprIdentityStore\.github\workflows\hexalith_sonar_qube.yml
 		Hexalith.DaprIdentityStore\LICENSE = Hexalith.DaprIdentityStore\LICENSE
 		Hexalith.DaprIdentityStore\buildFiles\Project.Common.props = Hexalith.DaprIdentityStore\buildFiles\Project.Common.props
 		Hexalith.DaprIdentityStore\README.md = Hexalith.DaprIdentityStore\README.md
