@@ -100,7 +100,7 @@ jobs:
             --arch x64 \
             -p:ContainerImageTags='"${{ env.VERSION }};latest"' \
             -p:ContainerRegistry=${{ vars.AZURE_REGISTRY }} \
-            -p:ContainerRepository='"${repo}"'
+            -p:ContainerRepository=$repo
         }
 
         publish_container "Web"
