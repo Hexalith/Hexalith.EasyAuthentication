@@ -120,6 +120,18 @@
   <data name="ClaimsMenuItem" xml:space="preserve">
     <value>Revendications</value>
   </data>
+  <data name="LoginMenuItem" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LogoutMenuItem" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="ManageAccountMenuItem" xml:space="preserve">
+    <value>Gérer le compte</value>
+  </data>
+  <data name="RegisterUserMenuItem" xml:space="preserve">
+    <value>Créer un compte</value>
+  </data>
   <data name="SecurityMenuItem" xml:space="preserve">
     <value>Sécurité</value>
   </data>

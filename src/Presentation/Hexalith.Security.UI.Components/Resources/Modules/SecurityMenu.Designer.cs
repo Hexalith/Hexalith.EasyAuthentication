@@ -70,6 +70,42 @@ namespace Hexalith.Security.UI.Components.Resources.Modules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string LoginMenuItem {
+            get {
+                return ResourceManager.GetString("LoginMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        internal static string LogoutMenuItem {
+            get {
+                return ResourceManager.GetString("LogoutMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage account.
+        /// </summary>
+        internal static string ManageAccountMenuItem {
+            get {
+                return ResourceManager.GetString("ManageAccountMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        internal static string RegisterUserMenuItem {
+            get {
+                return ResourceManager.GetString("RegisterUserMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Security.
         /// </summary>
         internal static string SecurityMenuItem {
