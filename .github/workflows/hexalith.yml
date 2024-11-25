@@ -65,14 +65,6 @@ jobs:
     - name: Unit Tests
       run: |
         dotnet test --configuration Release -p:Version=${{ env.VERSION }} ./test/${{ vars.HEXALITH_MODULE_NAME }}.UnitTests/${{ vars.HEXALITH_MODULE_NAME }}.UnitTests.csproj
-    - name: Publish final release packages to Nuget
-      if: startswith(github.ref, 'refs/tags/v') 
-      run: |
-        dotnet nuget push './src/**/*.nupkg' --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate    
-    - name: Publish preview packages to GitHub
-      if: ${{ !startswith(github.ref, 'refs/tags/') }}
-      run: |
-        dotnet nuget push './src/**/*.nupkg' --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
     - name: Check the container registry parameters
       run: |
         echo "Registry: ${{ vars.AZURE_REGISTRY }}"
@@ -103,6 +95,14 @@ jobs:
 
         publish_container "HexalithApp.WebServer" "web"
         publish_container "HexalithApp.ApiServer" "api"    
+    - name: Publish final release packages to Nuget
+      if: startswith(github.ref, 'refs/tags/v') 
+      run: |
+        dotnet nuget push './src/**/*.nupkg' --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate    
+    - name: Publish preview packages to GitHub
+      if: ${{ !startswith(github.ref, 'refs/tags/') }}
+      run: |
+        dotnet nuget push './src/**/*.nupkg' --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
     - name: Log in to Azure
       uses: azure/login@v2
       with:
