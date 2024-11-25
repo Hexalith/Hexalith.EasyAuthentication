@@ -95,9 +95,9 @@ jobs:
             --configuration Release \
             --os linux \
             --arch x64 \
-            -p:ContainerImageTags="${{ env.VERSION }};latest" \
+            -p:ContainerImageTags="'${{ env.VERSION }};latest'" \
             -p:ContainerRegistry=${{ vars.AZURE_REGISTRY }} \
-            -p:ContainerRepository="${{ vars.HEXALITH_MODULE_SHORT_NAME }}${app_type_lower}"
+            -p:ContainerRepository="'${{ vars.HEXALITH_MODULE_SHORT_NAME }}${app_type_lower}'"
         }
 
         publish_container "Web"
