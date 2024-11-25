@@ -80,7 +80,7 @@ jobs:
     - name: Publish and push the server images to the container registry
       run: |
         publish_container() {
-          local app_type="$1"
+          local app_type=$1
           local project_name="./HexalithApp/src/HexalithApp.${app_type}Server/HexalithApp.${app_type}Server.csproj"
           local app_type_lower=$(echo "$app_type" | tr '[:upper:]' '[:lower:]')
           
