@@ -17,4 +17,7 @@
     <HexalithDaprIdentityStorePath Condition="'$(HexalithDaprIdentityStorePath)' == ''">$(HexalithPath)..\Hexalith.DaprIdentityStore\</HexalithDaprIdentityStorePath>
     <HexalithDaprIdentityStoreVersion Condition="'$(HexalithDaprIdentityStoreVersion)' == ''">*</HexalithDaprIdentityStoreVersion>
   </PropertyGroup>
+  <PropertyGroup>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
 </Project>
