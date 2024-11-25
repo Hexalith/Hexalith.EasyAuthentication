@@ -79,29 +79,29 @@ jobs:
         password: ${{ secrets.AZURE_APPLICATIONSECRET }}
     - name: Publish and push the server images to the container registry
       run: |
-        # Function to publish container
         publish_container() {
-          local app_type=$1          
+          local app_type="$1"
           local project_name="./HexalithApp/src/HexalithApp.${app_type}Server/HexalithApp.${app_type}Server.csproj"
           local app_type_lower=$(echo "$app_type" | tr '[:upper:]' '[:lower:]')
-
-          if [ ! -f "$project_path" ]; then
-            echo "Error: Project file not found at $project_path"
+          
+          if [ ! -f "$project_name" ]; then
+            echo "Error: Project file not found at $project_name"
             return 1
-          }
-
+          fi
+          
+          echo "Publishing container for ${app_type}..."
           dotnet publish "$project_name" \
             /t:PublishContainer \
             --configuration Release \
             --os linux \
             --arch x64 \
-            -p:ContainerImageTags='"${{ env.VERSION }};latest"' \
+            -p:ContainerImageTags="${{ env.VERSION }};latest" \
             -p:ContainerRegistry=${{ vars.AZURE_REGISTRY }} \
-            -p:ContainerRepository='"${{ vars.HEXALITH_MODULE_SHORT_NAME }}$app_type_lower"'
+            -p:ContainerRepository="${{ vars.HEXALITH_MODULE_SHORT_NAME }}${app_type_lower}"
         }
 
         publish_container "Web"
-        publish_container "Api"    
+        publish_container "Api"
     - name: Publish final release packages to Nuget
       if: startswith(github.ref, 'refs/tags/v') 
       run: |
