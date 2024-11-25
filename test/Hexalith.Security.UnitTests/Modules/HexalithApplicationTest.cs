@@ -12,8 +12,8 @@ using Hexalith.Application.Modules.Applications;
 using Hexalith.Security.Application.Configurations;
 using Hexalith.Security.WebApp;
 using Hexalith.Security.WebServer;
+using Hexalith.UI.Components;
 
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,10 +24,10 @@ public class HexalithApplicationTest
     {
         _ = HexalithApplication.WebAppApplication.WebAppModules
             .Should()
-            .HaveCount(1);
+            .HaveCount(2);
         _ = HexalithApplication.WebAppApplication.Modules
             .Should()
-            .HaveCount(1);
+            .HaveCount(2);
         _ = HexalithApplication.WebAppApplication.WebAppModules
             .Should()
             .Contain(typeof(HexalithSecurityWebAppModule));
@@ -41,10 +41,10 @@ public class HexalithApplicationTest
     {
         _ = HexalithApplication.WebServerApplication.WebServerModules
             .Should()
-            .HaveCount(1);
+            .HaveCount(2);
         _ = HexalithApplication.WebServerApplication.Modules
             .Should()
-            .HaveCount(1);
+            .HaveCount(2);
         _ = HexalithApplication.WebServerApplication.WebServerModules
             .Should()
             .Contain(typeof(HexalithSecurityWebServerModule));
@@ -68,9 +68,9 @@ public class HexalithApplicationTest
 
         HexalithApplication.AddWebAppServices(services, configuration);
 
-        // Check that the client module services have been added by checking if AuthenticationStateProvider has been added
+        // Check that the client module services have been added by checking if Fluent UI ToastService has been added
         _ = services
             .Should()
-            .ContainSingle(s => s.ServiceType == typeof(AuthenticationStateProvider));
+            .ContainSingle(s => s.ServiceType == typeof(MenuItemInformation));
     }
 }
