@@ -20,6 +20,7 @@ permissions:
   id-token: write
   security-events: write
 env:
+  DOTNET_MULTILEVEL_LOOKUP: 0 
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_NOLOGO: true  # To reduce noise
@@ -80,21 +81,20 @@ jobs:
       run: |
         # Function to publish container
         publish_container() {
-          local project=$1
-          local repository=$2
-          
-          dotnet publish "./HexalithApp/src/$project/$project.csproj" \
+          local app_type=$1          
+          local project_name="./HexalithApp/src/HexalithApp.${app_type}Server/HexalithApp.${app_type}Server.csproj"
+          dotnet publish "$project_name" \
             /t:PublishContainer \
             --configuration Release \
             --os linux \
             --arch x64 \
             -p:ContainerImageTags='"${{ env.VERSION }};latest"' \
             -p:ContainerRegistry=${{ vars.AZURE_REGISTRY }} \
-            -p:ContainerRepository='"${{ vars.HEXALITH_MODULE_SHORT_NAME }}-$repository"'
+            -p:ContainerRepository='"${{ vars.HEXALITH_MODULE_SHORT_NAME }}$app_type"'
         }
 
-        publish_container "HexalithApp.WebServer" "web"
-        publish_container "HexalithApp.ApiServer" "api"    
+        publish_container "web"
+        publish_container "api"    
     - name: Publish final release packages to Nuget
       if: startswith(github.ref, 'refs/tags/v') 
       run: |
@@ -112,19 +112,16 @@ jobs:
         enable-AzPSSession: true
         allow-no-subscriptions: true
     - name: Deploy to Azure Container Apps
-      run: az account show
-    - name: Deploy to Azure Container Apps
       run: |
         # Function to update container app
         update_container_app() {
-          local app_name=$1
-          local app_type=$2
+          local app_type=$1
           
           az containerapp update \
             --name ${{ vars.HEXALITH_MODULE_SHORT_NAME }}$app_type \
             --resource-group ${{ vars.HEXALITH_RESOURCE_GROUP }} \
-            --image ${{ vars.AZURE_REGISTRY }}/${{ vars.HEXALITH_MODULE_SHORT_NAME }}-$app_type:${{ env.VERSION }}
+            --image ${{ vars.AZURE_REGISTRY }}/${{ vars.HEXALITH_MODULE_SHORT_NAME }}$app_type:${{ env.VERSION }}
         }
 
-        update_container_app "web" "web"
-        update_container_app "api" "api" 
+        update_container_app "web"
+        update_container_app "api" 
