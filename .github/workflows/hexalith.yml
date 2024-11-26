@@ -65,7 +65,7 @@ jobs:
         }
     - name: Unit Tests
       run: |
-        dotnet test --configuration Release -p:Version=${{ env.VERSION }} ./test/${{ vars.HEXALITH_MODULE_NAME }}.UnitTests/${{ vars.HEXALITH_MODULE_NAME }}.UnitTests.csproj
+        dotnet test --configuration Release -p:Version=${{ env.VERSION }} ./test/UnitTests/UnitTests.csproj
     - name: Check the container registry parameters
       run: |
         echo "Registry: ${{ vars.AZURE_REGISTRY }}"

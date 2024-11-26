@@ -89,8 +89,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{3A505F
 		Hexalith.Modules.WebServer.props = Hexalith.Modules.WebServer.props
 		Hexalith.props = Hexalith.props
 		.github\workflows\hexalith.yml = .github\workflows\hexalith.yml
-		.github\workflows\hexalith_security_sonar_qube.yml = .github\workflows\hexalith_security_sonar_qube.yml
 		src\BuildFiles\Project.Common.props = src\BuildFiles\Project.Common.props
+		.github\workflows\sonar_qube.yml = .github\workflows\sonar_qube.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8B5B1376-6E74-4BE2-8688-5F4B604B0370}"
@@ -112,8 +112,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.github\workflows\semgrep.yml = .github\workflows\semgrep.yml
 		.github\workflows\sonarqube.yml = .github\workflows\sonarqube.yml
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hexalith.Security.UnitTests", "test\Hexalith.Security.UnitTests\Hexalith.Security.UnitTests.csproj", "{0FB784CA-270E-423F-9002-2B16A692C461}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_global", "_global", "{1E9B2907-372E-4D83-96E0-F09636AF1E6A}"
 	ProjectSection(SolutionItems) = preProject
@@ -224,6 +222,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{4B884768
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireHost", "Aspire\AspireHost.csproj", "{595203FC-160D-41DA-8A21-6886DD95B7B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "test\UnitTests\UnitTests.csproj", "{192E497C-7036-4BA6-91F0-52CEF700D95A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -367,10 +367,6 @@ Global
 		{92269465-385D-4598-9883-28379DE598C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92269465-385D-4598-9883-28379DE598C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92269465-385D-4598-9883-28379DE598C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0FB784CA-270E-423F-9002-2B16A692C461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FB784CA-270E-423F-9002-2B16A692C461}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FB784CA-270E-423F-9002-2B16A692C461}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0FB784CA-270E-423F-9002-2B16A692C461}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76D01851-A0B8-4586-A801-3D9C39DD2D5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76D01851-A0B8-4586-A801-3D9C39DD2D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76D01851-A0B8-4586-A801-3D9C39DD2D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -455,6 +451,10 @@ Global
 		{595203FC-160D-41DA-8A21-6886DD95B7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{595203FC-160D-41DA-8A21-6886DD95B7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{595203FC-160D-41DA-8A21-6886DD95B7B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{192E497C-7036-4BA6-91F0-52CEF700D95A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{192E497C-7036-4BA6-91F0-52CEF700D95A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{192E497C-7036-4BA6-91F0-52CEF700D95A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{192E497C-7036-4BA6-91F0-52CEF700D95A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -500,7 +500,6 @@ Global
 		{6A210437-68DA-4468-AF3C-4887406BD03B} = {3D11F14C-AF25-4D09-8182-568B18EB78FC}
 		{9A85438A-48CC-404E-9B1C-A29269FE78B9} = {3D11F14C-AF25-4D09-8182-568B18EB78FC}
 		{92269465-385D-4598-9883-28379DE598C6} = {3D11F14C-AF25-4D09-8182-568B18EB78FC}
-		{0FB784CA-270E-423F-9002-2B16A692C461} = {8B5B1376-6E74-4BE2-8688-5F4B604B0370}
 		{1E9B2907-372E-4D83-96E0-F09636AF1E6A} = {6DCC825D-02D0-4F25-9A3D-A530736AB837}
 		{76D01851-A0B8-4586-A801-3D9C39DD2D5C} = {AA983AFF-9CBC-4F2A-98E3-3CACA5039C61}
 		{8F25EBB4-BF9E-40C2-9B16-7D2E875AFFBC} = {AA983AFF-9CBC-4F2A-98E3-3CACA5039C61}
@@ -530,6 +529,7 @@ Global
 		{11E354BA-A045-78FA-C608-DF5354C9CA80} = {D0662561-58FC-4245-B168-DEDC9D519E53}
 		{C34E8C2A-4E0E-BBED-8BFD-C5727E05447E} = {D0662561-58FC-4245-B168-DEDC9D519E53}
 		{4B884768-108B-4F83-8343-A8E17F5C2DD1} = {D0662561-58FC-4245-B168-DEDC9D519E53}
+		{192E497C-7036-4BA6-91F0-52CEF700D95A} = {8B5B1376-6E74-4BE2-8688-5F4B604B0370}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09CBB595-8996-4C7F-9C48-4C58AD9293AC}
