@@ -30,14 +30,14 @@ public static class SecurityMenu
                         new MenuItemInformation(
                             Labels.RegisterUserMenuItem,
                             "Account/Register",
-                            new IconInformation("BuildingRetailShield", 20, IconStyle.Regular),
+                            new IconInformation("ShieldAdd", 20, IconStyle.Regular),
                             false,
                             10,
                             []),
                         new MenuItemInformation(
                             Labels.LoginMenuItem,
                             "Account/Login",
-                            new IconInformation("ShieldCheckMark", 20, IconStyle.Regular),
+                            new IconInformation("ShieldCheckmark", 20, IconStyle.Regular),
                             false,
                             10,
                             []),
