@@ -159,10 +159,87 @@
           "System.Drawing.Common": "8.0.0"
         }
       },
+      "Dapr.Actors": {
+        "type": "Transitive",
+        "resolved": "1.14.0",
+        "contentHash": "CUds5JTUGE8xJTcMw6fbSGbnJm7p7TNe7ZHymvSJb0apowFZRZQFm72rqSf3791nQtTdyioVYDi6cZGhUgrkWg==",
+        "dependencies": {
+          "Dapr.Client": "1.14.0",
+          "Microsoft.Extensions.Logging.Abstractions": "3.1.0"
+        }
+      },
+      "Dapr.Actors.AspNetCore": {
+        "type": "Transitive",
+        "resolved": "1.14.0",
+        "contentHash": "e2tnu+ae5jcIm9rWYPnmgUm6DAonDixDd3cPZZc0h1TfAcSLkSyKp5t3+LR41FvKdiDGb2sdZ96frxiPf6FZ6w==",
+        "dependencies": {
+          "Dapr.Actors": "1.14.0"
+        }
+      },
+      "Dapr.AspNetCore": {
+        "type": "Transitive",
+        "resolved": "1.14.0",
+        "contentHash": "CtP5zOR29Ft8qsrQ2R9001yc1FczUCowIuzeOKEPCe/kAKbCs4IwA7QXDzIbvkhqxT4JxniQMK/ASk7LBygghQ==",
+        "dependencies": {
+          "Dapr.Client": "1.14.0"
+        }
+      },
+      "Dapr.Client": {
+        "type": "Transitive",
+        "resolved": "1.14.0",
+        "contentHash": "gvoxV+nKOLHTeDx+WLwV79GJ/ldJuCsRrFmyxq4NodIeE9XfEi5z08Nc+EAwn1NibD3Wi4B0CPZpm+El+UKFCA==",
+        "dependencies": {
+          "Google.Api.CommonProtos": "2.2.0",
+          "Google.Protobuf": "3.15.0",
+          "Grpc.Net.Client": "2.52.0"
+        }
+      },
       "FluentValidation": {
         "type": "Transitive",
         "resolved": "11.10.0",
         "contentHash": "qsJGSJDdZ8qiG+lVJ70PZfJHcEdq8UQZ/tZDXoj78/iHKG6lVKtMJsD11zyyv/IPc7rwqGqnFoFLTNzpo3IPYg=="
+      },
+      "Google.Api.CommonProtos": {
+        "type": "Transitive",
+        "resolved": "2.2.0",
+        "contentHash": "mxXNYkHYL7T6NG8cdbodxpixQZfpozBkZj2g+jGCB/sO13RqfUvh9YHd8G2QI5HP24brl+nILJReC3/gzgsrrg==",
+        "dependencies": {
+          "Google.Protobuf": "[3.13.0, 4.0.0)"
+        }
+      },
+      "Google.Protobuf": {
+        "type": "Transitive",
+        "resolved": "3.15.0",
+        "contentHash": "2na7LsYrtxkEQaVCNjaafBzVu4IJ4U4+dwwBazK8oUkpDiIFjO0GkyTc+IbStx4xNVAV4EqHl+qp2uegFgFiiA==",
+        "dependencies": {
+          "System.Memory": "4.5.3",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
+        }
+      },
+      "Grpc.Core.Api": {
+        "type": "Transitive",
+        "resolved": "2.52.0",
+        "contentHash": "SQiPyBczG4vKPmI6Fd+O58GcxxDSFr6nfRAJuBDUNj+PgdokhjWJvZE/La1c09AkL2FVm/jrDloG89nkzmVF7A==",
+        "dependencies": {
+          "System.Memory": "4.5.3"
+        }
+      },
+      "Grpc.Net.Client": {
+        "type": "Transitive",
+        "resolved": "2.52.0",
+        "contentHash": "hWVH9g/Nnjz40ni//2S8UIOyEmhueQREoZIkD0zKHEPqLxXcNlbp4eebXIOicZtkwDSx0TFz9NpkbecEDn6rBw==",
+        "dependencies": {
+          "Grpc.Net.Common": "2.52.0",
+          "Microsoft.Extensions.Logging.Abstractions": "3.0.3"
+        }
+      },
+      "Grpc.Net.Common": {
+        "type": "Transitive",
+        "resolved": "2.52.0",
+        "contentHash": "di9qzpdx525IxumZdYmu6sG2y/gXJyYeZ1ruFUzB9BJ1nj4kU1/dTAioNCMt1VLRvNVDqh8S8B1oBdKhHJ4xRg==",
+        "dependencies": {
+          "Grpc.Core.Api": "2.52.0"
+        }
       },
       "Humanizer": {
         "type": "Transitive",
@@ -1299,7 +1376,6 @@
         "type": "Project",
         "dependencies": {
           "Hexalith.Domain.Abstractions": "[1.0.0, )",
-          "Hexalith.Domain.ConversationThreads": "[1.0.0, )",
           "Hexalith.Extensions": "[1.0.0, )",
           "Microsoft.Extensions.Localization.Abstractions": "[9.*, )",
           "Microsoft.Extensions.Logging.Abstractions": "[9.*, )"
@@ -1333,18 +1409,34 @@
           "Microsoft.Extensions.Logging.Abstractions": "[9.*, )"
         }
       },
+      "hexalith.dapridentitystore": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.DaprIdentityStore.Abstractions": "[1.0.0, )",
+          "Hexalith.Infrastructure.DaprRuntime": "[1.0.0, )"
+        }
+      },
+      "hexalith.dapridentitystore.abstractions": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.Infrastructure.DaprRuntime.Abstractions": "[1.0.0, )",
+          "Microsoft.Extensions.Identity.Stores": "[9.*, )"
+        }
+      },
+      "hexalith.dapridentitystore.ui": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.DaprIdentityStore": "[1.0.0, )",
+          "Hexalith.DaprIdentityStore.Abstractions": "[1.0.0, )",
+          "Hexalith.UI.Components": "[1.0.0, )",
+          "Microsoft.AspNetCore.Components.WebAssembly.Server": "[9.*, )"
+        }
+      },
       "hexalith.domain.abstractions": {
         "type": "Project",
         "dependencies": {
           "Hexalith.Extensions": "[1.0.0, )",
           "Hexalith.PolymorphicSerialization": "[1.0.0, )"
-        }
-      },
-      "hexalith.domain.conversationthreads": {
-        "type": "Project",
-        "dependencies": {
-          "Hexalith.Domain.Abstractions": "[1.0.0, )",
-          "Hexalith.Extensions": "[1.0.0, )"
         }
       },
       "hexalith.extensions": {
@@ -1357,6 +1449,38 @@
           "Microsoft.Extensions.Logging.Abstractions": "[9.*, )",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "[9.*, )",
           "Microsoft.Extensions.Options.DataAnnotations": "[9.*, )"
+        }
+      },
+      "hexalith.infrastructure.daprruntime": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.Application": "[1.0.0, )",
+          "Hexalith.Infrastructure.DaprRuntime.Abstractions": "[1.0.0, )",
+          "Hexalith.Infrastructure.Serialization": "[1.0.0, )"
+        }
+      },
+      "hexalith.infrastructure.daprruntime.abstractions": {
+        "type": "Project",
+        "dependencies": {
+          "Dapr.Actors.AspNetCore": "[1.14.*, )",
+          "Dapr.AspNetCore": "[1.14.*, )",
+          "Hexalith.Application": "[1.0.0, )",
+          "Hexalith.Infrastructure.Serialization": "[1.0.0, )"
+        }
+      },
+      "hexalith.infrastructure.daprruntime.sessions": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.Application.Partitions.Abstractions": "[1.0.0, )",
+          "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
+          "Hexalith.Infrastructure.DaprRuntime": "[1.0.0, )",
+          "Hexalith.Infrastructure.DaprRuntime.Abstractions": "[1.0.0, )"
+        }
+      },
+      "hexalith.infrastructure.serialization": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.Application": "[1.0.0, )"
         }
       },
       "hexalith.polymorphicserialization": {
@@ -1399,6 +1523,7 @@
           "Hexalith.Security.Application": "[1.0.0, )",
           "Hexalith.Security.UI.Components": "[1.0.0, )",
           "Hexalith.Security.UI.Pages": "[1.0.0, )",
+          "Hexalith.UI.Components": "[1.0.0, )",
           "Microsoft.AspNetCore.Components.WebAssembly": "[9.*, )",
           "Microsoft.AspNetCore.Components.WebAssembly.Authentication": "[9.*, )",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "[9.*, )"
