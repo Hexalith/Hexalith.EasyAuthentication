@@ -88,8 +88,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{3A505F
 		Hexalith.Modules.WebApp.props = Hexalith.Modules.WebApp.props
 		Hexalith.Modules.WebServer.props = Hexalith.Modules.WebServer.props
 		Hexalith.props = Hexalith.props
-		.github\workflows\hexalith_security_sonar_qube.yml = .github\workflows\hexalith_security_sonar_qube.yml
 		.github\workflows\hexalith.yml = .github\workflows\hexalith.yml
+		.github\workflows\hexalith_security_sonar_qube.yml = .github\workflows\hexalith_security_sonar_qube.yml
 		src\BuildFiles\Project.Common.props = src\BuildFiles\Project.Common.props
 	EndProjectSection
 EndProject
@@ -200,8 +200,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.Security.Application", "src\Application\Hexalith.Security.Application\Hexalith.Security.Application.csproj", "{77B777F4-0E62-48BA-A86B-9830772DD7D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityInfrastructure", "SecurityInfrastructure\SecurityInfrastructure.csproj", "{0F2AD951-9EA3-9D89-06C9-E7905A0A9639}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.DaprIdentityStore.Abstractions", "Hexalith.DaprIdentityStore\src\Hexalith.DaprIdentityStore.Abstractions\Hexalith.DaprIdentityStore.Abstractions.csproj", "{46CA507D-56BF-1F3A-00A8-00F2350CAE26}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexalith.DaprIdentityStore", "Hexalith.DaprIdentityStore\src\Hexalith.DaprIdentityStore\Hexalith.DaprIdentityStore.csproj", "{11E354BA-A045-78FA-C608-DF5354C9CA80}"
@@ -224,6 +222,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{4B884768
 		Hexalith.DaprIdentityStore\buildFiles\Project.Common.props = Hexalith.DaprIdentityStore\buildFiles\Project.Common.props
 		Hexalith.DaprIdentityStore\README.md = Hexalith.DaprIdentityStore\README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireHost", "Aspire\AspireHost.csproj", "{595203FC-160D-41DA-8A21-6886DD95B7B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -439,10 +439,6 @@ Global
 		{77B777F4-0E62-48BA-A86B-9830772DD7D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77B777F4-0E62-48BA-A86B-9830772DD7D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77B777F4-0E62-48BA-A86B-9830772DD7D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F2AD951-9EA3-9D89-06C9-E7905A0A9639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F2AD951-9EA3-9D89-06C9-E7905A0A9639}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F2AD951-9EA3-9D89-06C9-E7905A0A9639}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F2AD951-9EA3-9D89-06C9-E7905A0A9639}.Release|Any CPU.Build.0 = Release|Any CPU
 		{46CA507D-56BF-1F3A-00A8-00F2350CAE26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{46CA507D-56BF-1F3A-00A8-00F2350CAE26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46CA507D-56BF-1F3A-00A8-00F2350CAE26}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -455,6 +451,10 @@ Global
 		{C34E8C2A-4E0E-BBED-8BFD-C5727E05447E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C34E8C2A-4E0E-BBED-8BFD-C5727E05447E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C34E8C2A-4E0E-BBED-8BFD-C5727E05447E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{595203FC-160D-41DA-8A21-6886DD95B7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{595203FC-160D-41DA-8A21-6886DD95B7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{595203FC-160D-41DA-8A21-6886DD95B7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{595203FC-160D-41DA-8A21-6886DD95B7B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

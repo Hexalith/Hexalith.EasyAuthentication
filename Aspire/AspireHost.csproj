@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsAspireHost>true</IsAspireHost>
-    <UserSecretsId>HexalithProjectInfrastructure</UserSecretsId>
+    <UserSecretsId>HexalithAspireHost</UserSecretsId>
   </PropertyGroup>
   <ItemGroup Condition="'$(UseProjectReference)' == 'true'">
     <ProjectReference Include="$(HexalithPath)\src\Core\Infrastructure\Hexalith.Infrastructure.AspireService.Hosting\Hexalith.Infrastructure.AspireService.Hosting.csproj" IsAspireProjectResource="false" />
