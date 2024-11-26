@@ -1,4 +1,4 @@
-name: Hexalith Security Build
+name: Hexalith Build
 on:
   push:
     paths-ignore:
