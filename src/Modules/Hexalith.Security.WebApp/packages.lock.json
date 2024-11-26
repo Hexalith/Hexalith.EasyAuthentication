@@ -927,6 +927,7 @@
         "type": "Project",
         "dependencies": {
           "Hexalith.Domain.Abstractions": "[1.0.0, )",
+          "Hexalith.Domain.ConversationThreads": "[1.0.0, )",
           "Hexalith.Extensions": "[1.0.0, )",
           "Microsoft.Extensions.Localization.Abstractions": "[9.*, )",
           "Microsoft.Extensions.Logging.Abstractions": "[9.*, )"
@@ -965,6 +966,13 @@
         "dependencies": {
           "Hexalith.Extensions": "[1.0.0, )",
           "Hexalith.PolymorphicSerialization": "[1.0.0, )"
+        }
+      },
+      "hexalith.domain.conversationthreads": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.Domain.Abstractions": "[1.0.0, )",
+          "Hexalith.Extensions": "[1.0.0, )"
         }
       },
       "hexalith.extensions": {
