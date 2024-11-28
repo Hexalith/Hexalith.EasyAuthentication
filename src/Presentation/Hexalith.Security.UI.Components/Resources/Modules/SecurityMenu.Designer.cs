@@ -108,9 +108,9 @@ namespace Hexalith.Security.UI.Components.Resources.Modules {
         /// <summary>
         ///   Looks up a localized string similar to Role.
         /// </summary>
-        internal static string RoleMenuItem {
+        internal static string RolesMenuItem {
             get {
-                return ResourceManager.GetString("RoleMenuItem", resourceCulture);
+                return ResourceManager.GetString("RolesMenuItem", resourceCulture);
             }
         }
         
@@ -144,9 +144,9 @@ namespace Hexalith.Security.UI.Components.Resources.Modules {
         /// <summary>
         ///   Looks up a localized string similar to Users.
         /// </summary>
-        internal static string UserMenuItem {
+        internal static string UsersMenuItem {
             get {
-                return ResourceManager.GetString("UserMenuItem", resourceCulture);
+                return ResourceManager.GetString("UsersMenuItem", resourceCulture);
             }
         }
     }
