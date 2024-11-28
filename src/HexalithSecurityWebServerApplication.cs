@@ -1,4 +1,4 @@
-namespace Hexalith.Security.Client;
+namespace Hexalith.Security.WebServer;
 
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Hexalith.Application.Modules.Applications;
 using Hexalith.Extensions.Helpers;
 using Hexalith.Security.Application;
-using Hexalith.Security.WebServer;
+using Hexalith.Security.WebApp;
 using Hexalith.UI.Components.Modules;
 
 /// <summary>
@@ -14,7 +14,7 @@ using Hexalith.UI.Components.Modules;
 /// </summary>
 public class HexalithSecurityWebServerApplication : HexalithWebServerApplication
 {
-    private string? _version;
+    private static string? _version;
 
     /// <inheritdoc/>
     public override string Id => $"{HexalithSecurityApplicationInformation.Id}.{ApplicationType}";
@@ -26,7 +26,7 @@ public class HexalithSecurityWebServerApplication : HexalithWebServerApplication
     public override string ShortName => HexalithSecurityApplicationInformation.ShortName;
 
     /// <inheritdoc/>
-    public override string Version => _version ??= VersionHelper.EntryProductVersion() ?? base.Version;
+    public override string Version => _version ??= typeof(HexalithSecurityWebServerModule).GetAssemblyVersion();
 
     /// <inheritdoc/>
     public override Type WebAppApplicationType => typeof(HexalithSecurityWebAppApplication);

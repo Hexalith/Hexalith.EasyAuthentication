@@ -62,5 +62,19 @@ public static class SecurityMenu
                             false,
                             30,
                             []),
+                        new MenuItemInformation(
+                            Labels.UserMenuItem,
+                            "/Security/User",
+                            new IconInformation("User", 20, IconStyle.Regular),
+                            false,
+                            30,
+                            []),
+                        new MenuItemInformation(
+                            Labels.RoleMenuItem,
+                            "/Security/Role",
+                            new IconInformation("User", 20, IconStyle.Regular),
+                            false,
+                            30,
+                            []),
                     ]);
 }

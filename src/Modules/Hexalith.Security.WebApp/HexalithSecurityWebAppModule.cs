@@ -1,5 +1,6 @@
 ﻿namespace Hexalith.Security.WebApp;
 
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -19,6 +20,8 @@ using Microsoft.Extensions.DependencyInjection;
 /// </summary>
 public sealed class HexalithSecurityWebAppModule : IWebAppApplicationModule
 {
+    private static string? _version;
+
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];
 
@@ -44,7 +47,7 @@ public sealed class HexalithSecurityWebAppModule : IWebAppApplicationModule
         typeof(ClaimsView).Assembly];
 
     /// <inheritdoc/>
-    public string Version => field ??= this.ProductVersion() ?? "1.0";
+    public string Version => _version ??= GetType().GetAssemblyVersion();
 
     private static string Path => HexalithSecurityApplicationInformation.ShortName;
 

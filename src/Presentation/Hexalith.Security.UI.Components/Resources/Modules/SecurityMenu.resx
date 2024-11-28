@@ -132,11 +132,17 @@
   <data name="RegisterUserMenuItem" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="RoleMenuItem" xml:space="preserve">
+    <value>Role</value>
+  </data>
   <data name="SecurityMenuItem" xml:space="preserve">
     <value>Security</value>
   </data>
   <data name="SessionsMenuItem" xml:space="preserve">
     <value>Sessions</value>
+  </data>
+  <data name="UserMenuItem" xml:space="preserve">
+    <value>Users</value>
   </data>
   <data name="UserIdentityMenuItem" xml:space="preserve">
     <value>Identities</value>

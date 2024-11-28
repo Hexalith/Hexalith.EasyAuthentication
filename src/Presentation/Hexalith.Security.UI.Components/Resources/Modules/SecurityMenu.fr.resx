@@ -132,11 +132,17 @@
   <data name="RegisterUserMenuItem" xml:space="preserve">
     <value>Créer un compte</value>
   </data>
+  <data name="RoleMenuItem" xml:space="preserve">
+    <value>Roles</value>
+  </data>
   <data name="SecurityMenuItem" xml:space="preserve">
     <value>Sécurité</value>
   </data>
   <data name="SessionsMenuItem" xml:space="preserve">
     <value>Sessions</value>
+  </data>
+  <data name="UserMenuItem" xml:space="preserve">
+    <value>Utilisateurs</value>
   </data>
   <data name="UserIdentityMenuItem" xml:space="preserve">
     <value>Identitées</value>

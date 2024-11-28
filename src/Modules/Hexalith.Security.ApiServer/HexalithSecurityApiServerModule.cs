@@ -19,6 +19,8 @@ using Microsoft.Extensions.DependencyInjection;
 /// </summary>
 public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModule
 {
+    private static string? _version;
+
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];
 
@@ -38,7 +40,7 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
     string IApplicationModule.Path => Path;
 
     /// <inheritdoc/>
-    public string Version => field ??= this.ProductVersion() ?? "1.0";
+    public string Version => _version ??= GetType().GetAssemblyVersion();
 
     private static string Path => HexalithSecurityApplicationInformation.ShortName;
 

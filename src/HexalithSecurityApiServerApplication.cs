@@ -1,11 +1,10 @@
-namespace Hexalith.Security.Client;
+namespace Hexalith.Security.ApiServer;
 
 using System;
 using System.Collections.Generic;
 
 using Hexalith.Application.Modules.Applications;
 using Hexalith.Extensions.Helpers;
-using Hexalith.Security.ApiServer;
 using Hexalith.Security.Application;
 
 /// <summary>
@@ -13,7 +12,7 @@ using Hexalith.Security.Application;
 /// </summary>
 public class HexalithSecurityApiServerApplication : HexalithApiServerApplication
 {
-    private string? _version;
+    private static string? _version;
 
     /// <inheritdoc/>
     public override IEnumerable<Type> ApiServerModules => [typeof(HexalithSecurityApiServerModule)];
@@ -28,5 +27,5 @@ public class HexalithSecurityApiServerApplication : HexalithApiServerApplication
     public override string ShortName => HexalithSecurityApplicationInformation.ShortName;
 
     /// <inheritdoc/>
-    public override string Version => _version ??= VersionHelper.EntryProductVersion() ?? base.Version;
+    public override string Version => _version ??= typeof(HexalithSecurityApiServerModule).GetAssemblyVersion();
 }
