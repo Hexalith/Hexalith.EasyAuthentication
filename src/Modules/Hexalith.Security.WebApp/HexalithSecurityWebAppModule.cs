@@ -8,9 +8,7 @@ using Hexalith.Application.Modules.Modules;
 using Hexalith.Extensions.Helpers;
 using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
-using Hexalith.Security.UI.Components.Claims;
-using Hexalith.Security.UI.Components.Menu;
-using Hexalith.Security.UI.Pages.Security;
+using Hexalith.Security.Application.Menu;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,10 +39,7 @@ public sealed class HexalithSecurityWebAppModule : IWebAppApplicationModule
     string IApplicationModule.Path => Path;
 
     /// <inheritdoc/>
-    public IEnumerable<Assembly> PresentationAssemblies => [
-        GetType().Assembly,
-        typeof(SecurityIndex).Assembly,
-        typeof(ClaimsView).Assembly];
+    public IEnumerable<Assembly> PresentationAssemblies => [GetType().Assembly];
 
     /// <inheritdoc/>
     public string Version => _version ??= GetType().GetAssemblyVersion();

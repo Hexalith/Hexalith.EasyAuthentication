@@ -1,9 +1,9 @@
-﻿namespace Hexalith.Security.UI.Components.Menu;
+﻿namespace Hexalith.Security.Application.Menu;
 
 using Hexalith.UI.Components;
 using Hexalith.UI.Components.Icons;
 
-using Labels = Hexalith.Security.UI.Components.Resources.Modules.SecurityMenu;
+using Labels = Hexalith.Security.Application.Resources.Modules.SecurityMenu;
 
 /// <summary>
 /// Represents the Manhole menu.

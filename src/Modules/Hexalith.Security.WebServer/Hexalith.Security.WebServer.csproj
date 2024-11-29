@@ -14,6 +14,7 @@
     <PackageReference Include="System.Text.Json" Version="$(MicrosoftExtensionsPackagesVersion)" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Presentation\Hexalith.Security.UI.Pages\Hexalith.Security.UI.Pages.csproj" />
     <ProjectReference Include="..\Hexalith.Security.WebApp\Hexalith.Security.WebApp.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(UseProjectReference)' == 'true'">

@@ -9,9 +9,7 @@ using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
 using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
-using Hexalith.Security.UI.Components.Claims;
-using Hexalith.Security.UI.Components.Menu;
-using Hexalith.Security.UI.Pages.Security;
+using Hexalith.Security.Application.Menu;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -48,8 +46,8 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
     [
         GetType().Assembly,
         typeof(Hexalith.DaprIdentityStore.UI._Imports).Assembly,
-        typeof(SecurityIndex).Assembly,
-        typeof(ClaimsView).Assembly
+        typeof(Hexalith.Security.UI.Components._Imports).Assembly,
+        typeof(Hexalith.Security.UI.Pages._Imports).Assembly
     ];
 
     /// <inheritdoc/>

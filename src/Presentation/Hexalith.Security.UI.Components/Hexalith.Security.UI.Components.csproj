@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>$(DefaultTargetFramework)</TargetFramework>
@@ -15,24 +15,13 @@
     <ProjectReference Include="$(HexalithPath)\src\Core\Application\Hexalith.Application.Sessions.Abstractions\Hexalith.Application.Sessions.Abstractions.csproj" />
     <ProjectReference Include="$(HexalithPath)\src\Core\Application\Hexalith.Application.Partitions.Abstractions\Hexalith.Application.Partitions.Abstractions.csproj" />
     <ProjectReference Include="$(HexalithPath)\src\Core\UI\Hexalith.UI.Components\Hexalith.UI.Components.csproj" />
+    <ProjectReference Include="$(HexalithDaprIdentityStorePath)\src\Hexalith.DaprIdentityStore.UI\Hexalith.DaprIdentityStore.UI.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
     <PackageReference Include="Hexalith.Application.Sessions.Abstractions" Version="$(HexalithVersion)" />
     <PackageReference Include="Hexalith.Application.Partitions.Abstractions" Version="$(HexalithVersion)" />
     <PackageReference Include="Hexalith.UI.Components" Version="$(HexalithVersion)" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Resources\Modules\SecurityMenu.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>SecurityMenu.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\Modules\SecurityMenu.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SecurityMenu.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <PackageReference Include="Hexalith.DaprIdentityStore.Abstractions" Version="$(HexalithDaprIdentityStoreVersion)" />
   </ItemGroup>
 
 </Project>

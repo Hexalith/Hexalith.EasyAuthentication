@@ -8,11 +8,22 @@
 
 
   <ItemGroup>
-    <SupportedPlatform Include="browser" />
+    <ProjectReference Include="..\Hexalith.Security.UI.Components\Hexalith.Security.UI.Components.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hexalith.Security.UI.Components\Hexalith.Security.UI.Components.csproj" />
+    <Compile Update="Resources\Users\UserIndex.Designer.cs">
+      <DependentUpon>UserIndex.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Users\UserIndex.resx">
+      <LastGenOutput>UserIndex.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

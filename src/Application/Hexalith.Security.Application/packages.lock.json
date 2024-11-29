@@ -652,6 +652,12 @@
         "resolved": "9.0.0",
         "contentHash": "js7+qAu/9mQvnhA4EfGMZNEzXtJCDxgkgj8ohuxq/Qxv+R56G+ljefhiJHOxTNiw54q8vmABCWUwkMulNdlZ4A=="
       },
+      "hexalith.application": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.Application.Abstractions": "[1.0.0, )"
+        }
+      },
       "hexalith.application.abstractions": {
         "type": "Project",
         "dependencies": {
@@ -713,6 +719,13 @@
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "[9.*, )",
           "System.Text.Json": "[9.*, )"
+        }
+      },
+      "hexalith.ui.components.abstractions": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.Application": "[1.0.0, )",
+          "Hexalith.Application.Modules.Abstractions": "[1.0.0, )"
         }
       }
     }

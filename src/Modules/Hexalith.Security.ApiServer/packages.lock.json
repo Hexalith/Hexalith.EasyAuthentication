@@ -854,15 +854,12 @@
         "type": "Project",
         "dependencies": {
           "Hexalith.DaprIdentityStore.Abstractions": "[1.0.0, )",
-          "Hexalith.Infrastructure.DaprRuntime": "[1.0.0, )"
+          "Hexalith.Infrastructure.DaprRuntime": "[1.0.0, )",
+          "Microsoft.Extensions.Identity.Stores": "[9.*, )"
         }
       },
       "hexalith.dapridentitystore.abstractions": {
-        "type": "Project",
-        "dependencies": {
-          "Hexalith.Infrastructure.DaprRuntime.Abstractions": "[1.0.0, )",
-          "Microsoft.Extensions.Identity.Stores": "[9.*, )"
-        }
+        "type": "Project"
       },
       "hexalith.domain.abstractions": {
         "type": "Project",
@@ -936,7 +933,15 @@
           "Hexalith.Application.Modules": "[1.0.0, )",
           "Hexalith.Application.Partitions.Abstractions": "[1.0.0, )",
           "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
+          "Hexalith.UI.Components.Abstractions": "[1.0.0, )",
           "Microsoft.Extensions.Identity.Stores": "[9.*, )"
+        }
+      },
+      "hexalith.ui.components.abstractions": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.Application": "[1.0.0, )",
+          "Hexalith.Application.Modules.Abstractions": "[1.0.0, )"
         }
       }
     }
