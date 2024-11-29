@@ -85,7 +85,9 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
             .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<SecuritySettings>(configuration);
         _ = services
-            .AddAuthorization()
+            .AddAuthorization(options => options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build())
             .AddApiAuthorization();
     }
 

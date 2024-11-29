@@ -29,11 +29,11 @@
       "Hexalith.TestMocks": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.0.46",
-        "contentHash": "tNkFtZdF36F4vR/gfT4MXvuZRE0Z5r01xm9/ACyQb9ns0nEvvrsAxdT6wBhl8TZyDmOuddXe4FgbkhOLtEjXoA==",
+        "resolved": "1.0.47",
+        "contentHash": "wbLDNDRgzA4v5hHTK9TK0w157fkmWHvjZTh2gRxki6Majg3fzjeizi0fVHQ3kq3begXZwmKOfa8arC2IJoGjwg==",
         "dependencies": {
           "FluentAssertions": "6.12.2",
-          "Hexalith.Extensions": "1.0.46",
+          "Hexalith.Extensions": "1.0.47",
           "Microsoft.Extensions.Configuration": "9.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.0",
           "Microsoft.Extensions.Configuration.FileExtensions": "9.0.0",
