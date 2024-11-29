@@ -12,6 +12,7 @@ using Hexalith.Infrastructure.DaprRuntime.Partitions.Helpers;
 using Hexalith.Infrastructure.DaprRuntime.Sessions.Helpers;
 using Hexalith.Security.Application;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +22,9 @@ using Microsoft.Extensions.DependencyInjection;
 public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModule
 {
     private static string? _version;
+
+    /// <inheritdoc/>
+    public IDictionary<string, AuthorizationPolicy> AuthorizationPolicies => new Dictionary<string, AuthorizationPolicy>();
 
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];
@@ -41,7 +45,7 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
     string IApplicationModule.Path => Path;
 
     /// <inheritdoc/>
-    public string Version => _version ??= GetType().GetAssemblyVersion();
+    public string Version => _version ??= GetType().Assembly.GetAssemblyVersion() ?? "1.0.0";
 
     private static string Path => HexalithSecurityApplicationInformation.ShortName;
 

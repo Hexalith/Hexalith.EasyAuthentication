@@ -12,6 +12,7 @@ using Hexalith.Security.Application.Configurations;
 using Hexalith.Security.Application.Menu;
 using Hexalith.Security.UI.Components.Helpers;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,9 @@ using Microsoft.Extensions.Options;
 public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModule
 {
     private static string? _version;
+
+    /// <inheritdoc/>
+    public IDictionary<string, AuthorizationPolicy> AuthorizationPolicies => new Dictionary<string, AuthorizationPolicy>();
 
     /// <inheritdoc/>
     public IEnumerable<string> Dependencies => [];
@@ -52,7 +56,7 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
     ];
 
     /// <inheritdoc/>
-    public string Version => _version ??= GetType().GetAssemblyVersion();
+    public string Version => _version ??= GetType().Assembly.GetAssemblyVersion() ?? "1.0.0";
 
     private static string Path => HexalithSecurityApplicationInformation.ShortName;
 

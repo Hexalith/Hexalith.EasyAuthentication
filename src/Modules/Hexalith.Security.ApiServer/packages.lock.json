@@ -585,6 +585,16 @@
           "Humanizer.Core": "[2.14.1]"
         }
       },
+      "Microsoft.AspNetCore.Authorization": {
+        "type": "Transitive",
+        "resolved": "9.0.0",
+        "contentHash": "qDJlBC5pUQ/3o6/C6Vuo9CGKtV5TAe5AdKeHvDR2bgmw8vwPxsAy3KG5eU0i1C+iAUNbmq+iDTbiKt16f9pRiA==",
+        "dependencies": {
+          "Microsoft.AspNetCore.Metadata": "9.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.0",
+          "Microsoft.Extensions.Options": "9.0.0"
+        }
+      },
       "Microsoft.AspNetCore.Cryptography.Internal": {
         "type": "Transitive",
         "resolved": "9.0.0",
@@ -597,6 +607,11 @@
         "dependencies": {
           "Microsoft.AspNetCore.Cryptography.Internal": "9.0.0"
         }
+      },
+      "Microsoft.AspNetCore.Metadata": {
+        "type": "Transitive",
+        "resolved": "9.0.0",
+        "contentHash": "X81C891nMuWgzNHyZ0C3s+blSDxRHzQHDFYQoOKtFvFuxGq3BbkLbc5CfiCqIzA/sWIfz6u8sGBgwntQwBJWBw=="
       },
       "Microsoft.Extensions.Caching.Abstractions": {
         "type": "Transitive",
@@ -831,7 +846,8 @@
       "hexalith.application.modules.abstractions": {
         "type": "Project",
         "dependencies": {
-          "Hexalith.Application.Abstractions": "[1.0.0, )"
+          "Hexalith.Application.Abstractions": "[1.0.0, )",
+          "Microsoft.AspNetCore.Authorization": "[9.0.0, )"
         }
       },
       "hexalith.application.partitions.abstractions": {
