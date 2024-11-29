@@ -1548,7 +1548,8 @@
       "hexalith.application.modules.abstractions": {
         "type": "Project",
         "dependencies": {
-          "Hexalith.Application.Abstractions": "[1.0.0, )"
+          "Hexalith.Application.Abstractions": "[1.0.0, )",
+          "Microsoft.AspNetCore.Authorization": "[9.0.0, )"
         }
       },
       "hexalith.application.partitions.abstractions": {
