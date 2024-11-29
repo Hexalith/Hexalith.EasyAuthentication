@@ -10,6 +10,7 @@ using Hexalith.Extensions.Helpers;
 using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
 using Hexalith.Security.Application.Menu;
+using Hexalith.Security.UI.Components.Helpers;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -69,14 +70,10 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
             return;
         }
 
-        _ = services.AddControllers().AddDapr();
+        _ = services
+            .AddSecurityUIComponents()
+            .AddControllers().AddDapr();
 
-        // _ = services.AddAuthentication()
-        //    .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"))
-        //    .EnableTokenAcquisitionToCallDownstreamApi()
-        //    .AddInMemoryTokenCaches();
-        // _ = services.AddAuthentication()
-        //    .AddIdentityCookies();
         _ = services
             .AddCascadingAuthenticationState()
             .AddDaprIdentityStoreUI()

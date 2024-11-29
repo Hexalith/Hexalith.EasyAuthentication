@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hexalith.Security.UI.Pages.Resources.Users {
+namespace Hexalith.Security.UI.Components.Resources.Users {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Hexalith.Security.UI.Pages.Resources.Users {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class UserIndex {
+    internal class UserSummaryGrid {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal UserIndex() {
+        internal UserSummaryGrid() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Hexalith.Security.UI.Pages.Resources.Users {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hexalith.Security.UI.Pages.Resources.Users.UserIndex", typeof(UserIndex).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hexalith.Security.UI.Components.Resources.Users.UserSummaryGrid", typeof(UserSummaryGrid).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,38 @@ namespace Hexalith.Security.UI.Pages.Resources.Users {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User list.
+        ///   Looks up a localized string similar to Email.
         /// </summary>
-        internal static string Title {
+        internal static string Email {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin.
+        /// </summary>
+        internal static string GlobalAdministrator {
+            get {
+                return ResourceManager.GetString("GlobalAdministrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identifier.
+        /// </summary>
+        internal static string Id {
+            get {
+                return ResourceManager.GetString("Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
     }

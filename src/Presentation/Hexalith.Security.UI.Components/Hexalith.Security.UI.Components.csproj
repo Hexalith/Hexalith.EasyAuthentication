@@ -23,5 +23,18 @@
     <PackageReference Include="Hexalith.UI.Components" Version="$(HexalithVersion)" />
     <PackageReference Include="Hexalith.DaprIdentityStore.Abstractions" Version="$(HexalithDaprIdentityStoreVersion)" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\Users\UserSummaryGrid.Designer.cs">
+      <DependentUpon>UserSummaryGrid.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Users\UserSummaryGrid.resx">
+      <LastGenOutput>UserSummaryGrid.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 
 </Project>
