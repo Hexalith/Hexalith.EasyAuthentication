@@ -6,6 +6,7 @@ using Dapr.Actors.Runtime;
 
 using Hexalith.Application.Modules.Modules;
 using Hexalith.DaprIdentityStore.Helpers;
+using Hexalith.DaprIdentityStore.Models;
 using Hexalith.Extensions.Helpers;
 using Hexalith.Infrastructure.DaprRuntime.Partitions.Helpers;
 using Hexalith.Infrastructure.DaprRuntime.Sessions.Helpers;
@@ -53,6 +54,8 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
+        _ = services.AddIdentityApiEndpoints<CustomUser>()
+            .AddUserStore<DaprIdentityStore.Stores.DaprActorUserStore>();
         _ = services.AddDaprIdentityStore();
     }
 

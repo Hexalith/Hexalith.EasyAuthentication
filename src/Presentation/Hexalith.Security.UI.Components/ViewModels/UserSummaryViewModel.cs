@@ -7,4 +7,4 @@
 /// <param name="Name">The name of the user.</param>
 /// <param name="Email">The email address of the user.</param>
 /// <param name="GlobalAdministrator">Indicates whether the user is a global administrator.</param>
-public record UserSummaryViewModel(string Id, string Name, string Email, bool GlobalAdministrator);
+public record UserSummaryViewModel(string Id, string? Name, string? Email, bool GlobalAdministrator);

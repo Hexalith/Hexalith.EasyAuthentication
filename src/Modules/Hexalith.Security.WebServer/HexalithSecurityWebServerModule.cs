@@ -72,7 +72,8 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
 
         _ = services
             .AddSecurityUIComponents()
-            .AddControllers().AddDapr();
+            .AddControllers()
+            .AddDapr();
 
         _ = services
             .AddCascadingAuthenticationState()

@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Identity;
 /// </summary>
 public class UserService : IUserService
 {
-    private readonly IUserClaimStore<CustomUserClaim> _claimStore;
+    private readonly IUserClaimStore<CustomUser> _claimStore;
     private readonly IUserCollectionService _userCollectionService;
     private readonly IUserStore<CustomUser> _userStore;
 
@@ -29,7 +29,7 @@ public class UserService : IUserService
     public UserService(
         IUserCollectionService userCollectionService,
         IUserStore<CustomUser> userStore,
-        IUserClaimStore<CustomUserClaim> claimStore)
+        IUserClaimStore<CustomUser> claimStore)
     {
         ArgumentNullException.ThrowIfNull(userCollectionService);
         ArgumentNullException.ThrowIfNull(userStore);
@@ -48,23 +48,28 @@ public class UserService : IUserService
     public async Task<IEnumerable<UserSummaryViewModel>> GetAllAsync(CancellationToken cancellationToken)
     {
         IEnumerable<string> ids = await _userCollectionService.AllAsync().ConfigureAwait(false);
-        List<CustomUser> users = [];
-        List<Task<CustomUser?>> userTasks = [];
-        List<Task<CustomUserClaim?>> claimTasks = [];
+        List<Task<UserSummaryViewModel?>> userTasks = [];
         foreach (string id in ids)
         {
-            userTasks.Add(_userStore.FindByIdAsync(id, CancellationToken.None));
-            claimTasks.Add(_claimStore.FindByIdAsync(id, CancellationToken.None));
+            userTasks.Add(GetUserSummaryAsync(id, CancellationToken.None));
         }
 
-        CustomUser?[] customUsers = await Task.WhenAll(userTasks).ConfigureAwait(false);
-        CustomUserClaim?[] customUserClaims = await Task.WhenAll(claimTasks).ConfigureAwait(false);
-        return customUsers
-            .OfType<CustomUser>()
-            .Select(p => new UserSummaryViewModel(
-                    p.Id,
-                    p.UserName,
-                    p.Email,
-                    customUserClaims.Where(p => p.ClaimType == ClaimTypes.Role && p.ClaimValue == ApplicationRoles.GlobalAdministrator).Any()));
+        return (await Task.WhenAll(userTasks).ConfigureAwait(false)).OfType<UserSummaryViewModel>();
+    }
+
+    private async Task<UserSummaryViewModel?> GetUserSummaryAsync(string userId, CancellationToken cancellationToken)
+    {
+        CustomUser? user = await _userStore.FindByIdAsync(userId, cancellationToken).ConfigureAwait(false);
+        if (user == null)
+        {
+            return null;
+        }
+
+        IList<Claim> claims = await _claimStore.GetClaimsAsync(user, cancellationToken).ConfigureAwait(false);
+        return new UserSummaryViewModel(
+            userId,
+            user.UserName,
+            user.Email,
+            claims.Any(p => p.Type == ClaimTypes.Role && p.Value == ApplicationRoles.GlobalAdministrator));
     }
 }
