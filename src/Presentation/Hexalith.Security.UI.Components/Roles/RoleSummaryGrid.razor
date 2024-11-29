@@ -1,0 +1,22 @@
+﻿@inject IRoleService RoleService
+@using Labels = Hexalith.Security.UI.Components.Resources.Roles.RoleSummaryGrid
+
+<FluentDataGrid TGridItem="RoleSummaryViewModel" Items="@_users?.AsQueryable()" ResizableColumns="true">
+    <PropertyColumn Property="@(p => p.Id)" Title="@Labels.Id" />
+    <PropertyColumn Property="@(p => p.Name)" Title="@Labels.Name" />
+</FluentDataGrid>
+@if (_users is null)
+{
+    <FluentProgressRing />
+}
+
+
+@code {
+    private IEnumerable<RoleSummaryViewModel>? _users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _users = await RoleService.GetAllAsync(CancellationToken.None);
+        await base.OnInitializedAsync();
+    }
+}

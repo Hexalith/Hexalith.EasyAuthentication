@@ -1,6 +1,7 @@
 ﻿namespace Hexalith.Security.UI.Components.Helpers;
 
-using Hexalith.Security.UI.Components.Services;
+using Hexalith.Security.UI.Components.Roles;
+using Hexalith.Security.UI.Components.Users;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +18,7 @@ public static class SecurityHelper
     public static IServiceCollection AddSecurityUIComponents(this IServiceCollection services)
     {
         _ = services.AddScoped<IUserService, UserService>();
+        _ = services.AddScoped<IRoleService, RoleService>();
         return services;
     }
 }

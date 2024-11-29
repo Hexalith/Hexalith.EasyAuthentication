@@ -1,4 +1,4 @@
-﻿namespace Hexalith.Security.UI.Components.ViewModels;
+﻿namespace Hexalith.Security.UI.Components.Users;
 
 /// <summary>
 /// Represents a summary view model for a user.

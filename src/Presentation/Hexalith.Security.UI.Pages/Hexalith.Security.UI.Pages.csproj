@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\Roles\RoleIndex.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RoleIndex.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Users\UserIndex.Designer.cs">
       <DependentUpon>UserIndex.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -20,6 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\Roles\RoleIndex.resx">
+      <LastGenOutput>RoleIndex.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Users\UserIndex.resx">
       <LastGenOutput>UserIndex.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>

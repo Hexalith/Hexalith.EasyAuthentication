@@ -1,4 +1,4 @@
-﻿namespace Hexalith.Security.UI.Components.Services;
+﻿namespace Hexalith.Security.UI.Components.Users;
 
 using System.Security.Claims;
 using System.Threading;
@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using Hexalith.Application;
 using Hexalith.DaprIdentityStore.Models;
 using Hexalith.DaprIdentityStore.Services;
-using Hexalith.Security.UI.Components.ViewModels;
 
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 /// <summary>
@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity;
 /// </summary>
 public class UserService : IUserService
 {
+    private readonly AuthenticationStateProvider _authenticatorTokenProvider;
     private readonly IUserClaimStore<CustomUser> _claimStore;
     private readonly IUserCollectionService _userCollectionService;
     private readonly IUserStore<CustomUser> _userStore;
@@ -27,14 +28,16 @@ public class UserService : IUserService
     /// <param name="userStore">The user store.</param>
     /// <param name="claimStore">The claim store.</param>
     public UserService(
+        AuthenticationStateProvider authenticatorTokenProvider,
         IUserCollectionService userCollectionService,
         IUserStore<CustomUser> userStore,
         IUserClaimStore<CustomUser> claimStore)
     {
+        ArgumentNullException.ThrowIfNull(authenticatorTokenProvider);
         ArgumentNullException.ThrowIfNull(userCollectionService);
         ArgumentNullException.ThrowIfNull(userStore);
         ArgumentNullException.ThrowIfNull(claimStore);
-
+        _authenticatorTokenProvider = authenticatorTokenProvider;
         _userCollectionService = userCollectionService;
         _userStore = userStore;
         _claimStore = claimStore;
@@ -54,7 +57,30 @@ public class UserService : IUserService
             userTasks.Add(GetUserSummaryAsync(id, CancellationToken.None));
         }
 
-        return (await Task.WhenAll(userTasks).ConfigureAwait(false)).OfType<UserSummaryViewModel>();
+        return (await Task.WhenAll(userTasks).ConfigureAwait(false))
+            .OfType<UserSummaryViewModel>()
+            .OrderBy(p => p.Name);
+    }
+
+    /// <inheritdoc/>
+    public async Task GrantGloablAdministratorRoleAsync(string userId, CancellationToken cancellationToken)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(userId);
+        AuthenticationState authenticationState = await _authenticatorTokenProvider.GetAuthenticationStateAsync().ConfigureAwait(false);
+        if (authenticationState.User?.Identity?.IsAuthenticated != true)
+        {
+            throw new InvalidOperationException("The user is not authenticated.");
+        }
+
+        if (!authenticationState.User.IsInRole(ApplicationRoles.GlobalAdministrator))
+        {
+            throw new InvalidOperationException($"The user {authenticationState.User.Identity.Name} is not authorized. The user must be a global administrator.");
+        }
+
+        await _claimStore.AddClaimsAsync(
+            new CustomUser { Id = userId },
+            [new Claim(ClaimTypes.Role, ApplicationRoles.GlobalAdministrator)],
+            cancellationToken).ConfigureAwait(false);
     }
 
     private async Task<UserSummaryViewModel?> GetUserSummaryAsync(string userId, CancellationToken cancellationToken)

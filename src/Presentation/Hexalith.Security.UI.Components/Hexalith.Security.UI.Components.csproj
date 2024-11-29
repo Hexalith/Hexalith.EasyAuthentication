@@ -24,6 +24,11 @@
     <PackageReference Include="Hexalith.DaprIdentityStore.Abstractions" Version="$(HexalithDaprIdentityStoreVersion)" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Resources\Roles\RoleSummaryGrid.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RoleSummaryGrid.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Users\UserSummaryGrid.Designer.cs">
       <DependentUpon>UserSummaryGrid.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -31,6 +36,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Resources\Roles\RoleSummaryGrid.resx">
+      <LastGenOutput>RoleSummaryGrid.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Users\UserSummaryGrid.resx">
       <LastGenOutput>UserSummaryGrid.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
