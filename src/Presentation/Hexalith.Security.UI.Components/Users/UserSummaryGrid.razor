@@ -1,21 +1,20 @@
 ﻿@inject IUserService UserService
 @inject NavigationManager NavigationManager
 @using Labels = Hexalith.Security.UI.Components.Resources.Users.UserSummaryGrid
-
+<FluentLabel Typo="Typography.Subject">@($"{RendererInfo.Name} {(RendererInfo.IsInteractive?"Interactive":"Static")}")</FluentLabel>
 <FluentDataGrid TGridItem="UserSummaryViewModel" Items="@_users?.AsQueryable()" ResizableColumns="true">
 	<PropertyColumn Property="@(p => p.Id)" Title="@Labels.Id" />
 	<PropertyColumn Property="@(p => p.Name)" Title="@Labels.Name" />
 	<PropertyColumn Property="@(p => p.Email)" Title="@Labels.Email" />
 	<TemplateColumn Title="Administrator" Align="@Align.Center">
-		<FluentCheckbox Value="@(context.GlobalAdministrator)" aria-label="Administrator" Onclick="@(() => OnGlobalAdministrator(context))" />
+		<FluentCheckbox Disabled="@(_users?.Where(p => p.GlobalAdministrator).Count() < 2 && context.GlobalAdministrator)" Value="@(context.GlobalAdministrator)" CheckStateChanged="@(() => OnGlobalAdministrator(context))" />
 	</TemplateColumn>
 	<TemplateColumn Title="Disabled" Align="@Align.Center">
-		<FluentCheckbox Value="@context.Disabled" aria-label="Enabled" Onclick="@(() => OnDisabled(context))" />
+		<FluentCheckbox Disabled="@(context.GlobalAdministrator)" Value="@context.Disabled" CheckStateChanged="@(() => OnDisabled(context))" aria-label="Enabled" />
 	</TemplateColumn>
 	<TemplateColumn Title="Actions" Align="@Align.End">
-		<FluentButton aria-label="Edit" IconEnd="@(new Icons.Regular.Size16.Edit())" Onclick="@(() => OnEdit(context))" />
-		<FluentButton aria-label="Disable" Disabled="@(!context.GlobalAdministrator)" IconEnd="@(new Icons.Regular.Size16.RecordStop())" Onclick="@(() => OnDisable(context))" />
-		<FluentButton aria-label="Delete" Disabled="@(!context.GlobalAdministrator)" IconEnd="@(new Icons.Regular.Size16.Delete())" Onclick="@(() => OnDelete(context))" />
+		<FluentButton aria-label="Edit" IconEnd="@(new Icons.Regular.Size16.Edit())" OnClick="@(() => OnEdit(context))" />
+		<FluentButton aria-label="Delete" Disabled="@(context.GlobalAdministrator)" IconEnd="@(new Icons.Regular.Size16.Delete())" Onclick="@(() => OnDelete(context))" />
 	</TemplateColumn>
 </FluentDataGrid>
 @if (_users is null)
@@ -35,12 +34,6 @@
 	private async Task OnDelete(UserSummaryViewModel context)
 	{
 		await UserService.DeleteAsync(context.Id, CancellationToken.None);
-		StateHasChanged();
-	}
-	private async Task OnDisable(UserSummaryViewModel context)
-	{
-		await UserService.DisableAsync(context.Id, CancellationToken.None);
-		StateHasChanged();
 	}
 	private void OnEdit(UserSummaryViewModel context)
 	{
@@ -52,7 +45,6 @@
 			await UserService.RemoveGlobalAdministratorAsync(context.Id, CancellationToken.None);
 		else
 			await UserService.AddGlobalAdministratorAsync(context.Id, CancellationToken.None);
-		StateHasChanged();
 	}
 	private async Task OnDisabled(UserSummaryViewModel context)
 	{
@@ -64,7 +56,6 @@
 			.Where(p => p.Id != context.Id)
 			.Union([await UserService.GetSummaryAsync(context.Id, CancellationToken.None)])
 			.OrderBy(p => p.Name);
-		StateHasChanged();
 	}
 
 }

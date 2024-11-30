@@ -27,8 +27,6 @@
 	[CascadingParameter]
 	private Task<AuthenticationState>? authenticationState { get; set; }
 
-	private string? authMessage;
-	private string? surname;
 	private IEnumerable<Claim> claims = Enumerable.Empty<Claim>();
 	private ClaimsPrincipal? _user;
 
