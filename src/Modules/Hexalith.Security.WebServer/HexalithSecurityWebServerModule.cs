@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
+using Hexalith.Application.Modules.Applications;
 using Hexalith.Application.Modules.Modules;
 using Hexalith.DaprIdentityStore.UI.Helpers;
 using Hexalith.Extensions.Configuration;
@@ -85,10 +86,9 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
             .AddSingleton(p => SecurityMenu.Menu)
             .ConfigureSettings<SecuritySettings>(configuration);
         _ = services
-            .AddAuthorization(options => options.FallbackPolicy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build())
-            .AddApiAuthorization();
+            .AddAuthorization(
+                HexalithApplication.WebServerApplication?.ConfigureAuthorization()
+                    ?? throw new InvalidOperationException("Web server application not initialized."));
     }
 
     /// <inheritdoc/>

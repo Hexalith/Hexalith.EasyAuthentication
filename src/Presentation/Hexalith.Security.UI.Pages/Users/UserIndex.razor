@@ -1,10 +1,9 @@
-﻿@page "/Security"
-@page "/Security/User"
+﻿@page "/Security/User"
 @using Hexalith.Security.UI.Components.Users
 @using Labels = Hexalith.Security.UI.Pages.Resources.Users.UserIndex
 
 <FluentLabel Typo="Typography.PageTitle">@Labels.Title</FluentLabel>
-<UserSummaryGrid/>
+<UserSummaryGrid @rendermode="InteractiveAuto"/>
 
 @code {
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using Dapr.Actors.Runtime;
 
+using Hexalith.Application.Modules.Applications;
 using Hexalith.Application.Modules.Modules;
 using Hexalith.DaprIdentityStore.Helpers;
 using Hexalith.DaprIdentityStore.Models;
@@ -61,6 +62,10 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
         _ = services.AddIdentityApiEndpoints<CustomUser>()
             .AddUserStore<DaprIdentityStore.Stores.DaprActorUserStore>();
         _ = services.AddDaprIdentityStore();
+        _ = services
+            .AddAuthorization(
+            HexalithApplication.ApiServerApplication?.ConfigureAuthorization()
+                ?? throw new InvalidOperationException("Web server application not initialized."));
     }
 
     /// <summary>

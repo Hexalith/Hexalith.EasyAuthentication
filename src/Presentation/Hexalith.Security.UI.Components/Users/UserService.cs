@@ -8,7 +8,6 @@ using Hexalith.Application;
 using Hexalith.DaprIdentityStore.Models;
 using Hexalith.DaprIdentityStore.Services;
 
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 /// <summary>
@@ -16,7 +15,6 @@ using Microsoft.AspNetCore.Identity;
 /// </summary>
 public class UserService : IUserService
 {
-    private readonly AuthenticationStateProvider _authenticatorTokenProvider;
     private readonly IUserClaimStore<CustomUser> _claimStore;
     private readonly IUserCollectionService _userCollectionService;
     private readonly IUserStore<CustomUser> _userStore;
@@ -28,19 +26,82 @@ public class UserService : IUserService
     /// <param name="userStore">The user store.</param>
     /// <param name="claimStore">The claim store.</param>
     public UserService(
-        AuthenticationStateProvider authenticatorTokenProvider,
         IUserCollectionService userCollectionService,
         IUserStore<CustomUser> userStore,
         IUserClaimStore<CustomUser> claimStore)
     {
-        ArgumentNullException.ThrowIfNull(authenticatorTokenProvider);
         ArgumentNullException.ThrowIfNull(userCollectionService);
         ArgumentNullException.ThrowIfNull(userStore);
         ArgumentNullException.ThrowIfNull(claimStore);
-        _authenticatorTokenProvider = authenticatorTokenProvider;
         _userCollectionService = userCollectionService;
         _userStore = userStore;
         _claimStore = claimStore;
+    }
+
+    /// <inheritdoc/>
+    public Task AddGlobalAdministratorAsync(string userId, CancellationToken cancellationToken)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(userId);
+        return _claimStore.AddClaimsAsync(
+            new CustomUser { Id = userId },
+            [new Claim(ClaimTypes.Role, ApplicationRoles.GlobalAdministrator)],
+            cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task DeleteAsync(string userId, CancellationToken cancellationToken)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(userId);
+        _ = await _userStore.DeleteAsync(new CustomUser { Id = userId }, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task DisableAsync(string userId, CancellationToken cancellationToken)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(userId);
+        CustomUser? user = await _userStore.FindByIdAsync(userId, cancellationToken).ConfigureAwait(false);
+        if (user is null or { Disabled: true })
+        {
+            return;
+        }
+
+        user.Disabled = true;
+        _ = await _userStore.UpdateAsync(user, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task EnableAsync(string userId, CancellationToken cancellationToken)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(userId);
+        CustomUser? user = await _userStore.FindByIdAsync(userId, cancellationToken).ConfigureAwait(false);
+        if (user is null or { Disabled: false })
+        {
+            return;
+        }
+
+        user.Disabled = false;
+        _ = await _userStore.UpdateAsync(user, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<UserDetailsViewModel?> FindAsync(string userId, CancellationToken cancellationToken) => throw new NotImplementedException();
+
+    /// <inheritdoc/>
+    public async Task<UserSummaryViewModel?> FindSummaryAsync(string userId, CancellationToken cancellationToken)
+    {
+        CustomUser? user = await _userStore.FindByIdAsync(userId, cancellationToken).ConfigureAwait(false);
+        if (user == null)
+        {
+            return null;
+        }
+
+        IList<Claim> claims = await _claimStore.GetClaimsAsync(user, cancellationToken).ConfigureAwait(false);
+        return new UserSummaryViewModel(
+            userId,
+            user.UserName,
+            user.Email,
+            user.Disabled,
+            claims.Any(p => p.Type == ClaimTypes.Role && p.Value == ApplicationRoles.GlobalAdministrator));
     }
 
     /// <summary>
@@ -54,7 +115,7 @@ public class UserService : IUserService
         List<Task<UserSummaryViewModel?>> userTasks = [];
         foreach (string id in ids)
         {
-            userTasks.Add(GetUserSummaryAsync(id, CancellationToken.None));
+            userTasks.Add(FindSummaryAsync(id, CancellationToken.None));
         }
 
         return (await Task.WhenAll(userTasks).ConfigureAwait(false))
@@ -63,19 +124,19 @@ public class UserService : IUserService
     }
 
     /// <inheritdoc/>
-    public async Task GrantGloablAdministratorRoleAsync(string userId, CancellationToken cancellationToken)
+    public async Task<UserDetailsViewModel> GetAsync(string userId, CancellationToken cancellationToken)
+        => await FindAsync(userId, cancellationToken).ConfigureAwait(false)
+            ?? throw new InvalidOperationException("User not found.");
+
+    /// <inheritdoc/>
+    public async Task<UserSummaryViewModel> GetSummaryAsync(string userId, CancellationToken cancellationToken)
+        => await FindSummaryAsync(userId, cancellationToken).ConfigureAwait(false)
+            ?? throw new InvalidOperationException("User not found.");
+
+    /// <inheritdoc/>
+    public async Task GrantGlobalAdministratorRoleAsync(string userId, CancellationToken cancellationToken)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(userId);
-        AuthenticationState authenticationState = await _authenticatorTokenProvider.GetAuthenticationStateAsync().ConfigureAwait(false);
-        if (authenticationState.User?.Identity?.IsAuthenticated != true)
-        {
-            throw new InvalidOperationException("The user is not authenticated.");
-        }
-
-        if (!authenticationState.User.IsInRole(ApplicationRoles.GlobalAdministrator))
-        {
-            throw new InvalidOperationException($"The user {authenticationState.User.Identity.Name} is not authorized. The user must be a global administrator.");
-        }
 
         await _claimStore.AddClaimsAsync(
             new CustomUser { Id = userId },
@@ -83,19 +144,15 @@ public class UserService : IUserService
             cancellationToken).ConfigureAwait(false);
     }
 
-    private async Task<UserSummaryViewModel?> GetUserSummaryAsync(string userId, CancellationToken cancellationToken)
+    /// <inheritdoc/>
+    public async Task RemoveGlobalAdministratorAsync(string userId, CancellationToken cancellationToken)
     {
-        CustomUser? user = await _userStore.FindByIdAsync(userId, cancellationToken).ConfigureAwait(false);
-        if (user == null)
-        {
-            return null;
-        }
-
-        IList<Claim> claims = await _claimStore.GetClaimsAsync(user, cancellationToken).ConfigureAwait(false);
-        return new UserSummaryViewModel(
-            userId,
-            user.UserName,
-            user.Email,
-            claims.Any(p => p.Type == ClaimTypes.Role && p.Value == ApplicationRoles.GlobalAdministrator));
+        await _claimStore.RemoveClaimsAsync(
+            new CustomUser { Id = userId },
+            [new Claim(ClaimTypes.Role, ApplicationRoles.GlobalAdministrator)],
+            cancellationToken).ConfigureAwait(false);
     }
+
+    /// <inheritdoc/>
+    public Task UpdateAsync(UserEditViewModel user, CancellationToken cancellationToken) => throw new NotImplementedException();
 }
