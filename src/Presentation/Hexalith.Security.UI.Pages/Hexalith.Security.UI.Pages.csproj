@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\Partitions\PartitionIndex.Designer.cs">
+      <DependentUpon>PartitionIndex.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\Roles\RoleIndex.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -25,6 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\Partitions\PartitionIndex.resx">
+      <LastGenOutput>PartitionIndex.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Roles\RoleIndex.resx">
       <LastGenOutput>RoleIndex.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,0 +1,22 @@
+﻿@inject IPartitionService PartitionService
+@using Labels = Hexalith.Security.UI.Components.Resources.Partitions.PartitionSummaryGrid
+
+<FluentDataGrid TGridItem="PartitionSummaryViewModel" Items="@_users?.AsQueryable()" ResizableColumns="true">
+    <PropertyColumn Property="@(p => p.Id)" Title="@Labels.Id" />
+    <PropertyColumn Property="@(p => p.Name)" Title="@Labels.Name" />
+</FluentDataGrid>
+@if (_users is null)
+{
+    <FluentProgressRing />
+}
+
+
+@code {
+    private IEnumerable<PartitionSummaryViewModel>? _users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _users = await PartitionService.GetAllAsync(CancellationToken.None);
+        await base.OnInitializedAsync();
+    }
+}
