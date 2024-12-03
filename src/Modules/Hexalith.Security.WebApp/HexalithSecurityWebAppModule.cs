@@ -6,7 +6,6 @@ using System.Reflection;
 
 using Hexalith.Application.Modules.Modules;
 using Hexalith.Extensions.Helpers;
-using Hexalith.Infrastructure.ClientApp;
 using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
 using Hexalith.Security.Application.Menu;

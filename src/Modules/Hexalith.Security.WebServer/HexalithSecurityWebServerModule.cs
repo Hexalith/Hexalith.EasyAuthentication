@@ -8,6 +8,7 @@ using Hexalith.Application.Modules.Modules;
 using Hexalith.DaprIdentityStore.UI.Helpers;
 using Hexalith.Extensions.Configuration;
 using Hexalith.Extensions.Helpers;
+using Hexalith.Infrastructure.ClientAppOnServer.Helpers;
 using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
 using Hexalith.Security.Application.Menu;
@@ -101,6 +102,7 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
         }
 
         _ = app.MapAdditionalIdentityEndpoints();
+        _ = app.MapUserPartitionServiceEndpoints();
     }
 
     /// <inheritdoc/>
