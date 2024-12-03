@@ -5,6 +5,7 @@
 		<StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
 	</PropertyGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\Hexalith\src\Core\Infrastructure\Hexalith.Infrastructure.ClientApp\Hexalith.Infrastructure.ClientApp.csproj" />
 	  <ProjectReference Include="..\..\Application\Hexalith.Security.Application\Hexalith.Security.Application.csproj" />
 	</ItemGroup>
 	<ItemGroup>

@@ -6,11 +6,13 @@ using System.Reflection;
 
 using Hexalith.Application.Modules.Modules;
 using Hexalith.Extensions.Helpers;
+using Hexalith.Infrastructure.ClientApp;
 using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
 using Hexalith.Security.Application.Menu;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -63,6 +65,13 @@ public sealed class HexalithSecurityWebAppModule : IWebAppApplicationModule
         {
             return;
         }
+
+        // Add authentication services
+        _ = services
+            .AddAuthorizationCore()
+            .AddCascadingAuthenticationState()
+            .AddAuthenticationStateDeserialization()
+            .AddScoped<BaseAddressAuthorizationMessageHandler>();
 
         _ = services.AddSingleton(p => SecurityMenu.Menu);
     }
