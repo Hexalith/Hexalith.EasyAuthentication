@@ -2754,7 +2754,8 @@
           "Hexalith.Application.Partitions.Abstractions": "[1.0.0, )",
           "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
           "Hexalith.Infrastructure.DaprRuntime": "[1.0.0, )",
-          "Hexalith.Infrastructure.DaprRuntime.Abstractions": "[1.0.0, )"
+          "Hexalith.Infrastructure.DaprRuntime.Abstractions": "[1.0.0, )",
+          "Hexalith.Infrastructure.Emails.Abstractions": "[1.0.0, )"
         }
       },
       "hexalith.infrastructure.emails.abstractions": {
@@ -2782,9 +2783,14 @@
         "type": "Project",
         "dependencies": {
           "FluentValidation.AspNetCore": "[11.3.0, )",
+          "Hexalith.Application.Organizations": "[1.0.0, )",
+          "Hexalith.Application.Partitions.Abstractions": "[1.0.0, )",
+          "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
           "Hexalith.Infrastructure.AspireService.Defaults": "[1.0.0, )",
           "Hexalith.Infrastructure.CosmosDb": "[1.0.0, )",
           "Hexalith.Infrastructure.DaprRuntime": "[1.0.0, )",
+          "Hexalith.Infrastructure.DaprRuntime.Partitions": "[1.0.0, )",
+          "Hexalith.Infrastructure.DaprRuntime.Sessions": "[1.0.0, )",
           "Hexalith.Infrastructure.WebApis.Abstractions": "[1.0.0, )",
           "Serilog.AspNetCore": "[8.0.*, )",
           "Serilog.Enrichers.Environment": "[3.0.*, )",

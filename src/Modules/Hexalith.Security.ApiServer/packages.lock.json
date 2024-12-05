@@ -928,7 +928,15 @@
           "Hexalith.Application.Partitions.Abstractions": "[1.0.0, )",
           "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
           "Hexalith.Infrastructure.DaprRuntime": "[1.0.0, )",
-          "Hexalith.Infrastructure.DaprRuntime.Abstractions": "[1.0.0, )"
+          "Hexalith.Infrastructure.DaprRuntime.Abstractions": "[1.0.0, )",
+          "Hexalith.Infrastructure.Emails.Abstractions": "[1.0.0, )"
+        }
+      },
+      "hexalith.infrastructure.emails.abstractions": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.Application.Abstractions": "[1.0.0, )",
+          "Hexalith.Infrastructure.Serialization": "[1.0.0, )"
         }
       },
       "hexalith.infrastructure.serialization": {
