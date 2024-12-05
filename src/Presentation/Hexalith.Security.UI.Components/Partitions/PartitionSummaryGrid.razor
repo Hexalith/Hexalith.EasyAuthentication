@@ -1,4 +1,4 @@
-﻿@inject IPartitionService PartitionService
+﻿@inject IPartitionViewModelService PartitionService
 @using Labels = Hexalith.Security.UI.Components.Resources.Partitions.PartitionSummaryGrid
 
 <FluentDataGrid TGridItem="PartitionSummaryViewModel" Items="@_users?.AsQueryable()" ResizableColumns="true">

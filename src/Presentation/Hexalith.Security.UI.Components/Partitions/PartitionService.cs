@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// Service for managing users.
 /// </summary>
-public class PartitionService : IPartitionService
+public class PartitionService : IPartitionViewModelService
 {
     /// <summary>
     /// Gets all users asynchronously.

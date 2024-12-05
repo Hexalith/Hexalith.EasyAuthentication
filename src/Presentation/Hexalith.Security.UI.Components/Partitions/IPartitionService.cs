@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// Defines the contract for user-related operations.
 /// </summary>
-public interface IPartitionService
+public interface IPartitionViewModelService
 {
     /// <summary>
     /// Retrieves all users asynchronously.
