@@ -5,12 +5,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Hexalith.Application.Partitions.Services;
 using Hexalith.Application.Sessions.Services;
-using Hexalith.DaprIdentityStore.Models;
 
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -24,10 +21,7 @@ using Microsoft.Extensions.Logging;
 public class UserPartitionController : ControllerBase
 {
     private readonly ILogger<UserPartitionController> _logger;
-    private readonly IPartitionService _partitionService;
-    private readonly UserManager<CustomUser> _userManager;
     private readonly IUserPartitionService _userPartitionService;
-    private readonly IUserStore<CustomUser> _userStore;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UserPartitionController"/> class.
@@ -40,18 +34,10 @@ public class UserPartitionController : ControllerBase
     /// <exception cref="ArgumentNullException">Thrown when any of the parameters are null.</exception>
     public UserPartitionController(
         IUserPartitionService userPartitionService,
-        IPartitionService partitionService,
-        IUserStore<CustomUser> userStore,
-        UserManager<CustomUser> userManager,
         ILogger<UserPartitionController> logger)
     {
         ArgumentNullException.ThrowIfNull(userPartitionService);
-        ArgumentNullException.ThrowIfNull(partitionService);
-        ArgumentNullException.ThrowIfNull(userStore);
-        _userPartitionService = userPartitionService ?? throw new ArgumentNullException(nameof(userPartitionService));
-        _partitionService = partitionService;
-        _userStore = userStore;
-        _userManager = userManager;
+        _userPartitionService = userPartitionService;
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
@@ -74,43 +60,9 @@ public class UserPartitionController : ControllerBase
             return BadRequest("User id is required and cannot be empty.");
         }
 
-        string? result = await _userPartitionService
+        return Ok(await _userPartitionService
             .GetDefaultPartitionAsync(userName, cancellationToken)
-            .ConfigureAwait(false);
-        if (!string.IsNullOrWhiteSpace(userName))
-        {
-            return Ok(result);
-        }
-
-        _logger.LogDefaultPartitionNotFound(userName);
-
-        CustomUser? user = await _userStore.FindByNameAsync(_userManager.NormalizeName(userName), cancellationToken).ConfigureAwait(false);
-        if (user is null)
-        {
-            return BadRequest($"User {userName} not found.");
-        }
-
-        // When the default partition is not found, we try to find the first partition in the list of user partitions.
-        result = user.Partitions.FirstOrDefault();
-
-        if (!string.IsNullOrWhiteSpace(result))
-        {
-            // Set user default partition to the first user partition found.
-            user.DefaultPartition = result;
-            _ = await _userStore.UpdateAsync(user, cancellationToken).ConfigureAwait(false);
-            return Ok(result);
-        }
-
-        // The user has no partition. We try to find the default partition in the system.
-        result = await _partitionService
-            .DefaultAsync(cancellationToken)
-            .ConfigureAwait(false);
-
-        // Update the user with the default partition.
-        user.DefaultPartition = result;
-        user.Partitions = [result];
-        _ = await _userStore.UpdateAsync(user, cancellationToken).ConfigureAwait(false);
-        return Ok(result);
+            .ConfigureAwait(false));
     }
 
     /// <summary>
@@ -129,14 +81,12 @@ public class UserPartitionController : ControllerBase
         if (string.IsNullOrWhiteSpace(userName))
         {
             _logger.LogUserIdRequired();
-            return BadRequest("User id is required and cannot be empty.");
+            return BadRequest("User name is required and cannot be empty.");
         }
 
-        IEnumerable<string> result = await _userPartitionService
-            .GetPartitionsAsync(_userManager.NormalizeName(userName), cancellationToken)
-            .ConfigureAwait(false);
-
-        return Ok(result);
+        return Ok(await _userPartitionService
+            .GetPartitionsAsync(userName, cancellationToken)
+            .ConfigureAwait(false));
     }
 
     /// <summary>
@@ -157,7 +107,7 @@ public class UserPartitionController : ControllerBase
         if (string.IsNullOrWhiteSpace(userName))
         {
             _logger.LogUserIdRequired();
-            return BadRequest("User id is required and cannot be empty.");
+            return BadRequest("User name is required and cannot be empty.");
         }
 
         if (string.IsNullOrWhiteSpace(partitionId))
@@ -166,10 +116,8 @@ public class UserPartitionController : ControllerBase
             return BadRequest("Partition id is required and cannot be empty.");
         }
 
-        bool result = await _userPartitionService
-            .InPartitionAsync(_userManager.NormalizeName(userName), partitionId, cancellationToken)
-            .ConfigureAwait(false);
-
-        return Ok(result);
+        return Ok(await _userPartitionService
+            .InPartitionAsync(userName, partitionId, cancellationToken)
+            .ConfigureAwait(false));
     }
 }

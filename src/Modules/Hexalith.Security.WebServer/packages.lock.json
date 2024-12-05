@@ -2608,6 +2608,7 @@
       "hexalith.dapridentitystore": {
         "type": "Project",
         "dependencies": {
+          "Hexalith.Application.Partitions.Abstractions": "[1.0.0, )",
           "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
           "Hexalith.DaprIdentityStore.Abstractions": "[1.0.0, )",
           "Hexalith.Infrastructure.DaprRuntime": "[1.0.0, )",
