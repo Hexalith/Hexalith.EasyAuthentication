@@ -3,7 +3,7 @@ Azure Container App authentication
 
 ## Build status
 
-[![Build status](https://github.com/Hexalith/Hexalith.Security/actions/workflows/hexalith_build.yml/badge.svg)](https://github.com/Hexalith/Hexalith.Security/actions)
+[![Build status](https://github.com/Hexalith/Hexalith.Security/actions/workflows/hexalith.yml/badge.svg)](https://github.com/Hexalith/Hexalith.Security/actions)
 [![NuGet](https://img.shields.io/nuget/v/Hexalith.Security.Server.svg)](https://www.nuget.org/packages/Hexalith.Security.Server)
 [![License: MIT](https://img.shields.io/github/license/hexalith/hexalith.Security)](https://github.com/hexalith/hexalith.Security/blob/main/LICENSE)
 [![Discord](https://img.shields.io/discord/1063152441819942922?label=Discord&logo=discord&logoColor=white&color=d82679)](https://discordapp.com/channels/1102166958918610994/1102166958918610997)
