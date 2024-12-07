@@ -24,7 +24,7 @@
   </ItemGroup>
   <ItemGroup Condition="'$(UseProjectReference)' != 'true'">
     <PackageReference Include="Hexalith.Infrastructure.DaprRuntime.Sessions" Version="$(HexalithVersion)" />
-    <PackageReference Include="Hexalith.Hexalith.Infrastructure.ClientAppOnServer" Version="$(HexalithVersion)" />
+    <PackageReference Include="Hexalith.Infrastructure.ClientAppOnServer" Version="$(HexalithVersion)" />
     <PackageReference Include="Hexalith.DaprIdentityStore.UI" Version="$(HexalithDaprIdentityStoreVersion)" />
   </ItemGroup>
   <ItemGroup>
