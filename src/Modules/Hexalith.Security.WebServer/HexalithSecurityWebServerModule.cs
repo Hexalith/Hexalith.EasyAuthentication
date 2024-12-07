@@ -12,6 +12,7 @@ using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
 using Hexalith.Security.Application.Menu;
 using Hexalith.Security.UI.Components.Helpers;
+using Hexalith.Security.WebServer.Controllers;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -78,6 +79,7 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
         _ = services
             .AddSecurityUIComponents()
             .AddControllers()
+            .AddApplicationPart(typeof(UserPartitionController).Assembly)
             .AddDapr();
 
         _ = services
