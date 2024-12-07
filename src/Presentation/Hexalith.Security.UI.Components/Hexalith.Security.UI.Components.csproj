@@ -21,7 +21,7 @@
     <PackageReference Include="Hexalith.Application.Sessions.Abstractions" Version="$(HexalithVersion)" />
     <PackageReference Include="Hexalith.Application.Partitions.Abstractions" Version="$(HexalithVersion)" />
     <PackageReference Include="Hexalith.UI.Components" Version="$(HexalithVersion)" />
-    <PackageReference Include="Hexalith.DaprIdentityStore.Abstractions" Version="$(HexalithDaprIdentityStoreVersion)" />
+    <PackageReference Include="Hexalith.DaprIdentityStore.UI" Version="$(HexalithDaprIdentityStoreVersion)" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\Partitions\PartitionSummaryGrid.Designer.cs">
