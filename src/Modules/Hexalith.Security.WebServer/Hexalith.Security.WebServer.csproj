@@ -4,6 +4,12 @@
     <UserSecretsId>ec81df23-6b1e-4de8-b8ad-539fbc979451</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Content Remove="Controllers\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(AspNetCorePackagesVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="$(AspNetCorePackagesVersion)" />
@@ -14,6 +20,7 @@
     <PackageReference Include="System.Text.Json" Version="$(MicrosoftExtensionsPackagesVersion)" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Hexalith.Security.Servers\Hexalith.Security.Servers.csproj" />
     <ProjectReference Include="..\..\Presentation\Hexalith.Security.UI.Pages\Hexalith.Security.UI.Pages.csproj" />
     <ProjectReference Include="..\Hexalith.Security.WebApp\Hexalith.Security.WebApp.csproj" />
   </ItemGroup>
@@ -26,8 +33,5 @@
     <PackageReference Include="Hexalith.Infrastructure.DaprRuntime.Sessions" Version="$(HexalithVersion)" />
     <PackageReference Include="Hexalith.Infrastructure.ClientAppOnServer" Version="$(HexalithVersion)" />
     <PackageReference Include="Hexalith.DaprIdentityStore.UI" Version="$(HexalithDaprIdentityStoreVersion)" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Middlewares\" />
   </ItemGroup>
 </Project>

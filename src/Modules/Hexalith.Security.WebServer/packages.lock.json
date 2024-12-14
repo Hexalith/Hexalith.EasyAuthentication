@@ -2827,6 +2827,15 @@
           "Microsoft.Extensions.Identity.Stores": "[9.*, )"
         }
       },
+      "hexalith.security.servers": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.Application.Modules.Abstractions": "[1.0.0, )",
+          "Hexalith.DaprIdentityStore": "[1.0.0, )",
+          "Hexalith.Infrastructure.DaprRuntime.Partitions": "[1.0.0, )",
+          "Hexalith.Infrastructure.DaprRuntime.Sessions": "[1.0.0, )"
+        }
+      },
       "hexalith.security.ui.components": {
         "type": "Project",
         "dependencies": {

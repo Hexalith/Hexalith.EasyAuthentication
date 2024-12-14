@@ -1,4 +1,4 @@
-﻿namespace Hexalith.Security.WebServer.Controllers;
+﻿namespace Hexalith.Security.Servers.Controllers;
 
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Hexalith.Application.Sessions.Services;
+using Hexalith.Security.WebServer.Controllers;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

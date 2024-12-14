@@ -11,8 +11,8 @@ using Hexalith.Extensions.Helpers;
 using Hexalith.Security.Application;
 using Hexalith.Security.Application.Configurations;
 using Hexalith.Security.Application.Menu;
+using Hexalith.Security.Servers.Controllers;
 using Hexalith.Security.UI.Components.Helpers;
-using Hexalith.Security.WebServer.Controllers;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
