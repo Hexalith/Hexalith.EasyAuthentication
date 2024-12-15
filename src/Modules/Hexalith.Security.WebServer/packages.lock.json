@@ -177,25 +177,17 @@
       },
       "Blazor.Geolocation": {
         "type": "Transitive",
-        "resolved": "9.0.1",
-        "contentHash": "K1Gf89HZn/8IAOwU21Fgyq90xYTxIFLNsrdWGYv8eBdBjgme81jzq8oc3r5YH0nAvi+whICL1Io178fKJEfEuQ==",
+        "resolved": "2.0.1",
+        "contentHash": "6Qd0EuuFIg3dOFENEgJrHN5z3VBU/OqWbL9SVnSvXIEmZFYG/ULkuv7+yePum+ELoz2KZdSq5xiRsI5f1oY/eg==",
         "dependencies": {
-          "Blazor.Serialization": "9.0.1",
-          "Microsoft.AspNetCore.Components.Web": "9.0.0"
+          "Blazor.Serialization": "2.0.1",
+          "Microsoft.AspNetCore.Components.Web": "6.0.0"
         }
       },
       "Blazor.Serialization": {
         "type": "Transitive",
-        "resolved": "9.0.1",
-        "contentHash": "RxAfShLvrK/uZozVBAjjl05s1AwL6fSNmv1mCn4iUw629aYqNqejfEk/4tcXe+qdtkfD890MzLovvBj5HVQCYA=="
-      },
-      "Blazored.SessionStorage": {
-        "type": "Transitive",
-        "resolved": "2.4.0",
-        "contentHash": "e3XXH+zGGxDq1zC7YzLDD8mfvtoC6ESwTWOGD25H+FbPJlB7yQeL72hDY76tqkcrh98fh+y12r4BNhyQVV9YKw==",
-        "dependencies": {
-          "Microsoft.AspNetCore.Components.Web": "7.0.1"
-        }
+        "resolved": "2.0.1",
+        "contentHash": "9nyo7jKm+xdrfPWUXp+BjZl5wSUjL+JHXWli0eh293eRqs4YfR/wg7WS6Wx1WK5Us1hyOuuVsRnqcvkClVoVgQ=="
       },
       "CompareNETObjects": {
         "type": "Transitive",
@@ -2669,7 +2661,6 @@
       "hexalith.infrastructure.clientapp": {
         "type": "Project",
         "dependencies": {
-          "Blazored.SessionStorage": "[2.4.0, )",
           "Hexalith.Application.Modules": "[1.0.0, )",
           "Hexalith.Application.Organizations": "[1.0.0, )",
           "Microsoft.Extensions.Caching.Memory": "[9.*, )",
@@ -2685,7 +2676,7 @@
       "hexalith.infrastructure.clientapponserver": {
         "type": "Project",
         "dependencies": {
-          "Blazor.Geolocation": "[9.0.1, )",
+          "Blazor.Geolocation": "(, )",
           "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
           "Hexalith.Infrastructure.ClientApp": "[1.0.0, )",
           "Hexalith.Infrastructure.DaprRuntime": "[1.0.0, )",
