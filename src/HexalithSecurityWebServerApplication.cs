@@ -14,7 +14,7 @@ using Hexalith.UI.Components.Modules;
 /// </summary>
 public class HexalithSecurityWebServerApplication : HexalithWebServerApplication
 {
-    private static string? _version;
+    private static readonly string _version = string.Empty;
 
     /// <inheritdoc/>
     public override string Id => $"{HexalithSecurityApplicationInformation.Id}.{ApplicationType}";
@@ -26,7 +26,9 @@ public class HexalithSecurityWebServerApplication : HexalithWebServerApplication
     public override string ShortName => HexalithSecurityApplicationInformation.ShortName;
 
     /// <inheritdoc/>
-    public override string Version => _version ??= typeof(HexalithSecurityWebServerModule).GetAssemblyVersion();
+    public override string Version => string.IsNullOrWhiteSpace(_version)
+        ? typeof(HexalithSecurityWebServerModule).GetAssemblyVersion()
+        : _version;
 
     /// <inheritdoc/>
     public override Type WebAppApplicationType => typeof(HexalithSecurityWebAppApplication);

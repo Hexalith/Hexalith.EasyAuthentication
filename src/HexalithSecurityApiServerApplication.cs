@@ -12,7 +12,7 @@ using Hexalith.Security.Application;
 /// </summary>
 public class HexalithSecurityApiServerApplication : HexalithApiServerApplication
 {
-    private static string? _version;
+    private static readonly string _version = string.Empty;
 
     /// <inheritdoc/>
     public override IEnumerable<Type> ApiServerModules => [typeof(HexalithSecurityApiServerModule)];
@@ -27,5 +27,7 @@ public class HexalithSecurityApiServerApplication : HexalithApiServerApplication
     public override string ShortName => HexalithSecurityApplicationInformation.ShortName;
 
     /// <inheritdoc/>
-    public override string Version => _version ??= typeof(HexalithSecurityApiServerModule).GetAssemblyVersion();
+    public override string Version => string.IsNullOrWhiteSpace(_version)
+        ? typeof(HexalithSecurityApiServerModule).GetAssemblyVersion()
+        : _version;
 }
