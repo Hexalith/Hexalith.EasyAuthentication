@@ -29,11 +29,11 @@
       "Hexalith.TestMocks": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.51.7",
-        "contentHash": "P+k9/U93SrtiWEphASA96p3gbb3UvKxqC5DfDkSdcv54iUSTWH11UW7q2uVW3u1+WHom58DofVc5vwPqxedpDQ==",
+        "resolved": "1.51.8",
+        "contentHash": "b8yTjZ68zCs20mgeBno2rHTxyPr/fGHxjRC0LRkclmXpOUu1SK8M04IQX4hi3FPncPtX+RHgGbNBClK8inBGJA==",
         "dependencies": {
           "FluentAssertions": "7.0.0",
-          "Hexalith.Extensions": "1.51.7",
+          "Hexalith.Extensions": "1.51.8",
           "Microsoft.Extensions.Configuration": "9.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.0",
           "Microsoft.Extensions.Configuration.FileExtensions": "9.0.0",
@@ -180,20 +180,6 @@
           "System.Text.Json": "4.7.2",
           "System.Threading.Tasks.Extensions": "4.5.4"
         }
-      },
-      "Blazor.Geolocation": {
-        "type": "Transitive",
-        "resolved": "2.0.1",
-        "contentHash": "6Qd0EuuFIg3dOFENEgJrHN5z3VBU/OqWbL9SVnSvXIEmZFYG/ULkuv7+yePum+ELoz2KZdSq5xiRsI5f1oY/eg==",
-        "dependencies": {
-          "Blazor.Serialization": "2.0.1",
-          "Microsoft.AspNetCore.Components.Web": "6.0.0"
-        }
-      },
-      "Blazor.Serialization": {
-        "type": "Transitive",
-        "resolved": "2.0.1",
-        "contentHash": "9nyo7jKm+xdrfPWUXp+BjZl5wSUjL+JHXWli0eh293eRqs4YfR/wg7WS6Wx1WK5Us1hyOuuVsRnqcvkClVoVgQ=="
       },
       "Castle.Core": {
         "type": "Transitive",
@@ -2836,7 +2822,6 @@
       "hexalith.infrastructure.clientapponserver": {
         "type": "Project",
         "dependencies": {
-          "Blazor.Geolocation": "(, )",
           "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
           "Hexalith.Infrastructure.ClientApp": "[1.0.0, )",
           "Hexalith.Infrastructure.DaprRuntime": "[1.0.0, )",
