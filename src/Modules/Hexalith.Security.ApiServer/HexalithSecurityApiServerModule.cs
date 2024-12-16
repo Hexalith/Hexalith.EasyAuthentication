@@ -61,7 +61,7 @@ public sealed class HexalithSecurityApiServerModule : IApiServerApplicationModul
         ArgumentNullException.ThrowIfNull(configuration);
         _ = services.AddIdentityApiEndpoints<CustomUser>()
             .AddUserStore<DaprIdentityStore.Stores.DaprActorUserStore>();
-        _ = services.AddDaprIdentityStore();
+        _ = services.AddDaprIdentityStoreServer();
         _ = services.AddControllers().AddApplicationPart(typeof(UserPartitionController).Assembly);
     }
 

@@ -1,7 +1,6 @@
 ﻿@inject IUserService UserService
 @inject NavigationManager NavigationManager
 @using Labels = Hexalith.Security.UI.Components.Resources.Users.UserSummaryGrid
-<FluentLabel Typo="Typography.Subject">@($"{RendererInfo.Name} {(RendererInfo.IsInteractive?"Interactive":"Static")}")</FluentLabel>
 <FluentDataGrid TGridItem="UserSummaryViewModel" Items="@_users?.AsQueryable()" ResizableColumns="true">
 	<PropertyColumn Property="@(p => p.Id)" Title="@Labels.Id" />
 	<PropertyColumn Property="@(p => p.Name)" Title="@Labels.Name" />

@@ -1,12 +1,12 @@
-﻿@page "/Security/claim"
-<AuthorizeView>
-	<Authorized>
-		<ClaimsView/>
-	</Authorized>
-	<NotAuthorized>
-		<RedirectToLogin />
-	</NotAuthorized>
-</AuthorizeView>
-
+﻿@layout TestLayout
+@page "/Security/claim"
+@attribute [Authorize]
+<ClaimsView/>
+<FluentButton Appearance="Appearance.Stealth" OnClick="@Test">Hello</FluentButton>
+<h4>@RendererInfo.Name @(RendererInfo.IsInteractive ? "Interactive" : "Not Interactive")</h4>
 @code {
+    void Test()
+    {
+        Console.WriteLine("hello");
+    }
 }

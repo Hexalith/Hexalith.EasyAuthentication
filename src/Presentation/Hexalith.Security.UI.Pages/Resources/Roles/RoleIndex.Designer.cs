@@ -61,7 +61,7 @@ namespace Hexalith.Security.UI.Pages.Resources.Roles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User list.
+        ///   Looks up a localized string similar to Role list.
         /// </summary>
         internal static string Title {
             get {

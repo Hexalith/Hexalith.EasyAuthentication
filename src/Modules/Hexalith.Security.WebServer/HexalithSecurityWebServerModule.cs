@@ -52,6 +52,7 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
     public IEnumerable<Assembly> PresentationAssemblies =>
     [
         GetType().Assembly,
+        typeof(Hexalith.Security.WebApp.HexalithSecurityWebAppModule).Assembly,
         typeof(Hexalith.DaprIdentityStore.UI._Imports).Assembly,
         typeof(Hexalith.Security.UI.Components._Imports).Assembly,
         typeof(Hexalith.Security.UI.Pages._Imports).Assembly

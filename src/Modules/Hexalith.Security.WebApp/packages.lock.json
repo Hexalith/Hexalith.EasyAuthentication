@@ -967,6 +967,16 @@
           "Microsoft.Extensions.Logging.Abstractions": "[9.*, )"
         }
       },
+      "hexalith.dapridentitystore.abstractions": {
+        "type": "Project"
+      },
+      "hexalith.dapridentitystore.client": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.DaprIdentityStore.Abstractions": "[1.0.0, )",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "[9.*, )"
+        }
+      },
       "hexalith.domain.abstractions": {
         "type": "Project",
         "dependencies": {
