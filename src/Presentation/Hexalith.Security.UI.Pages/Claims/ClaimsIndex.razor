@@ -1,12 +1,4 @@
-﻿@layout TestLayout
-@page "/Security/claim"
+﻿@page "/Security/claim"
+@rendermode InteractiveServer
 @attribute [Authorize]
 <ClaimsView/>
-<FluentButton Appearance="Appearance.Stealth" OnClick="@Test">Hello</FluentButton>
-<h4>@RendererInfo.Name @(RendererInfo.IsInteractive ? "Interactive" : "Not Interactive")</h4>
-@code {
-    void Test()
-    {
-        Console.WriteLine("hello");
-    }
-}

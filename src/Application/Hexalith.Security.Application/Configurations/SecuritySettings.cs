@@ -10,7 +10,7 @@ using Hexalith.Extensions.Configuration;
 [DataContract]
 public record SecuritySettings(
     [property: DataMember]
-    bool Enabled) : ISettings
+    bool Disabled) : ISettings
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="SecuritySettings"/> class.

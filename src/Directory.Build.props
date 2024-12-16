@@ -8,9 +8,10 @@
     <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
     <PublishAot Condition="'$(EnableAotPublishing)' == 'true'">true</PublishAot>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+  <PropertyGroup>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>embedded</DebugType>
+    <DebugType>portable</DebugType>
+    <EmbedAllSources>true</EmbedAllSources>
   </PropertyGroup>
   <PropertyGroup Condition="'$(UseProjectReference)' == 'true'">
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>

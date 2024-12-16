@@ -25,7 +25,7 @@ public class SecuritySettingsTest : SerializationTestBase
             .Build();
         SecuritySettings settings = configuration.GetSettings<SecuritySettings>();
         _ = settings.Should().NotBeNull();
-        _ = settings.Enabled.Should().BeTrue();
+        _ = settings.Disabled.Should().BeTrue();
     }
 
     [Fact]
@@ -39,11 +39,11 @@ public class SecuritySettingsTest : SerializationTestBase
 
         // Assert
         _ = settings.Should().NotBeNull();
-        _ = settings.Enabled.Should().BeTrue();
+        _ = settings.Disabled.Should().BeTrue();
     }
 
     public override object ToSerializeObject() => new SecuritySettings
     {
-        Enabled = true,
+        Disabled = true,
     };
 }

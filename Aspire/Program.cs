@@ -27,7 +27,7 @@ if (app.IsProjectEnabled<Projects.HexalithApp_WebServer>())
 {
     _ = app
         .AddProject<Projects.HexalithApp_WebServer>("securityweb")
-        .WithEnvironmentFromConfiguration("Hexalith__Security__Enabled")
+        .WithEnvironmentFromConfiguration("Hexalith__Security__Disabled")
         .WithEnvironmentFromConfiguration("EmailServer__ApplicationSecret")
         .WithEnvironmentFromConfiguration("EmailServer__FromEmail")
         .WithEnvironmentFromConfiguration("EmailServer__FromName")
@@ -41,7 +41,7 @@ if (app.IsProjectEnabled<Projects.HexalithApp_ApiServer>())
 {
     _ = app
         .AddProject<Projects.HexalithApp_ApiServer>("securityapi")
-        .WithEnvironmentFromConfiguration("Hexalith__Security__Enabled")
+        .WithEnvironmentFromConfiguration("Hexalith__Security__Disabled")
         .WithEnvironmentFromConfiguration("EmailServer__ApplicationSecret")
         .WithEnvironmentFromConfiguration("EmailServer__FromEmail")
         .WithEnvironmentFromConfiguration("EmailServer__FromName")

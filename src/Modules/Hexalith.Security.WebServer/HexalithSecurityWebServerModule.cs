@@ -72,7 +72,7 @@ public sealed class HexalithSecurityWebServerModule : IWebServerApplicationModul
     {
         SecuritySettings settings = configuration.GetSettings<SecuritySettings>()
             ?? throw new InvalidOperationException($"Could not load settings section '{SecuritySettings.ConfigurationName()}'");
-        if (!settings.Enabled)
+        if (settings.Disabled)
         {
             return;
         }
