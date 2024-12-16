@@ -175,6 +175,14 @@
           "System.Threading.Tasks.Extensions": "4.5.4"
         }
       },
+      "Blazored.SessionStorage": {
+        "type": "Transitive",
+        "resolved": "2.4.0",
+        "contentHash": "e3XXH+zGGxDq1zC7YzLDD8mfvtoC6ESwTWOGD25H+FbPJlB7yQeL72hDY76tqkcrh98fh+y12r4BNhyQVV9YKw==",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "7.0.1"
+        }
+      },
       "CompareNETObjects": {
         "type": "Transitive",
         "resolved": "4.83.0",
@@ -1874,6 +1882,15 @@
           "Serilog": "4.2.0"
         }
       },
+      "Serilog.Sinks.BrowserConsole": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "Q4hNs0ewnJIHG7mR61RMpV5y7kfuY9hHMI4WZwVhQxXzlZTqvSDLAsTx1PL3ivbWrPKjbkKQpZc6byXdwx2lxA==",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.WebAssembly": "8.0.7",
+          "Serilog": "4.0.0"
+        }
+      },
       "Serilog.Sinks.Console": {
         "type": "Transitive",
         "resolved": "6.0.0",
@@ -1910,13 +1927,13 @@
       },
       "Swashbuckle.AspNetCore": {
         "type": "Transitive",
-        "resolved": "7.2.0",
-        "contentHash": "vJv19UpWm6OOgnS9QLDnWARNVasXUfj8SFvlG7UVALm4nBnfwRnEky7C0veSDqMUmBeMPC6Ec3d6G1ts/J04Uw==",
+        "resolved": "7.1.0",
+        "contentHash": "PpKwEZNCciDPczWPnuqaTVuN5jR/fG2RubQYgKHVWY2KB+TpvKkOrQJoF51S1yMJxygaofCM3BXlLy4PK/o8WA==",
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
-          "Swashbuckle.AspNetCore.Swagger": "7.2.0",
-          "Swashbuckle.AspNetCore.SwaggerGen": "7.2.0",
-          "Swashbuckle.AspNetCore.SwaggerUI": "7.2.0"
+          "Swashbuckle.AspNetCore.Swagger": "7.1.0",
+          "Swashbuckle.AspNetCore.SwaggerGen": "7.1.0",
+          "Swashbuckle.AspNetCore.SwaggerUI": "7.1.0"
         }
       },
       "Swashbuckle.AspNetCore.Annotations": {
@@ -1945,8 +1962,8 @@
       },
       "Swashbuckle.AspNetCore.SwaggerUI": {
         "type": "Transitive",
-        "resolved": "7.2.0",
-        "contentHash": "hgrXeKzyp5OGN8qVvL7A+vhmU7mDJTfGpiMBRL66IcfLOyna8UTLtn3cC3CghamXpRDufcc9ciklTszUGEQK0w=="
+        "resolved": "7.1.0",
+        "contentHash": "Tn9+gbG2wGekFDcm1+XQXPZoSZWOHn3DiEGaEw3/SMCtKdhkYiejoKpmTzZueKOBQf0Lzgvxs6Lss0WObN0RPA=="
       },
       "System.Buffers": {
         "type": "Transitive",
@@ -2571,7 +2588,6 @@
       "hexalith.dapridentitystore": {
         "type": "Project",
         "dependencies": {
-          "Hexalith.Application.Partitions.Abstractions": "[1.0.0, )",
           "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
           "Hexalith.DaprIdentityStore.Abstractions": "[1.0.0, )",
           "Hexalith.Infrastructure.DaprRuntime": "[1.0.0, )",
@@ -2632,12 +2648,13 @@
           "OpenTelemetry.Instrumentation.GrpcNetClient": "[1.8.0-beta.1, )",
           "OpenTelemetry.Instrumentation.Http": "[1.*, )",
           "OpenTelemetry.Instrumentation.Runtime": "[1.*, )",
-          "Swashbuckle.AspNetCore": "[7.2.0, )"
+          "Swashbuckle.AspNetCore": "[7.1.0, )"
         }
       },
       "hexalith.infrastructure.clientapp": {
         "type": "Project",
         "dependencies": {
+          "Blazored.SessionStorage": "[2.4.0, )",
           "Hexalith.Application.Modules": "[1.0.0, )",
           "Hexalith.Application.Organizations": "[1.0.0, )",
           "Microsoft.Extensions.Caching.Memory": "[9.*, )",
@@ -2646,8 +2663,8 @@
           "Microsoft.Extensions.Logging.Abstractions": "[9.*, )",
           "Microsoft.FluentUI.AspNetCore.Components": "[4.10.4, )",
           "Microsoft.FluentUI.AspNetCore.Components.Icons": "[4.10.4, )",
-          "Serilog.Extensions.Logging": "[9.0.0, )",
-          "Serilog.Settings.Configuration": "[9.0.0, )"
+          "Serilog.Extensions.Logging": "[8.0.*, )",
+          "Serilog.Settings.Configuration": "[8.0.*, )"
         }
       },
       "hexalith.infrastructure.clientapponserver": {
@@ -2663,6 +2680,18 @@
           "Microsoft.AspNetCore.Components.WebAssembly.Server": "[9.*, )",
           "Microsoft.AspNetCore.Identity.UI": "[9.*, )",
           "Microsoft.Extensions.Caching.Hybrid": "[9.*-*, )"
+        }
+      },
+      "hexalith.infrastructure.clientapponwasm": {
+        "type": "Project",
+        "dependencies": {
+          "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
+          "Hexalith.Infrastructure.ClientApp": "[1.0.0, )",
+          "Microsoft.AspNetCore.Components.WebAssembly": "[9.*, )",
+          "Microsoft.AspNetCore.Components.WebAssembly.Authentication": "[9.*, )",
+          "Serilog.Extensions.Logging": "[9.0.0, )",
+          "Serilog.Sinks.BrowserConsole": "[8.0.0, )",
+          "System.IdentityModel.Tokens.Jwt": "[8.3.0, )"
         }
       },
       "hexalith.infrastructure.cosmosdb": {
@@ -2733,7 +2762,6 @@
         "type": "Project",
         "dependencies": {
           "FluentValidation.AspNetCore": "[11.3.0, )",
-          "Hexalith.Application.Modules": "[1.0.0, )",
           "Hexalith.Application.Organizations": "[1.0.0, )",
           "Hexalith.Application.Partitions.Abstractions": "[1.0.0, )",
           "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
@@ -2762,7 +2790,8 @@
       "hexalith.infrastructure.webapis.abstractions": {
         "type": "Project",
         "dependencies": {
-          "Hexalith.Extensions": "[1.0.0, )"
+          "Hexalith.Extensions": "[1.0.0, )",
+          "Hexalith.Infrastructure.ClientAppOnWasm": "[1.0.0, )"
         }
       },
       "hexalith.polymorphicserialization": {
@@ -2780,15 +2809,6 @@
           "Hexalith.Application.Sessions.Abstractions": "[1.0.0, )",
           "Hexalith.UI.Components.Abstractions": "[1.0.0, )",
           "Microsoft.Extensions.Identity.Stores": "[9.*, )"
-        }
-      },
-      "hexalith.security.servers": {
-        "type": "Project",
-        "dependencies": {
-          "Hexalith.Application.Modules.Abstractions": "[1.0.0, )",
-          "Hexalith.DaprIdentityStore": "[1.0.0, )",
-          "Hexalith.Infrastructure.DaprRuntime.Partitions": "[1.0.0, )",
-          "Hexalith.Infrastructure.DaprRuntime.Sessions": "[1.0.0, )"
         }
       },
       "hexalith.security.ui.components": {
